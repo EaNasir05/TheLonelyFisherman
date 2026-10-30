@@ -5,8 +5,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    private DialogueRunner dialogueRunner;
-
     private void Awake()
     {
         if (instance == null)
@@ -17,23 +15,6 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }
-    }
-
-    private void Start()
-    {
-        dialogueRunner = FindFirstObjectByType<DialogueRunner>();
-    }
-
-    public void StartDialogue(string nodeName)
-    {
-        if (dialogueRunner != null)
-        {
-            dialogueRunner.StartDialogue(nodeName);
-        }
-        else
-        {
-            Debug.LogError("DialogueRunner not found in the scene.");
         }
     }
 }
