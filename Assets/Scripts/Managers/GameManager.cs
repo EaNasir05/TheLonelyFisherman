@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     private InMemoryVariableStorage yarnVariableStorage;
-    private DialogueRunner dialogueRunner;
+    public bool isPaused = false;
 
     private void Awake()
     {
@@ -30,14 +30,6 @@ public class GameManager : MonoBehaviour
             else
                 DontDestroyOnLoad(yarnVariableStorage.gameObject);
         }
-
-        dialogueRunner = FindFirstObjectByType<DialogueRunner>();
-        if (dialogueRunner == null)
-            Debug.LogError("DialogueRunner not found in the scene.");
-        else
-        {
-            dialogueRunner.AddCommandHandler<string>("ChangeScene", ChangeScene);
-        }
     }
 
     public void ChangeScene(string sceneName)
@@ -54,6 +46,38 @@ public class GameManager : MonoBehaviour
                 Debug.Log($"Yarn Variable '{variableName}': {value}");
             else
                 Debug.LogWarning($"Yarn Variable '{variableName}' not found.");
+        }
+    }
+
+    public void SetYarnVariable(string variableName, float value)
+    {
+        if (yarnVariableStorage != null)
+        {
+            yarnVariableStorage.SetValue(variableName, value);
+        }
+    }
+
+    public void SetYarnVariable(string variableName, int value)
+    {
+        if (yarnVariableStorage != null)
+        {
+            yarnVariableStorage.SetValue(variableName, value);
+        }
+    }
+
+    public void SetYarnVariable(string variableName, bool value)
+    {
+        if (yarnVariableStorage != null)
+        {
+            yarnVariableStorage.SetValue(variableName, value);
+        }
+    }
+
+    public void SetYarnVariable(string variableName, string value)
+    {
+        if (yarnVariableStorage != null)
+        {
+            yarnVariableStorage.SetValue(variableName, value);
         }
     }
 }

@@ -6,11 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Island.unity
+    path: Assets/Scenes/Hut.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/Scenes/Test.unity
     guid: 0d7f020e36b47da40954131bc7a559f6
   m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: df268314146995f458a50f172140ca93, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
