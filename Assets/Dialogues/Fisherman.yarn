@@ -1,4 +1,15 @@
-﻿title: Fisherman
+﻿title: Start
 ---
-This is an example of a Yarn Spinner script. Write your dialogue here!
+<<declare $variable = 0>>
+<<jump Test>>>>
+===
+
+title: Test
+---
+Vuoi cambiare scena?
+-> Sì
+    <<ChangeScene "Test">>
+-> No
+    <<set $variable = $variable + 1>>
+    <<jump Test>>
 ===
