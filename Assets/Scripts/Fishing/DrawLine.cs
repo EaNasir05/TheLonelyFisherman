@@ -4,8 +4,9 @@ public class DrawLine : MonoBehaviour
 {
     [SerializeField] private Transform startPoint;
     [SerializeField] private Transform hook;
+    [SerializeField] private float lineStartWidth = 0.1f;
+    [SerializeField] private float lineEndWidth = 0.1f;
     private LineRenderer line;
-    /*
     private Hook hookScript;
 
     private void Start()
@@ -13,9 +14,9 @@ public class DrawLine : MonoBehaviour
         line = GetComponent<LineRenderer>();
         hookScript = hook.gameObject.GetComponent<Hook>();
         line.positionCount = 2;
-        line.startWidth = (float)0.1;
-        line.endWidth = (float)0.1;
-        line.sortingOrder = -2;
+        line.startWidth = lineStartWidth;
+        line.endWidth = lineEndWidth;
+        //line.sortingOrder = -2;
     }
 
     private void Update()
@@ -28,8 +29,7 @@ public class DrawLine : MonoBehaviour
         else
         {
             line.SetPosition(0, startPoint.position);
-            line.SetPosition(1, hookScript.GetContactPointReturn());
+            line.SetPosition(1, hookScript.GetContactPoint());
         }
     }
-    */
 }

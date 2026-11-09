@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private InMemoryVariableStorage yarnVariableStorage;
     public bool isPaused = false;
+    private bool grandsonHere = false;
+
+    public bool IsGrandsonHere() => grandsonHere;
 
     private void Awake()
     {

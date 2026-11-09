@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using NUnit.Framework.Constraints;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -6,20 +7,28 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class Shooting : MonoBehaviour
 {
+    [Header("Audio")]
     [SerializeField] private AudioClip hookThrowAudio;
 
+    [Header("Trajectory")]
     [SerializeField] private Vector2 launchVelocity;
-    [Range(0.01f, 0.1f)]
-    [SerializeField] private float timeStep = 0.02f;
+    [Range(0.01f, 0.1f)] [SerializeField] private float timeStep = 0.02f;
     [SerializeField] private int maxCalculationSteps = 128;
-    [Range(0.01f, 1.0f)]
-    [SerializeField] private float tolerance;
+    [Range(0.01f, 1.0f)] [SerializeField] private float tolerance;
     [SerializeField] private bool showHitMarker;
     [SerializeField] private float maxRangeLeft;
     [SerializeField] private float maxRangeRight;
     [SerializeField] private float minRangeLeft;
     [SerializeField] private float minRangeRight;
+    [SerializeField] private float hookStartingXPosLeft;
+    [SerializeField] private float hookStartingXPosRight;
+    [Range(0.01f, 1.0f)] [SerializeField] private float lineStartWidth;
+    [Range(0.01f, 1.0f)] [SerializeField] private float lineEndWidth;
+    private RaycastHit hit;
+    readonly List<Vector3> points = new();
+    public Direction characterDirection = Direction.Left;
 
+    [Header("References")]
     [SerializeField] private GameObject hitMarker;
     [SerializeField] private SpriteRenderer characterSpriteRenderer;
     private LineRenderer lineRenderer;
@@ -27,23 +36,14 @@ public class Shooting : MonoBehaviour
     [SerializeField] private Rigidbody2D hookRB;
     private Transform hookTransform;
     [SerializeField] private Transform rodStartPoint;
-    [SerializeField] private float hookStartingXPosLeft;
-    [SerializeField] private float hookStartingXPosRight;
 
-    private RaycastHit hit;
-    readonly List<Vector3> points = new();
-
-    [SerializeField] private bool fire;
-
+    [Header("Movement")]
     [SerializeField] private float velocityRightLeft;
     private float moveInput;
-
-    [Range(0.01f, 1.0f)]
-    [SerializeField] private float lineStartWidth;
-    [Range(0.01f, 1.0f)]
-    [SerializeField] private float lineEndWidth;
-
     private bool isShot = false;
+
+    public float GetHookStartingXPosLeft() => hookStartingXPosLeft;
+    public float GetHookStartingXPosRight() => hookStartingXPosRight;
 
     private void Start()
     {
@@ -53,7 +53,6 @@ public class Shooting : MonoBehaviour
         inputHandler = FindFirstObjectByType<InputHandler>();
         inputHandler.onMoveInput += UpdateMoveInput;
         inputHandler.onSpeedUpInput += Shoot;
-        //Hook.onFishOutOfWater += Restart;
     }
 
     private void FixedUpdate()
@@ -79,11 +78,19 @@ public class Shooting : MonoBehaviour
         {
             newVelocityX = minRangeRight;
             characterSpriteRenderer.flipX = !characterSpriteRenderer.flipX;
+            transform.position = new Vector2(hookStartingXPosRight, transform.position.y);
+            rodStartPoint.position = new Vector2(hookStartingXPosRight, rodStartPoint.position.y);
+            hookTransform.position = new Vector2(hookStartingXPosRight, hookTransform.position.y);
+            characterDirection = Direction.Right;
         }
         else if (previousVelocityX >= minRangeRight && newVelocityX < minRangeRight)
         {
             newVelocityX = minRangeLeft;
             characterSpriteRenderer.flipX = !characterSpriteRenderer.flipX;
+            transform.position = new Vector2(hookStartingXPosLeft, transform.position.y);
+            rodStartPoint.position = new Vector2(hookStartingXPosLeft, rodStartPoint.position.y);
+            hookTransform.position = new Vector2(hookStartingXPosLeft, hookTransform.position.y);
+            characterDirection = Direction.Left;
         }
         launchVelocity.x = newVelocityX;
     }
@@ -151,7 +158,10 @@ public class Shooting : MonoBehaviour
 
     public void Restart()
     {
-        launchVelocity.x = -0.5f;
+        if (characterDirection == Direction.Left)
+            launchVelocity.x = minRangeLeft;
+        else
+            launchVelocity.x = minRangeRight;
         showHitMarker = true;
         hitMarker.SetActive(true);
         isShot = false;
@@ -161,7 +171,6 @@ public class Shooting : MonoBehaviour
 
     public void OnDestroy()
     {
-        //Hook.onFishOutOfWater -= Restart;
         inputHandler.onMoveInput -= UpdateMoveInput;
         inputHandler.onSpeedUpInput -= Shoot;
     }
