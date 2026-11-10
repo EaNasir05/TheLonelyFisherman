@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Yarn.Unity;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    [SerializeField] private Scene currentScene;
     private InMemoryVariableStorage yarnVariableStorage;
     public bool isPaused = false;
     private bool grandsonHere = false;
@@ -32,6 +35,12 @@ public class GameManager : MonoBehaviour
                 Debug.LogError("InMemoryVariableStorage not found in the scene.");
             else
                 DontDestroyOnLoad(yarnVariableStorage.gameObject);
+        }
+
+        if (currentScene == Scene.Fishing)
+        {
+            //Settaggio variabili FishingManager e Hook
+            FishingManager.instance.Initialize();
         }
     }
 

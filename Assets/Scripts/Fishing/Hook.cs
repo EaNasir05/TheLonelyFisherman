@@ -20,9 +20,8 @@ public class Hook : MonoBehaviour
     [SerializeField] private float linearDumpOnReturn = 10f;
     public float verticalSpeedUpMultiplier = 1.5f;
     public float verticalSpeedDownMultiplier = 0.5f;
-    public int biomesUnlocked = 1;
-    [SerializeField] private float rangePerBiome = 20f;
     private Vector2 contactPoint;
+    private float verticalRange;
 
     [Header("Catching")]
     public float power;
@@ -83,6 +82,7 @@ public class Hook : MonoBehaviour
         shootingSystem = FindFirstObjectByType<Shooting>();
         hookLeftStartPos = new Vector2(shootingSystem.GetHookStartingXPosLeft(), transform.position.y);
         hookRightStartPos = new Vector2(shootingSystem.GetHookStartingXPosRight(), transform.position.y);
+        verticalRange = FishingManager.instance.biomesHeight * FishingManager.instance.biomesUnlocked * -1;
     }
 
     private void FixedUpdate()
@@ -219,7 +219,7 @@ public class Hook : MonoBehaviour
     {
         if (!returning && !FishingManager.instance.stop)
         {
-            if (transform.position.y < rangePerBiome * biomesUnlocked * -1)
+            if (transform.position.y < verticalRange)
                 StartCoroutine(ReturnDelay());
         }
     }

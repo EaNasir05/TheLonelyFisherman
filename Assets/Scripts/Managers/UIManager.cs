@@ -10,7 +10,7 @@ public enum Scene { Island, Boat, Fishing, Ending, Lighthouse, Hut }
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
-    public Scene currentScene;
+    [SerializeField] private Scene currentScene;
 
     [Header("General")]
     [SerializeField] private Image blackScreen;

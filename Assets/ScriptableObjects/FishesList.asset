@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 826e30a3e9a704f4b9a1374c81680239, type: 3}
+  m_Name: FishesList
+  m_EditorClassIdentifier: Assembly-CSharp::FishesList
+  list:
+  - type: Green
+    prefab: {fileID: 114731333192276808, guid: 8a14d13aace68374c8de49bb6b5c780f, type: 3}
+  - type: Blue
+    prefab: {fileID: 4758077704970932413, guid: 373e6934764e41345937013261229642, type: 3}
+  - type: Yellow
+    prefab: {fileID: 9193463390012430350, guid: 6d3e04a6784a97047be6cd84a59c42b9, type: 3}
+  - type: Red
+    prefab: {fileID: 11831083444601182, guid: 7ea42e610d79fd44086cb1ed5b7b2eb3, type: 3}
+  - type: Pink
+    prefab: {fileID: 4781595926269199305, guid: 8e164299671eed54185326bc42f6b62f, type: 3}
+  fishesRatesPerBiome:
+  - fishes:
+    - fishType: Green
+      percentage: 100
+  - fishes:
+    - fishType: Blue
+      percentage: 100
+  - fishes:
+    - fishType: Yellow
+      percentage: 100
+  - fishes:
+    - fishType: Red
+      percentage: 100
+  - fishes:
+    - fishType: Pink
+      percentage: 100

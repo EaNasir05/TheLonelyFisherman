@@ -192,6 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9302c37f4d57a4548bc08789fbd13de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentScene: 2
   isPaused: 0
 --- !u!4 &5911683
 Transform:
@@ -553,7 +554,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 869d287e77fac3d488a844c5e85bb114, type: 3}
-  m_Color: {r: 0.2501886, g: 0.51846784, b: 0.83396226, a: 0.2}
+  m_Color: {r: 0.2501886, g: 0.51846784, b: 0.83396226, a: 0.29803923}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1533,8 +1534,6 @@ MonoBehaviour:
   linearDumpOnReturn: 10
   verticalSpeedUpMultiplier: 1.5
   verticalSpeedDownMultiplier: 0.5
-  biomesUnlocked: 1
-  rangePerBiome: 20
   power: 0
   standardCriticalChance: 5
   criticalChanceWithMagic: 5
@@ -1563,6 +1562,8 @@ GameObject:
   m_Component:
   - component: {fileID: 881730807}
   - component: {fileID: 881730808}
+  - component: {fileID: 881730809}
+  - component: {fileID: 881730810}
   m_Layer: 0
   m_Name: Fishing Manager
   m_TagString: Untagged
@@ -1599,7 +1600,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FishingManager
   stop: 0
   points: 0
-  stamina: 100
+  biomesUnlocked: 5
+  biomesHeight: 20
+--- !u!114 &881730809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881730806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aa61228719c3da47af02ea2e1545870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FishesSpawner
+  fishesList: {fileID: 11400000, guid: 89781d83d7deebf48bebd1ecad104727, type: 2}
+  cameraTransform: {fileID: 584015594}
+  layersPerBiome: 4
+  fishesOnLayerPerBiome: 0a0000000a0000000a0000000a0000000a000000
+  numberOfLayersToSpawnOnStart: 3
+  unitsVisibleToCamera: 11
+  fishesPositionXRange: {x: -9, y: 9}
+--- !u!114 &881730810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881730806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b395e4d2b8a1d84eb3fbf27c394f2d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FishesPool
+  fishesList: {fileID: 11400000, guid: 89781d83d7deebf48bebd1ecad104727, type: 2}
+  fishesParent: {fileID: 2108757806}
 --- !u!1 &882527150
 GameObject:
   m_ObjectHideFlags: 0
@@ -2844,6 +2879,37 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &2108757805
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2108757806}
+  m_Layer: 0
+  m_Name: -- FISHES --
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2108757806
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108757805}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2856,3 +2922,4 @@ SceneRoots:
   - {fileID: 881730807}
   - {fileID: 1402079237}
   - {fileID: 1218318606}
+  - {fileID: 2108757806}
