@@ -1679,7 +1679,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FishingManager
   stop: 0
   points: 0
-  biomesUnlocked: 5
+  biomesUnlocked: 4
   biomesHeight: 20
 --- !u!114 &881730809
 MonoBehaviour:
@@ -1696,7 +1696,7 @@ MonoBehaviour:
   fishesList: {fileID: 11400000, guid: 89781d83d7deebf48bebd1ecad104727, type: 2}
   cameraTransform: {fileID: 584015594}
   layersPerBiome: 4
-  fishesOnLayerPerBiome: 0a0000000a0000000a0000000a0000000a000000
+  fishesOnLayerPerBiome: 0a0000000a0000000f0000000f0000000f000000
   numberOfLayersToSpawnOnStart: 3
   unitsVisibleToCamera: 11
   fishesPositionXRange: {x: -9, y: 9}

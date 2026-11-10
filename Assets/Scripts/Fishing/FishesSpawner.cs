@@ -39,7 +39,7 @@ public class FishesSpawner : MonoBehaviour
         int biomes = FishingManager.instance.biomesUnlocked;
         int layers = biomes * layersPerBiome + 1;
         layersSize = FishingManager.instance.biomesHeight / layersPerBiome;
-        layersVisible = (int) Math.Ceiling((unitsVisibleToCamera - layersSize) / layersSize / 2);
+        layersVisible = (int) Math.Ceiling((unitsVisibleToCamera - layersSize) / layersSize);
         fishesInLayers = new(new Dictionary<string, int>[layers]);
         totalFishes = new();
         fishesActivatedPerLayer = new(new Dictionary<string, List<GameObject>>[layers]);
