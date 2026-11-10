@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO.Compression;
 using Unity.Collections;
 using UnityEngine;
 
@@ -39,15 +40,15 @@ public class FishesSpawner : MonoBehaviour
         int layers = biomes * layersPerBiome + 1;
         layersSize = FishingManager.instance.biomesHeight / layersPerBiome;
         layersVisible = (int) Math.Ceiling((unitsVisibleToCamera - layersSize) / layersSize / 2);
-        fishesInLayers = new();
+        fishesInLayers = new(new Dictionary<string, int>[layers]);
         totalFishes = new();
-        fishesActivatedPerLayer = new();
+        fishesActivatedPerLayer = new(new Dictionary<string, List<GameObject>>[layers]);
         List<FishPercentages> fishesPercentagePerBiomes = fishesList.fishesRatesPerBiome;
         int y = -1;
         Dictionary<string, int> fishesInLayer = null;
         for (int x = 0; x < layers; x++)
         {
-            if (x % layersPerBiome == 0 || y == -1)
+            if ((x % layersPerBiome == 0 && y + 1 < biomes) || y == -1)
             {
                 y++;
                 fishesInLayer = new();
@@ -104,6 +105,8 @@ public class FishesSpawner : MonoBehaviour
             {
                 fishes.Add(FishesPool.instance.ActivateFish(GetRandomPositionInLayer(layer), kvp.Key));
             }
+            if (fishesActivatedPerLayer[layer] == null)
+                fishesActivatedPerLayer[layer] = new();
             fishesActivatedPerLayer[layer][kvp.Key] = fishes;
         }
     }
