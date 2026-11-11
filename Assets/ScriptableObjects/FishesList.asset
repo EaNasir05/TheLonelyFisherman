@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: FishesList
   m_EditorClassIdentifier: Assembly-CSharp::FishesList
   list:
-  - type: Green
-    prefab: {fileID: 114731333192276808, guid: 8a14d13aace68374c8de49bb6b5c780f, type: 3}
+  - type: Branzino
+    prefab: {fileID: 6473685158530585248, guid: b413442184e28e9408f3148fc03d4ca6, type: 3}
+  - type: Sogliola
+    prefab: {fileID: 3057568736230052078, guid: e762ebaff1b2ad941837ed65ac11f9ad, type: 3}
+  - type: Merluzzo
+    prefab: {fileID: 5280115824541950317, guid: 8e7b5635935793447b5d7bf24530775a, type: 3}
   - type: Blue
     prefab: {fileID: 4758077704970932413, guid: 373e6934764e41345937013261229642, type: 3}
   - type: Yellow
@@ -25,8 +29,12 @@ MonoBehaviour:
     prefab: {fileID: 4781595926269199305, guid: 8e164299671eed54185326bc42f6b62f, type: 3}
   fishesRatesPerBiome:
   - fishes:
-    - fishType: Green
-      percentage: 100
+    - fishType: Branzino
+      percentage: 20
+    - fishType: Sogliola
+      percentage: 40
+    - fishType: Merluzzo
+      percentage: 40
   - fishes:
     - fishType: Blue
       percentage: 100
