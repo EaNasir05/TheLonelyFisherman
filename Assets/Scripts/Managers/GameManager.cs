@@ -6,7 +6,7 @@ using Yarn.Unity;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    [SerializeField] private Scene currentScene;
+    private Scene currentScene;
     private InMemoryVariableStorage yarnVariableStorage;
     public bool isPaused = false;
     private bool grandsonHere = false;
@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        UpdateCurrentScene();
+
         if (yarnVariableStorage == null)
         {
             yarnVariableStorage = FindFirstObjectByType<InMemoryVariableStorage>();
@@ -41,6 +43,31 @@ public class GameManager : MonoBehaviour
         {
             //Settaggio variabili FishingManager e Hook
             FishingManager.instance.Initialize();
+        }
+    }
+
+    private void UpdateCurrentScene()
+    {
+        string scene = SceneManager.GetActiveScene().name;
+        switch (scene)
+        {
+            case "EveningIsland":
+            case "MorningIsland":
+                currentScene = Scene.Island;
+                break;
+            case "Hut":
+                currentScene = Scene.Hut;
+                break;
+            case "Fishing":
+                currentScene = Scene.Fishing;
+                break;
+            case "MorningOnBoat":
+            case "EveningOnBoat":
+                currentScene = Scene.Boat;
+                break;
+            default:
+                currentScene = Scene.Ending;
+                break;
         }
     }
 

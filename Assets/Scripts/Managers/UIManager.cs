@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum Scene { Island, Boat, Fishing, Ending, Lighthouse, Hut }
@@ -98,11 +99,9 @@ public class UIManager : MonoBehaviour
         staminaSlider.value = value;
     }
 
-    private IEnumerator FadeIn()
+    private IEnumerator FadeIn(float duration)
     {
-        float duration = 1f;
         float elapsedTime = 0f;
-
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;
@@ -110,15 +109,12 @@ public class UIManager : MonoBehaviour
             blackScreen.color = new Color(0f, 0f, 0f, alpha);
             yield return null;
         }
-
         blackScreen.color = new Color(0f, 0f, 0f, 1f);
     }
 
-    private IEnumerator FadeOut()
+    private IEnumerator FadeOut(float duration, string sceneName)
     {
-        float duration = 1f;
         float elapsedTime = 0f;
-
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;
@@ -126,7 +122,8 @@ public class UIManager : MonoBehaviour
             blackScreen.color = new Color(0f, 0f, 0f, alpha);
             yield return null;
         }
-
         blackScreen.color = new Color(0f, 0f, 0f, 0f);
+
+        SceneManager.LoadScene(sceneName);
     }
 }

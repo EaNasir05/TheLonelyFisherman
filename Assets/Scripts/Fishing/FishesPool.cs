@@ -40,6 +40,15 @@ public class FishesPool : MonoBehaviour
         return fish;
     }
 
+    public GameObject ActivateFish(Vector2 position, string fishType, Vector2 movementRangeX, Vector2 movementRangeY)
+    {
+        GameObject fish = pool[fishType].Dequeue();
+        fish.transform.position = position;
+        fish.GetComponent<FishController>().SetMovementRange(movementRangeX, movementRangeY);
+        fish.SetActive(true);
+        return fish;
+    }
+
     public void DeactivateFish(GameObject fish, string fishType)
     {
         fish.SetActive(false);

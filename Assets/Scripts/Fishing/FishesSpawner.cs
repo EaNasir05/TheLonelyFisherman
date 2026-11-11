@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO.Compression;
-using Unity.Collections;
 using UnityEngine;
 
 public class FishesSpawner : MonoBehaviour
@@ -103,7 +101,10 @@ public class FishesSpawner : MonoBehaviour
             List<GameObject> fishes = new();
             for (int j = 0; j < kvp.Value; j++)
             {
-                fishes.Add(FishesPool.instance.ActivateFish(GetRandomPositionInLayer(layer), kvp.Key));
+                float maxY = -layer * layersSize;
+                if (layer == 0)
+                    maxY -= 1f;
+                fishes.Add(FishesPool.instance.ActivateFish(GetRandomPositionInLayer(layer), kvp.Key, new Vector2(fishesPositionXRange.x, fishesPositionXRange.y), new Vector2(-(layer + 1) * layersSize, maxY)));
             }
             if (fishesActivatedPerLayer[layer] == null)
                 fishesActivatedPerLayer[layer] = new();

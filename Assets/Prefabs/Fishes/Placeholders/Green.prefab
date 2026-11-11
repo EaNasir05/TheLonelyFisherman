@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3557444787251482074}
   - component: {fileID: 2974098816769278822}
+  - component: {fileID: 6724114911440045157}
   m_Layer: 0
   m_Name: Green
   m_TagString: Untagged
@@ -81,8 +82,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 6b5428573f1be4f85a5c11c401fd5aac, type: 3}
-  m_Color: {r: 0.029382557, g: 0.6150943, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: db67514448cc9f24db9eb1af95ea24ab, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -91,3 +92,26 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &6724114911440045157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114731333192276808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b084baedcf314df41ae60c1347fde394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FishController
+  fishType: Green
+  strength: 10
+  value: 10
+  movementSpeed: 2
+  diagonalMovementDuration: 4
+  diagonalMovementDelay: 1
+  maxRotation: 20
+  minRotation: 15
+  fallDuration: 5
+  goingUp: 0
+  dead: 0
