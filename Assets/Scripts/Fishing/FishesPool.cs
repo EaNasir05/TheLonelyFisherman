@@ -40,17 +40,20 @@ public class FishesPool : MonoBehaviour
         return fish;
     }
 
-    public GameObject ActivateFish(Vector2 position, string fishType, Vector2 movementRangeX, Vector2 movementRangeY)
+    public GameObject ActivateFish(Vector2 position, string fishType, Vector2 movementRangeX, Vector2 movementRangeY, int layer)
     {
         GameObject fish = pool[fishType].Dequeue();
         fish.transform.position = position;
-        fish.GetComponent<FishController>().SetMovementRange(movementRangeX, movementRangeY);
+        FishController controller = fish.GetComponent<FishController>();
+        controller?.SetMovementRange(movementRangeX, movementRangeY);
+        controller?.SetLayer(layer);
         fish.SetActive(true);
         return fish;
     }
 
     public void DeactivateFish(GameObject fish, string fishType)
     {
+        fish.transform.SetParent(fishesParent);
         fish.SetActive(false);
         pool[fishType].Enqueue(fish);
     }

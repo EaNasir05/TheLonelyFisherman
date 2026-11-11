@@ -1,10 +1,9 @@
-using System;
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public enum Scene { Island, Boat, Fishing, Ending, Lighthouse, Hut }
 
@@ -22,12 +21,21 @@ public class UIManager : MonoBehaviour
     [Header("Fishing")]
     [SerializeField] private TMP_Text fishingPoints;
     [SerializeField] private Slider staminaSlider;
+    private RectTransform staminaRectTransform;
     [SerializeField] private Image staminaFillImage;
     [SerializeField] private Color staminaFillColor;
     [SerializeField] private Color weightFillColor;
     [SerializeField] private Image staminaBackgroundImage;
     [SerializeField] private Color staminaBackgroundColor;
     [SerializeField] private Color weightBackgroundColor;
+    [SerializeField] private float staminaMaxScale;
+    [SerializeField] private float staminaScalingDuration;
+    private Coroutine scalingRoutine;
+    [SerializeField] private Transform hookCanvas;
+    [SerializeField] private GameObject pointsGainTextPrefab;
+    [SerializeField] private Vector2 scaleRangePointsGainText;
+    [SerializeField] private Vector2 valueRangePointsGainText;
+    [SerializeField] private float maxDistanceFromHookToText;
     private Hook hookScript;
 
     private void Awake()
@@ -38,6 +46,12 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         hookScript = FindFirstObjectByType<Hook>();
+        staminaRectTransform = staminaSlider.GetComponent<RectTransform>();
+    }
+
+    public void UpdatePointsText(float value)
+    {
+        fishingPoints.text = value.ToString();
     }
 
     public void ShowStaminaBar()
@@ -52,12 +66,12 @@ public class UIManager : MonoBehaviour
 
     public void IncreaseStaminaBarScale()
     {
-        StartCoroutine(ScaleInStamina());
+        scalingRoutine = StartCoroutine(ScaleInStamina());
     }
 
     public void ResetStaminaBarScale()
     {
-        StartCoroutine(ScaleOutStamina());
+        scalingRoutine = StartCoroutine(ScaleOutStamina());
     }
 
     public IEnumerator StaminaBarAnimationOnOverweight()
@@ -68,14 +82,38 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator ScaleInStamina()
     {
-        //Aumenta la scale
-        yield return null;
+        if (scalingRoutine != null)
+            StopCoroutine(scalingRoutine);
+        float elapsedTime = 0;
+        float startingScale = staminaRectTransform.localScale.x;
+        float targetScale = staminaMaxScale;
+        float realDuration = Mathf.Lerp(staminaScalingDuration, 0, (startingScale - 1) / (targetScale - 1));
+        while (elapsedTime < realDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float scale = Mathf.Lerp(startingScale, targetScale, elapsedTime / realDuration);
+            staminaRectTransform.localScale = new Vector3(scale, scale, 1);
+            yield return null;
+        }
+        scalingRoutine = null;
     }
 
     private IEnumerator ScaleOutStamina()
     {
-        //Resetta la scale
-        yield return null;
+        if (scalingRoutine != null)
+            StopCoroutine(scalingRoutine);
+        float elapsedTime = 0;
+        float startingScale = staminaRectTransform.localScale.x;
+        float targetScale = 1;
+        float realDuration = Mathf.Lerp(staminaScalingDuration, 0, (staminaMaxScale - startingScale) / (staminaMaxScale - 1));
+        while (elapsedTime < realDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float scale = Mathf.Lerp(startingScale, targetScale, elapsedTime / realDuration);
+            staminaRectTransform.localScale = new Vector3(scale, scale, 1);
+            yield return null;
+        }
+        scalingRoutine = null;
     }
 
     public void RefreshStaminaBar()
@@ -97,6 +135,28 @@ public class UIManager : MonoBehaviour
     public void UpdateStaminaBar(float value)
     {
         staminaSlider.value = value;
+    }
+
+    public void PrintPointGainText(float value)
+    {
+        Transform pgt = Instantiate(pointsGainTextPrefab).transform;
+        pgt.SetParent(hookCanvas);
+        pgt.localPosition = new Vector2(Random.Range(-maxDistanceFromHookToText, maxDistanceFromHookToText), Random.Range(-maxDistanceFromHookToText, maxDistanceFromHookToText));
+        pgt.GetComponent<TMP_Text>().text = "+" + value;
+        float fixedValue = Mathf.Clamp(value, scaleRangePointsGainText.x, scaleRangePointsGainText.y);
+        float scale = Mathf.Lerp(scaleRangePointsGainText.x, scaleRangePointsGainText.y, fixedValue - scaleRangePointsGainText.x / scaleRangePointsGainText.y - scaleRangePointsGainText.x);
+        pgt.localScale = new Vector3(scale, scale, 1);
+    }
+
+    public void PrintPointLossText(float value)
+    {
+        Transform pgt = Instantiate(pointsGainTextPrefab).transform;
+        pgt.SetParent(hookCanvas);
+        pgt.localPosition = new Vector2(Random.Range(-maxDistanceFromHookToText, maxDistanceFromHookToText), Random.Range(-maxDistanceFromHookToText, maxDistanceFromHookToText));
+        TMP_Text tmp = pgt.GetComponent<TMP_Text>();
+        tmp.text = "-" + value;
+        tmp.color = Color.red;
+        pgt.localScale = new Vector3(2, 2, 1);
     }
 
     private IEnumerator FadeIn(float duration)

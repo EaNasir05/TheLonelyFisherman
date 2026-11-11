@@ -1,3 +1,5 @@
+using System;
+using System.Drawing;
 using UnityEngine;
 
 public class FishingManager : MonoBehaviour
@@ -17,6 +19,20 @@ public class FishingManager : MonoBehaviour
     public void Initialize()
     {
         FishesSpawner.instance.Initialize();
+    }
+
+    public void GainPoints(int value)
+    {
+        points += value;
+        UIManager.instance.UpdatePointsText(points);
+        UIManager.instance.PrintPointGainText(value);
+    }
+
+    public void LosePoints(int value)
+    {
+        points = Math.Clamp(points - value, 0, 999999999);
+        UIManager.instance.UpdatePointsText(points);
+        UIManager.instance.PrintPointLossText(value);
     }
 
     public void StartFishingAttempt()

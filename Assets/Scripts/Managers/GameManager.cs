@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     private Scene currentScene;
     private InMemoryVariableStorage yarnVariableStorage;
     public bool isPaused = false;
-    private bool grandsonHere = false;
+    [SerializeField] private bool grandsonHere = false;
 
     public bool IsGrandsonHere() => grandsonHere;
 

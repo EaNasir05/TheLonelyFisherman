@@ -193,6 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPaused: 0
+  grandsonHere: 0
 --- !u!4 &5911683
 Transform:
   m_ObjectHideFlags: 0
@@ -1082,6 +1083,13 @@ MonoBehaviour:
   staminaBackgroundImage: {fileID: 1497574574}
   staminaBackgroundColor: {r: 0.047058824, g: 0.5921569, b: 0, a: 1}
   weightBackgroundColor: {r: 0.4943396, g: 0, b: 0, a: 1}
+  staminaMaxScale: 1.25
+  staminaScalingDuration: 0.25
+  hookCanvas: {fileID: 882527151}
+  pointsGainTextPrefab: {fileID: 5034507698958044418, guid: 19573d9224f19a544bc14e69b1d731f7, type: 3}
+  scaleRangePointsGainText: {x: 1, y: 1.5}
+  valueRangePointsGainText: {x: 10, y: 100}
+  maxDistanceFromHookToText: 1
 --- !u!4 &644733445
 Transform:
   m_ObjectHideFlags: 0
@@ -1615,7 +1623,7 @@ MonoBehaviour:
   power: 0
   standardCriticalChance: 5
   criticalChanceWithMagic: 5
-  criticalChanceWithMagicWhileReturning: 5
+  criticalChanceMultiplierWithMagicWhileReturning: 1
   criticalCatchPointsMultiplier: 1
   maxStamina: 100
   staminaConsumedPerSecond: 2
@@ -1627,6 +1635,7 @@ MonoBehaviour:
   weightAccumulatedPerSecond: 1
   overweightPointsLossMultiplier: 1
   weightGainOnCollisionMultiplier: 1
+  fishesToLoseOnOverweight: 6
   characterSpriteRenderer: {fileID: 678344358}
   rodStartPoint: {fileID: 910963874}
   posXToFlipSprite: 0
@@ -1810,7 +1819,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -2454,7 +2463,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 9999999
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2463,8 +2472,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4286235355
+  m_fontColor: {r: 0.8588236, g: 0.7607844, b: 0.4784314, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2488,7 +2497,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0

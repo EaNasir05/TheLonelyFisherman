@@ -104,7 +104,7 @@ public class FishesSpawner : MonoBehaviour
                 float maxY = -layer * layersSize;
                 if (layer == 0)
                     maxY -= 1f;
-                fishes.Add(FishesPool.instance.ActivateFish(GetRandomPositionInLayer(layer), kvp.Key, new Vector2(fishesPositionXRange.x, fishesPositionXRange.y), new Vector2(-(layer + 1) * layersSize, maxY)));
+                fishes.Add(FishesPool.instance.ActivateFish(GetRandomPositionInLayer(layer), kvp.Key, new Vector2(fishesPositionXRange.x, fishesPositionXRange.y), new Vector2(-(layer + 1) * layersSize, maxY), layer));
             }
             if (fishesActivatedPerLayer[layer] == null)
                 fishesActivatedPerLayer[layer] = new();
@@ -112,13 +112,21 @@ public class FishesSpawner : MonoBehaviour
         }
     }
 
+    public void RemoveFishFromFishesActivatedPerLayer(int layer, string type, GameObject fish)
+    {
+        fishesActivatedPerLayer[layer][type].Remove(fish);
+    }
+
     private void DeactivateFishesOnLayer(int layer)
     {
-        foreach (var kvp in fishesActivatedPerLayer[layer])
+        if (fishesActivatedPerLayer[layer] != null)
         {
-            for (int j = 0; j < kvp.Value.Count; j++)
+            foreach (var kvp in fishesActivatedPerLayer[layer])
             {
-                FishesPool.instance.DeactivateFish(kvp.Value[j], kvp.Key);
+                for (int j = 0; j < kvp.Value.Count; j++)
+                {
+                    FishesPool.instance.DeactivateFish(kvp.Value[j], kvp.Key);
+                }
             }
         }
     }

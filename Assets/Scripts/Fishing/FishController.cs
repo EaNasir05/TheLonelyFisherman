@@ -8,6 +8,7 @@ public class FishController : MonoBehaviour
     public string fishType;
     public float strength;
     public int value;
+    private int layer;
     [SerializeField] private float movementSpeed;
     [SerializeField] private float diagonalMovementDuration;
     [SerializeField] private float diagonalMovementDelay;
@@ -22,10 +23,21 @@ public class FishController : MonoBehaviour
     [SerializeField] private float fallDuration;
     public bool goingUp;
     public bool dead;
+    [SerializeField] private Vector2 rotWhileDeadRange;
+    [SerializeField] private Vector2 posWhileDeadMin;
+    [SerializeField] private Vector2 posWhileDeadMax;
+    [SerializeField] private float scaleWhileDead;
+    private float startingScale;
+    private Quaternion startingRotation;
+
+    public void SetLayer(int layer) => this.layer = layer;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        trigger = GetComponent<Collider2D>();
+        startingScale = transform.localScale.x;
+        startingRotation = transform.rotation;
     }
 
     private void Update()
@@ -47,15 +59,41 @@ public class FishController : MonoBehaviour
         StartCoroutine(MovementRoutine());
     }
 
-    private void OnDisable()
-    {
-        //trigger.enabled = true;
-        dead = false;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Collisione con l'amo
+        if (collision.CompareTag("Player"))
+        {
+            Hook hook = collision.gameObject.GetComponent<Hook>();
+            if (!hook.IsOverweight())
+            {
+                dead = true;
+                trigger.enabled = false;
+                FishesSpawner.instance.RemoveFishFromFishesActivatedPerLayer(layer, fishType, gameObject);
+                transform.SetParent(hook.transform);
+                hook.CatchFish(this, strength, value);
+                MoveTowardsHook(collision.transform);
+            }
+        }
+    }
+
+    public void ResetFish()
+    {
+        if (trigger != null)
+            trigger.enabled = true;
+        dead = false;
+        transform.localScale = new Vector3(startingScale, startingScale, 1);
+        transform.rotation = startingRotation;
+        FishesPool.instance.DeactivateFish(gameObject, fishType);
+    }
+
+    private void MoveTowardsHook(Transform hook)
+    {
+        float targetRotation = Random.Range(rotWhileDeadRange.x, rotWhileDeadRange.y);
+        Vector2 targetPosition = Vector2.Lerp(posWhileDeadMin, posWhileDeadMax, (targetRotation - rotWhileDeadRange.x) / (rotWhileDeadRange.y - rotWhileDeadRange.x));
+        float targetScale = scaleWhileDead;
+        transform.rotation = Quaternion.Euler(0, 0, targetRotation);
+        transform.localPosition = targetPosition;
+        transform.localScale = new Vector3(targetScale, targetScale, 1);
     }
 
     public void SetMovementRange(Vector2 rangeX, Vector2 rangeY)
@@ -110,7 +148,19 @@ public class FishController : MonoBehaviour
 
     public IEnumerator Fall()
     {
-        yield return null;
+        transform.parent = null;
+        transform.localScale = new Vector3(startingScale, startingScale, 1);
+        float elapsedTime = 0;
+        float fallSpeed = Random.Range(2f, 4f);
+        float rotationSpeed = Random.Range(-90f, 90f);
+        while (elapsedTime < fallDuration && dead)
+        {
+            transform.position += Vector3.down * fallSpeed * Time.deltaTime;
+            transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        ResetFish();
     }
 
     private IEnumerator MovementRoutine()

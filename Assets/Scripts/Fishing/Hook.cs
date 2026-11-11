@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Hook : MonoBehaviour
@@ -27,8 +28,9 @@ public class Hook : MonoBehaviour
     public float power;
     [Range(1, 100)] [SerializeField] private int standardCriticalChance = 5;
     [Range(1, 100)] public int criticalChanceWithMagic = 5;
-    [Range(1, 100)] public int criticalChanceWithMagicWhileReturning = 5;
+    public float criticalChanceMultiplierWithMagicWhileReturning = 1;
     public float criticalCatchPointsMultiplier = 1f;
+    private List<FishController> fishesCatched;
 
     [Header("Stamina")]
     public float maxStamina = 100f;
@@ -45,6 +47,7 @@ public class Hook : MonoBehaviour
     public float weightAccumulatedPerSecond = 0.1f;
     public float overweightPointsLossMultiplier = 1f;
     public float weightGainOnCollisionMultiplier = 1f;
+    [SerializeField] private int fishesToLoseOnOverweight = 3;
 
     [Header("Character sprite settings")]
     [SerializeField] private SpriteRenderer characterSpriteRenderer;
@@ -62,10 +65,12 @@ public class Hook : MonoBehaviour
     private bool decelerating = false;
     private bool acceleratingOnReturn = false;
     private bool overweight = false;
+    private bool readyToChangeSpeed = false;
     private bool readyToDash = true;
 
     public bool IsInTheSea() => inTheSea;
     public bool IsReturning() => returning;
+    public bool IsOverweight() => overweight;
     public Vector2 GetContactPoint() => contactPoint;
     public float GetCurrentStamina() => currentStamina;
     public float GetCurrentWeight() => currentWeight;
@@ -83,6 +88,7 @@ public class Hook : MonoBehaviour
         hookLeftStartPos = new Vector2(shootingSystem.GetHookStartingXPosLeft(), transform.position.y);
         hookRightStartPos = new Vector2(shootingSystem.GetHookStartingXPosRight(), transform.position.y);
         verticalRange = FishingManager.instance.biomesHeight * FishingManager.instance.biomesUnlocked * -1;
+        fishesCatched = new();
     }
 
     private void FixedUpdate()
@@ -117,18 +123,22 @@ public class Hook : MonoBehaviour
 
     private void SpeedUp(bool value)
     {
-        if (!returning)
+        if (!returning && readyToChangeSpeed && grandsonHere)
         {
             if (value)
             {
-
+                UIManager.instance.IncreaseStaminaBarScale();
+                speedUp = true;
+                rb.linearVelocity = Vector2.down * verticalSpeed * verticalSpeedUpMultiplier;
             }
-            else
+            else if (speedUp)
             {
-                
+                UIManager.instance.ResetStaminaBarScale();
+                speedUp = false;
+                rb.linearVelocity = Vector2.down * verticalSpeed;
             }
         }
-        else if (value && inTheSea && !FishingManager.instance.stop && readyToDash)
+        else if (value && returning && !FishingManager.instance.stop && readyToDash && !grandsonHere)
         {
             rb.AddForce(Vector2.up * verticalForceWhileReturning);
             StartCoroutine(RechargeVerticalForce());
@@ -137,13 +147,27 @@ public class Hook : MonoBehaviour
 
     private void SpeedDown(bool value)
     {
-        if (value)
+        if (readyToChangeSpeed && grandsonHere)
         {
-
+            if (value)
+            {
+                UIManager.instance.IncreaseStaminaBarScale();
+                speedDown = true;
+                rb.linearVelocity = Vector2.down * verticalSpeed * verticalSpeedDownMultiplier;
+            }
+            else if (speedDown)
+            {
+                UIManager.instance.ResetStaminaBarScale();
+                speedDown = false;
+                rb.linearVelocity = Vector2.down * verticalSpeed;
+            }
         }
-        else
+        else if (returning && grandsonHere)
         {
-            
+            if (value)
+                rb.linearVelocityY = verticalSpeed * verticalSpeedMultiplierWhileReturning * verticalSpeedDownMultiplier;
+            else
+                rb.linearVelocityY = verticalSpeed * verticalSpeedMultiplierWhileReturning;
         }
     }
 
@@ -175,11 +199,15 @@ public class Hook : MonoBehaviour
 
     private void VerticalAccelerationOnReturn()
     {
+        /*
         float targetSpeed = verticalSpeed * verticalSpeedMultiplierWhileReturning;
         float movement = verticalSpeedAcceleration * (targetSpeed - rb.linearVelocityY);
         if (movement == targetSpeed)
             acceleratingOnReturn = false;
         rb.linearVelocityY = movement;
+        */
+        rb.linearVelocityY = verticalSpeed * verticalSpeedMultiplierWhileReturning;
+        acceleratingOnReturn = false;
     }
 
     private void UpdateStaminaAndWeightOvertime()
@@ -211,7 +239,7 @@ public class Hook : MonoBehaviour
     {
         currentWeight = Mathf.Clamp(currentWeight + increase, 0, maxWeight);
         UIManager.instance.UpdateStaminaBar(currentWeight);
-        if (currentWeight == maxWeight)
+        if (currentWeight == maxWeight && !overweight)
             StartCoroutine(Overweight());
     }
 
@@ -229,6 +257,7 @@ public class Hook : MonoBehaviour
         rb.gravityScale = 0;
         contactPoint = transform.position;
         inTheSea = true;
+        readyToChangeSpeed = true;
         rb.linearVelocity = Vector2.down * verticalSpeed;
         currentStamina = maxStamina;
         UIManager.instance.RefreshStaminaBar();
@@ -243,13 +272,16 @@ public class Hook : MonoBehaviour
         rb.linearDamping = 0;
         rb.linearVelocity = Vector2.zero;
         UIManager.instance.HideStaminaBar();
+        foreach (FishController fish in fishesCatched)
+        {
+            fish.ResetFish();
+        }
         StartCoroutine(RestartFishing());
     }
 
     private void StartReturning()
     {
         returning = true;
-        speedDown = false;
         if (grandsonHere)
         {
             acceleratingOnReturn = true;
@@ -266,15 +298,13 @@ public class Hook : MonoBehaviour
 
     private IEnumerator ReturnDelay()
     {
+        UIManager.instance.ResetStaminaBarScale();
+        readyToChangeSpeed = false;
+        speedDown = false;
+        speedUp = false;
         rb.linearVelocityY = 0;
         yield return new WaitForSeconds(1f);
         StartReturning();
-    }
-
-    private IEnumerator Overweight()
-    {
-        yield return null;
-        //Sovraccarico
     }
 
     private IEnumerator RechargeVerticalForce()
@@ -302,5 +332,51 @@ public class Hook : MonoBehaviour
         }
         transform.position = targetPos;
         shootingSystem.Restart();
+    }
+
+    private IEnumerator Overweight()
+    {
+        overweight = true;
+        int pointsLoss = 0;
+        for (int i = 1; i <= fishesToLoseOnOverweight; i++)
+        {
+            FishController fish = fishesCatched[fishesCatched.Count - 1];
+            pointsLoss += fish.value;
+            StartCoroutine(fish.Fall());
+            fishesCatched.Remove(fish);
+        }
+        FishingManager.instance.LosePoints((int)(pointsLoss * overweightPointsLossMultiplier));
+        //VFX sovraccarico
+        currentWeight = 0;
+        UIManager.instance.UpdateStaminaBar(0);
+        overweight = false;
+        return null;
+    }
+
+    public void CatchFish(FishController fish, float strength, int value)
+    {
+        int crit = grandsonHere && (speedDown || speedDown) ? criticalChanceWithMagic : standardCriticalChance;
+        crit = grandsonHere && (speedDown || speedDown) && returning ? (int)(crit * criticalChanceMultiplierWithMagicWhileReturning) : crit;
+        if (Random.Range(1, 101) <= crit)
+        {
+            //VFX critico
+            FishingManager.instance.GainPoints((int)(value * criticalCatchPointsMultiplier));
+        }
+        else
+        {
+            FishingManager.instance.GainPoints(value);
+            float staminaLoss = Mathf.Clamp(strength - power, 0, maxStamina - currentStamina);
+            if (!returning)
+            {
+                currentStamina -= staminaLoss;
+                UIManager.instance.UpdateStaminaBar(currentStamina);
+            }
+            else if (!overweight)
+            {
+                currentWeight += staminaLoss;
+                UIManager.instance.UpdateStaminaBar(currentWeight);
+            }
+        }
+        fishesCatched.Add(fish);
     }
 }
