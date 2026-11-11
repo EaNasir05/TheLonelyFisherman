@@ -23,7 +23,7 @@ public class FishesSpawner : MonoBehaviour
     {
         instance = this;
     }
-
+    
     private void Update()
     {
         if (cameraTransform.position.y > currentLayer * -layersSize)

@@ -1611,7 +1611,7 @@ MonoBehaviour:
   horizontalSpeed: 3
   horizontalSpeedMultiplier: 1
   movementRange: {x: -9.8, y: 9.8}
-  verticalSpeed: 2
+  verticalSpeed: 1.5
   verticalSpeedAcceleration: 10
   verticalSpeedDeceleration: 10
   verticalSpeedMultiplierWhileReturning: 1
@@ -1632,7 +1632,7 @@ MonoBehaviour:
   staminaLossOnCollisionMultiplier: 1
   maxWeight: 100
   weightGainMultiplier: 1
-  weightAccumulatedPerSecond: 1
+  weightAccumulatedPerSecond: 5
   overweightPointsLossMultiplier: 1
   weightGainOnCollisionMultiplier: 1
   fishesToLoseOnOverweight: 6
@@ -1704,10 +1704,10 @@ MonoBehaviour:
   fishesList: {fileID: 11400000, guid: 89781d83d7deebf48bebd1ecad104727, type: 2}
   cameraTransform: {fileID: 584015594}
   layersPerBiome: 4
-  fishesOnLayerPerBiome: 0a0000000a0000000f0000000f0000000f000000
+  fishesOnLayerPerBiome: 0a00000010000000100000001400000014000000
   numberOfLayersToSpawnOnStart: 3
   unitsVisibleToCamera: 11
-  fishesPositionXRange: {x: -9, y: 9}
+  fishesPositionXRange: {x: -9.5, y: 9.5}
 --- !u!114 &881730810
 MonoBehaviour:
   m_ObjectHideFlags: 0

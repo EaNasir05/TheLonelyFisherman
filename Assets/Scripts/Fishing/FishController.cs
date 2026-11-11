@@ -27,7 +27,7 @@ public class FishController : MonoBehaviour
     [SerializeField] private Vector2 posWhileDeadMin;
     [SerializeField] private Vector2 posWhileDeadMax;
     [SerializeField] private float scaleWhileDead;
-    private float startingScale;
+    private Vector3 startingScale;
     private Quaternion startingRotation;
 
     public void SetLayer(int layer) => this.layer = layer;
@@ -36,7 +36,7 @@ public class FishController : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         trigger = GetComponent<Collider2D>();
-        startingScale = transform.localScale.x;
+        startingScale = transform.localScale;
         startingRotation = transform.rotation;
     }
 
@@ -81,7 +81,7 @@ public class FishController : MonoBehaviour
         if (trigger != null)
             trigger.enabled = true;
         dead = false;
-        transform.localScale = new Vector3(startingScale, startingScale, 1);
+        transform.localScale = startingScale;
         transform.rotation = startingRotation;
         FishesPool.instance.DeactivateFish(gameObject, fishType);
     }
@@ -140,16 +140,10 @@ public class FishController : MonoBehaviour
         SetMovementDirection(newRot);
     }
 
-    private void InvertVerticalDirection()
-    {
-        float newRot = diagonalPhase ? -movementRot : 0f;
-        SetMovementDirection(newRot);
-    }
-
     public IEnumerator Fall()
     {
         transform.parent = null;
-        transform.localScale = new Vector3(startingScale, startingScale, 1);
+        transform.localScale = startingScale;
         float elapsedTime = 0;
         float fallSpeed = Random.Range(2f, 4f);
         float rotationSpeed = Random.Range(-90f, 90f);
@@ -172,7 +166,7 @@ public class FishController : MonoBehaviour
             if (goingUp)
                 randomAngle = Random.Range(minRotation, maxRotation);
             else
-                randomAngle = Random.Range(-minRotation, -maxRotation);
+                randomAngle = Random.Range(-maxRotation, -minRotation);
             SetMovementDirection(randomAngle);
             yield return new WaitForSeconds(diagonalMovementDuration);
 
@@ -188,12 +182,15 @@ public class FishController : MonoBehaviour
         movementRot = angleInDegrees;
         float rad = angleInDegrees * Mathf.Deg2Rad;
         float x = Mathf.Cos(rad) * facingDirection;
-        float y = 0f;
-        if (angleInDegrees > 0f)
-        {
-            y = Mathf.Sin(rad) * (Random.value > 0.5f ? 1f : -1f);
-        }
+        float y = Mathf.Sin(rad); 
         movementDir = new Vector2(x, y).normalized;
+    }
+
+    private void InvertVerticalDirection()
+    {
+        float newRot = -movementRot;
+        goingUp = !goingUp;
+        SetMovementDirection(newRot);
     }
 
     private void CheckBoundaries()

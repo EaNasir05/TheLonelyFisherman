@@ -274,6 +274,7 @@ public class Hook : MonoBehaviour
         UIManager.instance.HideStaminaBar();
         foreach (FishController fish in fishesCatched)
         {
+            fish.transform.SetParent(null);
             fish.ResetFish();
         }
         StartCoroutine(RestartFishing());
@@ -340,10 +341,13 @@ public class Hook : MonoBehaviour
         int pointsLoss = 0;
         for (int i = 1; i <= fishesToLoseOnOverweight; i++)
         {
-            FishController fish = fishesCatched[fishesCatched.Count - 1];
-            pointsLoss += fish.value;
-            StartCoroutine(fish.Fall());
-            fishesCatched.Remove(fish);
+            if (fishesCatched.Count > 0)
+            {
+                FishController fish = fishesCatched[fishesCatched.Count - 1];
+                pointsLoss += fish.value;
+                StartCoroutine(fish.Fall());
+                fishesCatched.Remove(fish);
+            }
         }
         FishingManager.instance.LosePoints((int)(pointsLoss * overweightPointsLossMultiplier));
         //VFX sovraccarico
