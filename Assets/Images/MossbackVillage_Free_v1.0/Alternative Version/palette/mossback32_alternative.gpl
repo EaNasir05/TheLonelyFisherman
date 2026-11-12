@@ -1,0 +1,36 @@
+GIMP Palette
+Name: Mossback 32
+Columns: 8
+#
+ 27  22  38	Ink (outline, darkest)
+ 46  37  64	Deep shadow
+ 70  58  92	Dusk shadow
+110  90 140	Dream purple
+160 140 200	Dream glow
+ 29  53  87	Deep sea
+ 35  88 122	Sea
+ 47 133 144	Shallow sea
+ 87 181 168	Lagoon / sky low
+166 227 207	Sky / water highlight
+232 247 238	Foam (cool white)
+ 35  58  51	Moss shadow
+ 53  90  58	Moss dark
+ 79 125  60	Moss
+127 166  70	Moss light
+191 207 106	Moss highlight
+ 58  46  54	Shell shadow
+ 91  70  70	Shell dark
+128 100  82	Shell
+171 140 108	Shell light
+214 191 152	Shell highlight / sand
+ 75  42  44	Wood shadow
+114  60  50	Wood dark
+160  90  60	Wood / skin dark
+201 138  82	Wood light / skin mid
+232 168  56	Lantern / raincoat
+247 214 117	Lantern light
+255 246 220	Warm white
+124  45  60	Coral shadow
+192  74  74	Coral red
+238 134 112	Coral light
+248 192 168	Skin light / blush
