@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: Sea_glint
+  m_EditorClassIdentifier: Unity.2D.Tilemap.Extras::UnityEngine.Tilemaps.AnimatedTile
+  m_AnimatedSprites:
+  - {fileID: 6024090828794368380, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
+  - {fileID: -8380019, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
+  - {fileID: -1479691743, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
+  - {fileID: -100922153, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
+  - {fileID: -530361338, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
+  - {fileID: 909697551, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
+  - {fileID: 1407732345, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
+  - {fileID: -2070980521, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
+  - {fileID: 193804032, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
+  - {fileID: 1783169069, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
+  - {fileID: 484148632, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
+  - {fileID: 1686283720, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
+  m_MinSpeed: 10
+  m_MaxSpeed: 10
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 0
+  m_TileAnimationFlags: 0
