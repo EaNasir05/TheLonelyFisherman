@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public enum Scene { Island, Boat, Fishing, Ending, Lighthouse, Hut }
+public enum Scene { Island, Boat, Fishing, Ending, Lighthouse, Hut, Menu }
 
 public class UIManager : MonoBehaviour
 {
@@ -46,7 +46,8 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         hookScript = FindFirstObjectByType<Hook>();
-        staminaRectTransform = staminaSlider.GetComponent<RectTransform>();
+        staminaRectTransform = staminaSlider?.GetComponent<RectTransform>();
+        currentScene = GameManager.instance.GetCurrentScene();
     }
 
     public void UpdatePointsText(float value)
@@ -159,8 +160,9 @@ public class UIManager : MonoBehaviour
         pgt.localScale = new Vector3(2, 2, 1);
     }
 
-    private IEnumerator FadeIn(float duration)
+    public IEnumerator FadeOut(float duration, string sceneName)
     {
+        blackScreen.gameObject.SetActive(true);
         float elapsedTime = 0f;
         while (elapsedTime < duration)
         {
@@ -170,10 +172,13 @@ public class UIManager : MonoBehaviour
             yield return null;
         }
         blackScreen.color = new Color(0f, 0f, 0f, 1f);
+
+        SceneManager.LoadScene(sceneName);
     }
 
-    private IEnumerator FadeOut(float duration, string sceneName)
+    public IEnumerator FadeIn(float duration)
     {
+        blackScreen.gameObject.SetActive(true);
         float elapsedTime = 0f;
         while (elapsedTime < duration)
         {
@@ -183,7 +188,6 @@ public class UIManager : MonoBehaviour
             yield return null;
         }
         blackScreen.color = new Color(0f, 0f, 0f, 0f);
-
-        SceneManager.LoadScene(sceneName);
+        blackScreen.gameObject.SetActive(false);
     }
 }

@@ -6,11 +6,32 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 0f5a68c2fdfaa81489e8453c37e39ea0
+  - enabled: 1
     path: Assets/Scenes/Hut.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/Test.unity
-    guid: 0d7f020e36b47da40954131bc7a559f6
+    path: Assets/Scenes/MorningIsland.unity
+    guid: 7a83c55d7f9c4d645a6b668cec3abb9e
+  - enabled: 1
+    path: Assets/Scenes/MorningLighthouse.unity
+    guid: 2e76c6be05616c845975c19e8e36acb6
+  - enabled: 1
+    path: Assets/Scenes/MorningOnBoat.unity
+    guid: c5a4a1eb8a62d1f468dcb04aa911d09c
+  - enabled: 1
+    path: Assets/Scenes/Fishing.unity
+    guid: 14042fc343611014d90858d7639a13bd
+  - enabled: 1
+    path: Assets/Scenes/EveningOnBoat.unity
+    guid: b5d95f8512713704f990c7e1b68d246c
+  - enabled: 1
+    path: Assets/Scenes/EveningIsland.unity
+    guid: ca8fe7be8572d1347bb78a791f829a69
+  - enabled: 1
+    path: Assets/Scenes/EveningLighthouse.unity
+    guid: 489a69562f9afac4a8b98df701ab1afc
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: df268314146995f458a50f172140ca93, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

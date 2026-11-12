@@ -193,7 +193,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPaused: 0
-  grandsonHere: 0
+  tutorial: 1
+  grandsonHere: 1
 --- !u!4 &5911683
 Transform:
   m_ObjectHideFlags: 0
@@ -1612,18 +1613,14 @@ MonoBehaviour:
   horizontalSpeedMultiplier: 1
   movementRange: {x: -9.8, y: 9.8}
   verticalSpeed: 1.5
-  verticalSpeedAcceleration: 10
-  verticalSpeedDeceleration: 10
-  verticalSpeedMultiplierWhileReturning: 1
-  verticalForceWhileReturning: 500000
-  verticalForceCooldown: 0.2
-  linearDumpOnReturn: 10
+  verticalSpeedWithoutMagicOnReturn: 1
   verticalSpeedUpMultiplier: 1.5
   verticalSpeedDownMultiplier: 0.5
+  verticalSpeedUpMultiplierOnReturn: 1.5
   power: 0
   standardCriticalChance: 5
   criticalChanceWithMagic: 5
-  criticalChanceMultiplierWithMagicWhileReturning: 1
+  criticalChanceMultiplierWithMagicOnReturn: 1
   criticalCatchPointsMultiplier: 1
   maxStamina: 100
   staminaConsumedPerSecond: 2
