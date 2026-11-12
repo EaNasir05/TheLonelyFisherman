@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Yarn.Unity;
@@ -9,9 +8,11 @@ public class GameManager : MonoBehaviour
     private Scene currentScene;
     private InMemoryVariableStorage yarnVariableStorage;
     public bool isPaused = false;
+    public bool tutorial = true;
     [SerializeField] private bool grandsonHere = false;
 
     public bool IsGrandsonHere() => grandsonHere;
+    public Scene GetCurrentScene() => currentScene;
 
     private void Awake()
     {
@@ -46,6 +47,8 @@ public class GameManager : MonoBehaviour
             //Settaggio variabili FishingManager e Hook
             FishingManager.instance.Initialize();
         }
+
+        StartCoroutine(UIManager.instance.FadeIn(1f));
     }
 
     private void UpdateCurrentScene()
@@ -67,6 +70,9 @@ public class GameManager : MonoBehaviour
             case "EveningOnBoat":
                 currentScene = Scene.Boat;
                 break;
+            case "MainMenu":
+                currentScene = Scene.Menu;
+                break;
             default:
                 currentScene = Scene.Ending;
                 break;
@@ -75,7 +81,7 @@ public class GameManager : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        StartCoroutine(UIManager.instance.FadeOut(1f, sceneName));
     }
 
     public void PrintYarnVariable(string variableName)
