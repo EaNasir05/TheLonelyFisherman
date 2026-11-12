@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 826e30a3e9a704f4b9a1374c81680239, type: 3}
+  m_Name: FishesList
+  m_EditorClassIdentifier: Assembly-CSharp::FishesList
+  list:
+  - type: Merluzzo
+    prefab: {fileID: 5280115824541950317, guid: 8e7b5635935793447b5d7bf24530775a, type: 3}
+  - type: Sogliola
+    prefab: {fileID: 3057568736230052078, guid: e762ebaff1b2ad941837ed65ac11f9ad, type: 3}
+  - type: Branzino
+    prefab: {fileID: 6473685158530585248, guid: b413442184e28e9408f3148fc03d4ca6, type: 3}
+  - type: Sardina
+    prefab: {fileID: 8709872164638173276, guid: 5142e8ab7902d054e81fbeb22311d8f8, type: 3}
+  - type: Tonno
+    prefab: {fileID: 6645528130332791758, guid: 36640fb66af2c0c45a2a2c8450656ce8, type: 3}
+  - type: Angelo
+    prefab: {fileID: 2905874388291614519, guid: 9edd04d6bb31b344dbe27353f6d77698, type: 3}
+  - type: Mandarino
+    prefab: {fileID: 3956693968277277865, guid: 89688becca54a0b47bb382967f612e26, type: 3}
+  - type: Cernia
+    prefab: {fileID: 2773613963590212517, guid: 26caf7c4137648b40a7196b69d8bfeec, type: 3}
+  - type: Sbocco
+    prefab: {fileID: 1182679226383120012, guid: 0798ecb6ff228e5479473cce2a6fc31a, type: 3}
+  - type: Yellow
+    prefab: {fileID: 9193463390012430350, guid: 6d3e04a6784a97047be6cd84a59c42b9, type: 3}
+  - type: Red
+    prefab: {fileID: 11831083444601182, guid: 7ea42e610d79fd44086cb1ed5b7b2eb3, type: 3}
+  - type: Pink
+    prefab: {fileID: 4781595926269199305, guid: 8e164299671eed54185326bc42f6b62f, type: 3}
+  fishesRatesPerBiome:
+  - fishes:
+    - fishType: Branzino
+      percentage: 20
+    - fishType: Sogliola
+      percentage: 40
+    - fishType: Merluzzo
+      percentage: 40
+  - fishes:
+    - fishType: Sardina
+      percentage: 65
+    - fishType: Tonno
+      percentage: 15
+    - fishType: Angelo
+      percentage: 20
+  - fishes:
+    - fishType: Sbocco
+      percentage: 60
+    - fishType: Cernia
+      percentage: 20
+    - fishType: Mandarino
+      percentage: 20
+  - fishes:
+    - fishType: Yellow
+      percentage: 33
+    - fishType: Red
+      percentage: 33
+    - fishType: Pink
+      percentage: 33
+  - fishes:
+    - fishType: Yellow
+      percentage: 33
+    - fishType: Red
+      percentage: 33
+    - fishType: Pink
+      percentage: 33

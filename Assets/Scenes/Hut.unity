@@ -549,6 +549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9302c37f4d57a4548bc08789fbd13de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentScene: 0
   isPaused: 0
 --- !u!4 &337100788
 Transform:
@@ -841,7 +842,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37009f64f56a5884bab8b022e2373f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
+  currentScene: 0
   blackScreen: {fileID: 0}
+  shopMenu: {fileID: 0}
+  fishingPoints: {fileID: 0}
+  staminaSlider: {fileID: 0}
+  staminaFillImage: {fileID: 0}
+  staminaFillColor: {r: 0, g: 0, b: 0, a: 0}
+  weightFillColor: {r: 0, g: 0, b: 0, a: 0}
+  staminaBackgroundImage: {fileID: 0}
+  staminaBackgroundColor: {r: 0, g: 0, b: 0, a: 0}
+  weightBackgroundColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &766686122
 Transform:
   m_ObjectHideFlags: 0
@@ -987,17 +998,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.6}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.06}
-    oldSize: {x: 1.4628571, y: 1.4628571}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.12, y: 5.12}
     newSize: {x: 1.4628571, y: 1.4628571}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 4}
   m_EdgeRadius: 0
 --- !u!4 &892860285
 Transform:
@@ -1008,8 +1019,8 @@ Transform:
   m_GameObject: {fileID: 892860282}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.5, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1063,7 +1074,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 9bd9561054e604611b6f6c57c9b8500c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a34e0468b3033f948af803db48a52d85, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
