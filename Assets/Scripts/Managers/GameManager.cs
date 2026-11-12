@@ -1,14 +1,22 @@
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Yarn.Unity;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    private Scene currentScene;
     private InMemoryVariableStorage yarnVariableStorage;
     public bool isPaused = false;
+    [SerializeField] private bool grandsonHere = false;
+
+    public bool IsGrandsonHere() => grandsonHere;
 
     private void Awake()
     {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
         if (instance == null)
         {
             instance = this;
@@ -22,6 +30,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        UpdateCurrentScene();
+
         if (yarnVariableStorage == null)
         {
             yarnVariableStorage = FindFirstObjectByType<InMemoryVariableStorage>();
@@ -29,6 +39,37 @@ public class GameManager : MonoBehaviour
                 Debug.LogError("InMemoryVariableStorage not found in the scene.");
             else
                 DontDestroyOnLoad(yarnVariableStorage.gameObject);
+        }
+
+        if (currentScene == Scene.Fishing)
+        {
+            //Settaggio variabili FishingManager e Hook
+            FishingManager.instance.Initialize();
+        }
+    }
+
+    private void UpdateCurrentScene()
+    {
+        string scene = SceneManager.GetActiveScene().name;
+        switch (scene)
+        {
+            case "EveningIsland":
+            case "MorningIsland":
+                currentScene = Scene.Island;
+                break;
+            case "Hut":
+                currentScene = Scene.Hut;
+                break;
+            case "Fishing":
+                currentScene = Scene.Fishing;
+                break;
+            case "MorningOnBoat":
+            case "EveningOnBoat":
+                currentScene = Scene.Boat;
+                break;
+            default:
+                currentScene = Scene.Ending;
+                break;
         }
     }
 
