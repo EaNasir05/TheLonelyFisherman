@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Yarn.Unity;
@@ -9,10 +10,15 @@ public class GameManager : MonoBehaviour
     private InMemoryVariableStorage yarnVariableStorage;
     public bool isPaused = false;
     public bool tutorial = true;
+    private int day = 0;
+    private int money = 0;
     [SerializeField] private bool grandsonHere = false;
+    [SerializeField] private UpgradesList upgradesList;
 
     public bool IsGrandsonHere() => grandsonHere;
     public Scene GetCurrentScene() => currentScene;
+    public int GetDay() => day;
+    public int GetMoney() => money;
 
     private void Awake()
     {
@@ -22,6 +28,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            upgradesList.ResetUpgrades();
         }
         else if (instance != this)
         {
@@ -44,11 +51,15 @@ public class GameManager : MonoBehaviour
 
         if (currentScene == Scene.Fishing)
         {
-            //Settaggio variabili FishingManager e Hook
             FishingManager.instance.Initialize();
         }
 
         StartCoroutine(UIManager.instance.FadeIn(1f));
+    }
+
+    public void AddMoney(int increase)
+    {
+        money = Math.Clamp(money + increase, 0, 999999999);
     }
 
     private void UpdateCurrentScene()
