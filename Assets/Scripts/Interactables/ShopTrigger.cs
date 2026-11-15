@@ -26,7 +26,8 @@ public class ShopTrigger : MonoBehaviour
             playerHere = true;
             if (interactableRenderer != null)
                 interactableRenderer.color = interactableColor;
-            inputIcon?.SetActive(true);
+            if (inputIcon != null)
+                inputIcon?.SetActive(true);
         }
     }
 
@@ -37,11 +38,12 @@ public class ShopTrigger : MonoBehaviour
             playerHere = false;
             if (interactableRenderer != null)
                 interactableRenderer.color = Color.white;
-            inputIcon?.SetActive(false);
+            if (inputIcon != null)
+                inputIcon?.SetActive(false);
         }
     }
 
-    private void OpenShop()
+    public void OpenShop()
     {
         if (playerHere)
             UIManager.instance.OpenShop();

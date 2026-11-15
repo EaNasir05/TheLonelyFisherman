@@ -11,16 +11,19 @@ public class UpgradeButton : MonoBehaviour, ISelectHandler
     private Upgrade upgrade;
     [SerializeField] private bool firstNode;
     [SerializeField] private List<UpgradeButton> nextUpgrades;
-    private Button button;
+    [SerializeField] private Button button;
     [SerializeField] private Image buttonImage;
     [SerializeField] private Image connectionImage;
     public bool unlocked;
     public bool available;
 
-    private void Start()
+    private void Awake()
     {
         upgrade = upgradesList.GetUpgradeByName(upgradeName);
-        button = GetComponent<Button>();
+    }
+
+    private void Start()
+    {
         if (firstNode)
         {
             UpdateButton(true);
@@ -78,7 +81,6 @@ public class UpgradeButton : MonoBehaviour, ISelectHandler
             {
                 //sfx acquisto
                 GameManager.instance.AddMoney(-cost);
-                //aggiorna conteggio monete
                 upgrade.unlocked = true;
                 UpdateButton(true);
                 UpdateUpgradeInfo();

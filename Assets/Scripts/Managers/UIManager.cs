@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     private EventSystem eventSystem;
 
     [Header("Island")]
+    [SerializeField] private TMP_Text moneyCount;
     [SerializeField] private GameObject shopMenu;
     [SerializeField] private GameObject startingNodeShop;
     [SerializeField] private GameObject upgradeInfo;
@@ -61,6 +62,17 @@ public class UIManager : MonoBehaviour
         eventSystem = FindFirstObjectByType<EventSystem>();
     }
 
+    #region Money
+
+    public void UpdateMoneyCount(int value)
+    {
+        moneyCount?.SetText(value + "€");
+    }
+
+    #endregion Money
+
+    #region Shop
+
     public void OpenShop()
     {
         upgradeInfo.SetActive(false);
@@ -97,6 +109,10 @@ public class UIManager : MonoBehaviour
     {
         upgradeInfo.SetActive(false);
     }
+
+    #endregion Shop
+
+    #region Fishing
 
     public void UpdatePointsText(float value)
     {
@@ -207,6 +223,10 @@ public class UIManager : MonoBehaviour
         tmp.color = Color.red;
         pgt.localScale = new Vector3(2, 2, 1);
     }
+    
+    #endregion Fishing
+
+    #region Fade
 
     public IEnumerator FadeOut(float duration, string sceneName)
     {
@@ -238,4 +258,6 @@ public class UIManager : MonoBehaviour
         blackScreen.color = new Color(0f, 0f, 0f, 0f);
         blackScreen.gameObject.SetActive(false);
     }
+
+    #endregion Fade
 }

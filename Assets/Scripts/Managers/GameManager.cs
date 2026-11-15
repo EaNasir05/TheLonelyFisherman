@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public bool isPaused = false;
     public bool tutorial = true;
     private int day = 0;
-    private int money = 0;
+    private int money = 100;
     [SerializeField] private bool grandsonHere = false;
     [SerializeField] private UpgradesList upgradesList;
 
@@ -54,12 +54,18 @@ public class GameManager : MonoBehaviour
             FishingManager.instance.Initialize();
         }
 
+        if (currentScene == Scene.Hut || currentScene == Scene.Island || currentScene == Scene.Lighthouse)
+        {
+            UIManager.instance.UpdateMoneyCount(money);
+        }
+
         StartCoroutine(UIManager.instance.FadeIn(1f));
     }
 
     public void AddMoney(int increase)
     {
         money = Math.Clamp(money + increase, 0, 999999999);
+        UIManager.instance.UpdateMoneyCount(money);
     }
 
     private void UpdateCurrentScene()

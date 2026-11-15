@@ -14,20 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradesList
   list:
   - name: Lunghezza lenza 1
-    description: 
-    effect: 
-    icon: {fileID: 0}
+    description: "Aumenta la profondit\xE0 massima raggiungibile dall'amo."
+    effect: 20m >> 40m
+    icon: {fileID: 21300000, guid: 869d287e77fac3d488a844c5e85bb114, type: 3}
+    unlockedIcon: {fileID: 21300000, guid: 05f97dd42ee32384694e2b8aaa360e4a, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
     unlocked: 0
-    cost: 0
-  - name: 
-    description: 
-    effect: 
-    icon: {fileID: 0}
+    cost: 100
+  - name: Lunghezza lenza 2
+    description: "Aumenta la profondit\xE0 massima raggiungibile dall'amo."
+    effect: 40m >> 60m
+    icon: {fileID: 21300000, guid: 869d287e77fac3d488a844c5e85bb114, type: 3}
+    unlockedIcon: {fileID: 21300000, guid: 05f97dd42ee32384694e2b8aaa360e4a, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
     unlocked: 0
-    cost: 0
-  - name: 
-    description: 
-    effect: 
-    icon: {fileID: 0}
+    cost: 500
+  - name: Lunghezza lenza 3
+    description: "Aumenta la profondit\xE0 massima raggiungibile dall'amo."
+    effect: 60m >> 80m
+    icon: {fileID: 21300000, guid: 869d287e77fac3d488a844c5e85bb114, type: 3}
+    unlockedIcon: {fileID: 21300000, guid: 05f97dd42ee32384694e2b8aaa360e4a, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
     unlocked: 0
-    cost: 0
+    cost: 2000
