@@ -1,0 +1,36 @@
+GIMP Palette
+Name: Mossback 32
+Columns: 8
+#
+ 27  22  38  ink
+ 46  37  64  deep_shadow
+ 70  58  92  dusk_shadow
+110  90 140  dream_purple
+160 140 200  dream_glow
+ 29  53  87  deep_sea
+ 35  88 122  sea
+ 47 133 144  shallow_sea
+ 87 181 168  lagoon
+166 227 207  sky
+232 247 238  foam
+ 35  58  51  moss_shadow
+ 53  90  58  moss_dark
+ 79 125  60  moss
+127 166  70  moss_light
+191 207 106  moss_highlight
+ 58  46  54  stone_shadow
+ 91  70  70  stone_dark
+128 100  82  earth
+171 140 108  stone_light
+214 191 152  stone_highlight
+ 75  42  44  wood_shadow
+114  60  50  wood_dark
+160  90  60  wood
+201 138  82  wood_light
+232 168  56  raincoat
+247 214 117  raincoat_highlight
+255 246 220  warm_white
+124  45  60  coral_shadow
+192  74  74  coral
+238 134 112  coral_light
+248 192 168  skin_light

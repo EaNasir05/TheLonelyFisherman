@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: Sea_body
+  m_EditorClassIdentifier: Unity.2D.Tilemap.Extras::UnityEngine.Tilemaps.AnimatedTile
+  m_AnimatedSprites:
+  - {fileID: -6030092388781092302, guid: 6828bb5b26ccd8b4f877ebc8a43979f2, type: 3}
+  - {fileID: 1705982884, guid: 6828bb5b26ccd8b4f877ebc8a43979f2, type: 3}
+  - {fileID: 1886914028, guid: 6828bb5b26ccd8b4f877ebc8a43979f2, type: 3}
+  - {fileID: -1335738338, guid: 6828bb5b26ccd8b4f877ebc8a43979f2, type: 3}
+  - {fileID: -815857055, guid: 6828bb5b26ccd8b4f877ebc8a43979f2, type: 3}
+  - {fileID: -336197432, guid: 6828bb5b26ccd8b4f877ebc8a43979f2, type: 3}
+  - {fileID: -741878761, guid: 6828bb5b26ccd8b4f877ebc8a43979f2, type: 3}
+  - {fileID: 766115293, guid: 6828bb5b26ccd8b4f877ebc8a43979f2, type: 3}
+  - {fileID: -297535530, guid: 6828bb5b26ccd8b4f877ebc8a43979f2, type: 3}
+  - {fileID: 13593987, guid: 6828bb5b26ccd8b4f877ebc8a43979f2, type: 3}
+  - {fileID: 1841286019, guid: 6828bb5b26ccd8b4f877ebc8a43979f2, type: 3}
+  - {fileID: 806833071, guid: 6828bb5b26ccd8b4f877ebc8a43979f2, type: 3}
+  m_MinSpeed: 1
+  m_MaxSpeed: 1
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 0
+  m_TileAnimationFlags: 0
