@@ -1,0 +1,31 @@
+MOSSBACK VILLAGE - FREE 16x16 PIXEL ART PLATFORMER PACK
+LICENSE
+=======================================================
+
+Copyright (c) 2026 Mossback Village project owner. All rights reserved except as granted below.
+
+YOU MAY
+- Use these assets in personal, educational and COMMERCIAL games and projects, free of charge.
+- Modify, recolour, crop, re-arrange and animate them to fit your game.
+- Ship them inside your game and its builds (they may be extracted from your game's files by players; that is fine).
+- Use screenshots and videos of your game that contain them.
+
+YOU MAY NOT
+- Resell, sublicense or redistribute the assets themselves, unmodified or modified, alone or bundled inside another
+  asset pack, tileset collection, template, kit, marketplace listing or subscription.
+- Upload the source files (.aseprite, PNG sheets, palette files) to a public repository or file-sharing site, other than
+  as part of a finished game.
+- Claim that you drew the original assets, or use them to train a generative AI model.
+
+CREDIT
+Credit is appreciated but not required. Suggested line:
+    Art: "Mossback Village" free pixel art pack
+
+NO WARRANTY
+The assets are provided "as is", without warranty of any kind. The author is not liable for any claim or damage arising
+from their use.
+
+This is a plain-language summary written for the pack, not legal advice. If you are unsure whether your use is covered,
+ask before you ship.
+
+Palette note: the colour palette "Mossback 32" (palette/mossback32.*) is part of the pack and covered by this license.
