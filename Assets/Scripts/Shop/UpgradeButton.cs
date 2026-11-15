@@ -1,36 +1,48 @@
 using System;
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class UpgradeButton : MonoBehaviour
+public class UpgradeButton : MonoBehaviour, ISelectHandler
 {
-    [SerializeField] private Upgrade upgrade;
+    [SerializeField] private string upgradeName;
+    [SerializeField] private UpgradesList upgradesList;
+    private Upgrade upgrade;
     [SerializeField] private bool firstNode;
     [SerializeField] private List<UpgradeButton> nextUpgrades;
-    private Image buttonImage;
+    private Button button;
+    [SerializeField] private Image buttonImage;
+    [SerializeField] private Image connectionImage;
     public bool unlocked;
     public bool available;
 
     private void Start()
     {
-        buttonImage = GetComponent<Image>();
+        upgrade = upgradesList.GetUpgradeByName(upgradeName);
+        button = GetComponent<Button>();
         if (firstNode)
         {
             UpdateButton(true);
         }
     }
 
-    public void UpdateButton(bool available)
+    public void OnSelect(BaseEventData eventData)
+    {
+        UpdateUpgradeInfo();
+    }
+
+    private void UpdateButton(bool available)
     {
         this.available = available;
+        button.interactable = available;
         if (available)
         {
-            //aggiorna immagine con icona upgrade
+            connectionImage.color = Color.white;
             if (upgrade.unlocked)
             {
                 unlocked = true;
-                //colora di verde il bordo e aggiungi V verde
+                buttonImage.sprite = upgrade.unlockedIcon;
                 foreach (UpgradeButton button in nextUpgrades)
                 {
                     button.UpdateButton(true);
@@ -39,7 +51,7 @@ public class UpgradeButton : MonoBehaviour
             else
             {
                 unlocked = false;
-                //colora di grigio il bordo
+                buttonImage.sprite = upgrade.icon;
                 foreach (UpgradeButton button in nextUpgrades)
                 {
                     button.UpdateButton(false);
@@ -48,7 +60,8 @@ public class UpgradeButton : MonoBehaviour
         }
         else
         {
-            //aggiorna immagine con lucchetto
+            buttonImage.sprite = upgrade.lockedIcon;
+            connectionImage.color = Color.gray;
             foreach (UpgradeButton button in nextUpgrades)
             {
                 button.UpdateButton(false);
@@ -68,6 +81,7 @@ public class UpgradeButton : MonoBehaviour
                 //aggiorna conteggio monete
                 upgrade.unlocked = true;
                 UpdateButton(true);
+                UpdateUpgradeInfo();
             }
             else
             {
@@ -76,21 +90,8 @@ public class UpgradeButton : MonoBehaviour
         }
     }
 
-    public void UpdateUpgradeInfo()
+    private void UpdateUpgradeInfo()
     {
-        //aggiorna titolo
-        //aggiorna icona
-        //aggiorna descrizione
-        if (unlocked)
-        {
-            //aggiorna costo
-            //nascondi unlocked
-        }
-        else
-        {
-            //aggiorna unlocked
-            //nascondi costo
-        }
-        //aggiorna effetto
+        UIManager.instance.UpdateUpgradeInfo(upgrade.name, upgrade.description, upgrade.effect, upgrade.cost, upgrade.icon, upgrade.unlocked);
     }
 }

@@ -3,6 +3,9 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour
 {
     [SerializeField] private string dialogueNode = "";
+    [SerializeField] private GameObject inputIcon;
+    [SerializeField] private SpriteRenderer interactableRenderer;
+    [SerializeField] private Color interactableColor = Color.yellow;
     private InputHandler inputHandler;
     private bool playerHere = false;
 
@@ -20,13 +23,23 @@ public class DialogueTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
+        {
             playerHere = true;
+            if (interactableRenderer != null)
+                interactableRenderer.color = interactableColor;
+            inputIcon?.SetActive(true);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
+        {
             playerHere = false;
+            if (interactableRenderer != null)
+                interactableRenderer.color = Color.white;
+            inputIcon?.SetActive(false);
+        }
     }
 
     private void StartDialogue()

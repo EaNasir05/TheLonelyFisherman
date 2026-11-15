@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -14,9 +15,18 @@ public class UIManager : MonoBehaviour
 
     [Header("General")]
     [SerializeField] private Image blackScreen;
+    private EventSystem eventSystem;
 
     [Header("Island")]
     [SerializeField] private GameObject shopMenu;
+    [SerializeField] private GameObject startingNodeShop;
+    [SerializeField] private GameObject upgradeInfo;
+    [SerializeField] private Image upgradeIcon;
+    [SerializeField] private TMP_Text upgradeName;
+    [SerializeField] private TMP_Text upgradeDescription;
+    [SerializeField] private TMP_Text upgradeCost;
+    [SerializeField] private GameObject upgradeUnlocked;
+    [SerializeField] private TMP_Text upgradeEffect;
 
     [Header("Fishing")]
     [SerializeField] private TMP_Text fishingPoints;
@@ -48,6 +58,44 @@ public class UIManager : MonoBehaviour
         hookScript = FindFirstObjectByType<Hook>();
         staminaRectTransform = staminaSlider?.GetComponent<RectTransform>();
         currentScene = GameManager.instance.GetCurrentScene();
+        eventSystem = FindFirstObjectByType<EventSystem>();
+    }
+
+    public void OpenShop()
+    {
+        upgradeInfo.SetActive(false);
+        eventSystem.firstSelectedGameObject = startingNodeShop;
+        shopMenu.SetActive(true);
+    }
+
+    public void CloseShop()
+    {
+        upgradeInfo.SetActive(false);
+    }
+
+    public void UpdateUpgradeInfo(string name, string description, string effect, int cost, Sprite icon, bool unlocked)
+    {
+        upgradeName.text = name;
+        upgradeDescription.text = description;
+        upgradeEffect.text = effect;
+        upgradeIcon.sprite = icon;
+        if (unlocked)
+        {
+            upgradeUnlocked.SetActive(true);
+            upgradeCost.gameObject.SetActive(false);
+        }
+        else
+        {
+            upgradeUnlocked.SetActive(false);
+            upgradeCost.text = cost + "€";
+            upgradeCost.gameObject.SetActive(true);
+        }
+        upgradeInfo.SetActive(true);
+    }
+
+    public void HideUpgradeInfo()
+    {
+        upgradeInfo.SetActive(false);
     }
 
     public void UpdatePointsText(float value)
