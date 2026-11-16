@@ -32,6 +32,7 @@ public class Hook : MonoBehaviour
     public float maxStamina = 100f;
     private float currentStamina;
     public float staminaConsumedPerSecond = 1f;
+    public float staminaLossMultiplier = 1f;
     public float staminaConsumedMultiplierOnSpeedUp = 1.5f;
     public float staminaConsumedMultiplierOnSpeedDown = 1f;
     public float staminaLossOnCollisionMultiplier = 1f;
@@ -43,7 +44,7 @@ public class Hook : MonoBehaviour
     public float weightAccumulatedPerSecond = 0.1f;
     public float overweightPointsLossMultiplier = 1f;
     public float weightGainOnCollisionMultiplier = 1f;
-    [SerializeField] private int fishesToLoseOnOverweight = 3;
+    public int fishesToLoseOnOverweight = 3;
 
     [Header("Character sprite settings")]
     [SerializeField] private SpriteRenderer characterSpriteRenderer;
@@ -196,13 +197,13 @@ public class Hook : MonoBehaviour
         if (!returning)
         {
             if (speedUp)
-                DecreaseStamina(staminaConsumedPerSecond * staminaConsumedMultiplierOnSpeedUp * Time.deltaTime);
+                DecreaseStamina(staminaConsumedPerSecond * staminaLossMultiplier * staminaConsumedMultiplierOnSpeedUp * Time.deltaTime);
             else if (speedDown)
-                DecreaseStamina(staminaConsumedPerSecond * staminaConsumedMultiplierOnSpeedDown * Time.deltaTime);
+                DecreaseStamina(staminaConsumedPerSecond * staminaLossMultiplier * staminaConsumedMultiplierOnSpeedDown * Time.deltaTime);
             else
-                DecreaseStamina(staminaConsumedPerSecond * Time.deltaTime);
+                DecreaseStamina(staminaConsumedPerSecond * staminaLossMultiplier * Time.deltaTime);
         }
-        else if (!grandsonHere && !overweight)
+        else if (!grandsonHere && !overweight && fishesCatched.Count > 0)
         {
             IncreaseWeight(weightAccumulatedPerSecond * weightGainMultiplier * Time.deltaTime);
         }

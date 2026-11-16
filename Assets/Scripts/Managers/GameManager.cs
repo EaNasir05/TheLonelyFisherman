@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Yarn.Unity;
 
+public enum Scene { Village, Boat, Fishing, Ending, Interlude, Hut, Menu, Tutorial }
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -11,7 +13,7 @@ public class GameManager : MonoBehaviour
     public bool isPaused = false;
     public bool tutorial = true;
     private int day = 0;
-    private int money = 100;
+    private int money = 0;
     [SerializeField] private bool grandsonHere = false;
     [SerializeField] private UpgradesList upgradesList;
 
@@ -54,7 +56,7 @@ public class GameManager : MonoBehaviour
             FishingManager.instance.Initialize();
         }
 
-        if (currentScene == Scene.Hut || currentScene == Scene.Island || currentScene == Scene.Lighthouse)
+        if (currentScene == Scene.Hut || currentScene == Scene.Village || currentScene == Scene.Boat)
         {
             UIManager.instance.UpdateMoneyCount(money);
         }
@@ -64,7 +66,7 @@ public class GameManager : MonoBehaviour
 
     public void AddMoney(int increase)
     {
-        money = Math.Clamp(money + increase, 0, 999999999);
+        money = Math.Clamp(money + increase, 0, 99999999);
         UIManager.instance.UpdateMoneyCount(money);
     }
 
@@ -73,9 +75,9 @@ public class GameManager : MonoBehaviour
         string scene = SceneManager.GetActiveScene().name;
         switch (scene)
         {
-            case "EveningIsland":
-            case "MorningIsland":
-                currentScene = Scene.Island;
+            case "EveningVillage":
+            case "MorningVillage":
+                currentScene = Scene.Village;
                 break;
             case "Hut":
                 currentScene = Scene.Hut;
@@ -83,12 +85,18 @@ public class GameManager : MonoBehaviour
             case "Fishing":
                 currentScene = Scene.Fishing;
                 break;
-            case "MorningOnBoat":
-            case "EveningOnBoat":
+            case "MorningBoat":
+            case "EveningBoat":
                 currentScene = Scene.Boat;
+                break;
+            case "GoingToFish":
+                currentScene = Scene.Interlude;
                 break;
             case "MainMenu":
                 currentScene = Scene.Menu;
+                break;
+            case "Tutorial":
+                currentScene = Scene.Tutorial;
                 break;
             default:
                 currentScene = Scene.Ending;

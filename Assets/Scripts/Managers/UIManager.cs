@@ -7,8 +7,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public enum Scene { Island, Boat, Fishing, Ending, Lighthouse, Hut, Menu }
-
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
