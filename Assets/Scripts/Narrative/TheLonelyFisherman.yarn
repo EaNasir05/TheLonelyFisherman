@@ -1,0 +1,1422 @@
+title: Start
+position: 12,12
+---
+<<declare $Affection = 0>>
+<<declare $posValue = 0>>
+<<declare $negValue = 0>>
+<<declare $lastChoiceGood = true>> // ultima scelta: true = A, false = B
+<<declare $dayIndex = 1>> //Variabile che controlla il giorno corrente
+<<declare $boatBuilt = false>> //Variabile che controlla se la è barca finita
+<<declare $letterDone = false>> //Variabile che controlla se la scena di non ritorno è già avvenuta.
+<<declare $visitIndex = 2>>
+<<declare $confirm = false>> //Variabile per i nodi degli interagibili
+===
+
+title: Morning
+position: 107,792
+---
+// Check finali barca
+<<if $boatBuilt and $letterDone>>
+    <<jump Finale>>
+<<elseif $boatBuilt>>
+    <<jump VisitLettera>>
+
+// Giorni 1-12
+<<elseif $dayIndex == 1>>
+    <<jump Tutorial1>>
+<<elseif $dayIndex == 2>>
+    <<jump Day2>>
+<<elseif $dayIndex == 3>>
+    <<jump Day3>>
+<<elseif $dayIndex == 4>>
+    <<jump Day4>>
+<<elseif $dayIndex == 5>>
+    <<jump Day5>>
+<<elseif $dayIndex == 6>>
+    <<jump Day6>>
+<<elseif $dayIndex == 7>>
+    <<jump Day7>>
+<<elseif $dayIndex == 8>>
+    <<jump Day8>>
+<<elseif $dayIndex == 9>>
+    <<jump Day9>>
+<<elseif $dayIndex == 10>>
+    <<jump Day10>>
+<<elseif $dayIndex == 11>>
+    <<jump Day11>>
+<<elseif $dayIndex == 12>>
+    <<jump Day12>>
+
+// Giorno 13 (affezione negativa)
+<<elseif $dayIndex == 13 and not $letterDone and $Affection <= -5>>
+    <<jump VisitLettera>>
+<<elseif $dayIndex == 13 and $Affection <= 0>>
+    <<jump Visit13>>
+<<elseif $dayIndex == 13>>
+    <<jump Day13>>
+
+<<elseif $dayIndex == 14>>
+    <<jump Day14>>
+
+// Giorno 15 (affezione positiva)
+<<elseif $dayIndex == 15 and not $letterDone and $Affection >= 5>>
+    <<jump VisitLettera>>
+<<elseif $dayIndex == 15 and not $letterDone and not visited("Visit13") and $Affection > 0>>
+    <<jump Visit15>>
+<<elseif $dayIndex == 15>>
+    <<jump Day15>>
+
+// Giorno 16 (solo dopo la visita 6 del giorno 13)
+<<elseif $dayIndex == 16 and not $letterDone and $Affection <= -5>>
+    <<jump VisitLettera>>
+<<elseif $dayIndex == 16 and not $letterDone and visited("Visit13") and $Affection <= 0>>
+    <<jump Visit16>>
+<<elseif $dayIndex == 16>>
+    <<jump Day16>>
+
+<<elseif $dayIndex == 17>>
+    <<jump Day17>>
+<<elseif $dayIndex == 18>>
+    <<jump Day18>>
+
+// Giorno 19 lettera con valori intermedi
+<<elseif $dayIndex == 19 and not $letterDone>>
+    <<jump VisitLettera>>
+<<elseif $dayIndex == 19>>
+    <<jump Day19>>
+
+<<elseif $dayIndex == 20>>
+    <<jump Day20>>
+<<elseif $dayIndex == 21>>
+    <<jump Day21>>
+<<elseif $dayIndex == 22>>
+    <<jump Day22>>
+<<elseif $dayIndex == 23>>
+    <<jump Day23>>
+
+// Giorno 24 (solo affezione positiva)
+<<elseif $dayIndex == 24 and $letterDone and $Affection > 0>>
+    <<jump Visit24>>
+<<elseif $dayIndex == 24>>
+    <<jump Day24>>
+
+<<elseif $dayIndex == 25>>
+    <<jump Day25>>
+<<elseif $dayIndex == 26>>
+    <<jump Day26>>
+<<elseif $dayIndex == 27>>
+    <<jump Day27>>
+<<elseif $dayIndex == 28>>
+    <<jump Day28>>
+<<elseif $dayIndex == 29>>
+    <<jump Day29>>
+
+// Finali
+<<else>>
+    <<jump Finale>>
+<<endif>>
+===
+
+title: Fishing
+position: 232,12
+---
+Vuoi andare a pescare?
+-> Sì
+    <<set $confirm = true>>
+-> No
+    <<set $confirm = false>>
+===
+
+title: Boat
+position: 452,12
+---
+Vuoi lavorare alla barca?
+-> Sì
+    <<set $confirm = true>>
+-> No
+    <<set $confirm = false>>
+===
+
+title: Bed
+position: 672,12
+---
+Vuoi andare a casa?
+-> Sì
+    <<set $confirm = true>>
+-> No
+    <<set $confirm = false>>
+===
+
+title: BoatBuild
+position: 3659,12
+---
+<<if not visited("BoatBuild1")>>
+    <<jump BoatBuild1>>
+<<elseif not visited("BoatBuild2")>>
+    <<jump BoatBuild2>>
+<<elseif not visited("BoatBuild3")>>
+    <<jump BoatBuild3>>
+<<elseif not visited("BoatBuild4")>>
+    <<jump BoatBuild4>>
+<<else>>
+    <<jump BoatBuild5>>
+<<endif>>
+===
+
+title: BoatBuild1
+position: 3592,237
+---
+Hai lavorato alla barca fino a sera. #testo
+===
+
+title: BoatBuild2
+position: 3872,237
+---
+Hai lavorato alla barca fino a sera. Comincia a sembrare una barca. #testo
+===
+
+title: BoatBuild3
+position: 4152,237
+---
+Hai lavorato alla barca fino a sera. Sei a metà. #testo
+===
+
+title: BoatBuild4
+position: 4432,237
+---
+Hai lavorato alla barca fino a sera. Manca poco. #testo
+===
+
+title: BoatBuild5
+position: 4712,237
+---
+Hai lavorato alla barca fino a sera. La barca è pronta. #testo
+===
+
+title: Shop
+position: 3125,12
+---
+<<if not visited("ShopTutorial1")>>
+    <<jump ShopTutorial1>>
+<<else>>
+    <<jump ShopWelcome>>
+<<endif>>
+===
+
+title: ShopTutorial1
+position: 3092,237
+---
+Riccardo: Peppe! Benvenuto al negozio di Riccardo.
+Riccardo: Con le monete del pesce, qui ti sistemi la canna. Lenza più lunga, amo più robusto, cose così.
+===
+
+title: ShopTutorial2
+position: 892,12
+---
+Riccardo: Qui in alto vedi quante monete hai.
+Riccardo: Scegli quello che ti serve. Se le monete bastano, è tuo.
+(Levetta sinistra) per scegliere · (A) per comprare
+===
+
+
+title: ShopTutorial3
+position: 1112,12
+---
+Riccardo: E ogni cosa che compri ne sblocca altre. Una tira l'altra.
+Riccardo: Se le monete non bastano, vai a pescare. (ride)
+(B) per uscire
+===
+
+title: ShopWelcome
+position: 3372,237
+---
+Riccardo: Benvenuto al negozio di Riccardo.
+===
+
+title: Go
+position: 2445,382
+---
+<<if $boatBuilt and $letterDone>>
+    <<stop>>
+<<elseif $boatBuilt>>
+    <<jump GoLettera>>
+<<elseif $dayIndex == 2>>
+    <<jump Go2>>
+<<elseif $dayIndex == 4>>
+    <<jump Go4>>
+<<elseif $dayIndex == 6>>
+    <<jump Go6>>
+<<elseif $dayIndex == 8>>
+    <<jump Go8>>
+<<elseif $dayIndex == 11>>
+    <<jump Go11>>
+<<elseif $dayIndex == 13 and not $letterDone and $Affection <= -5>>
+    <<jump GoLettera>>
+<<elseif $dayIndex == 13 and $Affection <= 0>>
+    <<jump Go13>>
+<<elseif $dayIndex == 15 and not $letterDone and $Affection >= 5>>
+    <<jump GoLettera>>
+<<elseif $dayIndex == 15 and not $letterDone and not visited("Go13") and $Affection > 0>>
+    <<jump Go15>>
+<<elseif $dayIndex == 16 and not $letterDone and $Affection <= -5>>
+    <<jump GoLettera>>
+<<elseif $dayIndex == 16 and not $letterDone and visited("Go13") and $Affection <= 0>>
+    <<jump Go16>>
+<<elseif $dayIndex == 19 and not $letterDone>>
+    <<jump GoLettera>>
+<<elseif $dayIndex == 24 and $letterDone and $Affection > 0>>
+    <<jump Go24>>
+<<endif>>
+===
+
+title: Back
+position: 5014,12
+---
+<<if visited("GoLettera") and not $letterDone>>
+    <<jump BackLettera>>
+<<elseif $dayIndex == 2>>
+    <<jump Back2>>
+<<elseif $dayIndex == 4>>
+    <<jump Back4>>
+<<elseif $dayIndex == 6>>
+    <<jump Back6>>
+<<elseif $dayIndex == 8>>
+    <<jump Back8>>
+<<elseif $dayIndex == 11>>
+    <<jump Back11>>
+<<elseif $dayIndex == 13 and visited("Go13")>>
+    <<jump Back13>>
+<<elseif $dayIndex == 15 and visited("Go15")>>
+    <<jump Back15>>
+<<elseif $dayIndex == 16 and visited("Go16")>>
+    <<jump Back16>>
+<<elseif $dayIndex == 24 and visited("Go24")>>
+    <<jump Back24>>
+<<endif>>
+===
+title: Prologo
+position: 1332,12
+---
+Il mondo è pieno di maghi. #testo
+Eppure c'è un paese di mare dove quasi nessuno sa fare magie. #testo
+Lì vive Giuseppe, che tutti chiamano Peppe. #testo
+Da quando sua moglie non c'è più, passa le giornate in barca, poco fuori dal molo. #testo
+Pesca, e aspetta che il giorno passi. #testo
+===
+
+
+title: Tutorial1
+position: 9532,1317
+---
+(A) per andare avanti
+Albert: Nonno, oggi lanciamo qui?
+Nonno: Qui o altrove, il mare è tutto uguale. Decidi tu.
+(← →) per scegliere la direzione · (RT) per gettare l'amo
+===
+
+title: Tutorial2
+position: 1552,12
+---
+Albert: Vai, vai, vai!
+Nonno: Piano. Scende da solo, tu lo guidi.
+(← →) per spostare l'amo
+===
+
+title: Tutorial3
+position: 1772,12
+---
+Albert: Ne ho presi! Nonno, ne ho presi!
+Nonno: Bravo. Adesso tirali su con tutta la forza che hai.
+(RT) per tirare su l'amo
+===
+
+title: Tutorial4
+position: 1992,12
+---
+Albert: Guarda quanti! Sono più bravo di te?
+Nonno: Ancora no. Ma stai crescendo in fretta.
+Albert: Nonno… un giorno voglio andare a quell'isolotto. Non ci siamo mai andati.
+Nonno: Eh sì, con questa barchetta non ci arriviamo.
+Albert: Però me lo prometti che un giorno ci andiamo?
+Nonno: Sì, te lo prometto. Un giorno avremo una barca più forte, e ci andremo insieme.
+Albert: Davvero?
+Nonno: Davvero, davvero.
+<<ChangeScene: namescene>>
+===
+
+title: TutorialMagic1
+position: 2212,12
+---
+Albert: Ah nonno, ti mostro un trucchetto che ho imparato all'accademia.
+Albert: Velthas ankor… hamus.
+Nonno: Ma che fai?
+Albert: Bene, prova a pescare ora.
+===
+
+title: TutorialMagic2
+position: 2432,12
+---
+Tieni premuto (RB) per velocizzare · tieni premuto (LB) per rallentare
+===
+
+title: TutorialMagic3
+position: 2652,12
+---
+Nonno: Grazie… Però la prossima volta avvisa.
+===
+
+
+title: Day1Presente
+position: 2872,12
+---
+Nonno: Ah… devo essermi addormentato.
+Nonno: Hmm, la barca…
+Nonno: Il buon Albert torna finalmente in paese. Nella lettera dice che resta un mese.
+Nonno: Mi sembra giusto mantenerla, quella promessa.
+Nonno: Il legno buono costa. Ci vorrà parecchio pesce.
+Nonno: E la faccio dietro al faro, così non la vede finché non è pronta.
+Nonno: Bene. È il momento di prendere un po' di pesci.
+===
+
+title: Day2
+position: 3372,1317
+---
+Albert: Ciao, nonno!
+Nonno: Albert! Ma guarda come sei cresciuto. Come stai?
+Albert: Bene, nonno. Un po' stanco, ma bene.
+Nonno: Ho ricevuto la tua lettera. Quindi ti fermi in paese per un po'.
+Albert: Sì, avevo bisogno di un po' di pace.
+Nonno: Senti, io stavo andando a pescare. Ti va di venire, come facevamo una volta?
+Albert: Volentieri.
+===
+
+title: Day4
+position: 3092,1317
+---
+Albert: Buongiorno, nonno!
+Nonno: Eccoti. Ti aspettavo dall'alba. (ride)
+Nonno: Senti, quel trucchetto dell'altra volta…
+Albert: L'incantesimo?
+Nonno: Sì, quello. Come funziona?
+Albert: All'accademia lo usiamo per spostare gli oggetti. Ho pensato che sull'amo sarebbe stato divertente e ti avrebbe aiutato.
+Nonno: Ah, ottimo. Capisco.
+Albert: Ma credo di poterlo migliorare, quindi più lo uso meglio è.
+Nonno: Allora andiamo ad allenarlo pescando altri pesci. (ride)
+===
+
+title: Day6
+position: 7012,1317
+---
+<<if $Affection > 0 or ($Affection == 0 and $lastChoiceGood)>>
+    Albert: Buongiorno, nonno! Sai che nella Capitale il pesce te lo vendono già pulito? Senza testa, senza niente.
+    Nonno: Buongiorno anche a te. E come fai a capire se è fresco?
+    Albert: Non lo capisci. Lo compri e speri.
+    Nonno: Allora non è pesce. È una scommessa. (ride)
+    Albert: I miei amici non hanno mai visto un pesce intero. Uno pensava che nascessero già a filetti.
+    Nonno: Portalo qui, quello. Glielo faccio vedere io.
+    Albert: Prima o poi lo porto davvero, eh.
+    Nonno: Ti prendo in parola.
+<<else>>
+    Albert: Ciao, nonno.
+    Nonno: Eccoti. Ti aspettavo.
+    Albert: Lo sai che nella Capitale il pesce lo vendono già pulito?
+    Nonno: E come fai a capire se è fresco?
+    Albert: Non lo capisci. Per questo io non lo compro mai.
+    Nonno: Fai bene. Qui almeno sai cosa mangi.
+    Albert: Sì… Qui è tutto più semplice.
+    Nonno: Qui è casa.
+<<endif>>
+===
+
+title: Day8
+position: 9252,1317
+---
+<<if $Affection > 0 or ($Affection == 0 and $lastChoiceGood)>>
+    Albert: Buongiorno, nonno! Allora, me lo racconti? Com'eri da giovane?
+    Nonno: Buongiorno anche a te. Ero come adesso. Solo che correvo di più.
+    Albert: E basta?
+    Nonno: E ballavo. Ogni sabato, in piazza.
+    Albert: Tu? Ballavi? Non ci credo.
+    Nonno: Ero il migliore del paese. Chiedi in giro. A quelli ancora vivi, almeno. (ride)
+<<else>>
+    Albert: Ciao, nonno. Scusa, ho fatto tardi?
+    Nonno: No. Ti aspettavo, però.
+    Albert: Me lo racconti com'eri alla mia età? Me l'avevi promesso.
+    Nonno: Pescavo. E il sabato ballavo, in piazza.
+    Albert: Tu ballavi?
+    Nonno: Ero il migliore del paese.
+    Albert: Io non ho mai ballato. Mi vergogno troppo.
+    Nonno: Eh. Si vergognano tutti, all'inizio.
+<<endif>>
+===
+
+title: Day11
+position: 7852,1317
+---
+<<if $Affection > 0 or ($Affection == 0 and $lastChoiceGood)>>
+    Albert: Buongiorno, nonno! Allora, le ginocchia? Le hai allenate?
+    Nonno: Stanno come stavano. Vecchie.
+    Albert: Quindi niente lezione di ballo.
+    Nonno: Meglio per te. Il primo sabato che ho ballato ho rotto il naso a un amico.
+    Albert: Davvero?
+    Nonno: Gli ho pestato un piede, lui è caduto. Il resto l'ha fatto il pavimento. (ride)
+<<else>>
+    Albert: Ciao, nonno.
+    Nonno: Eccoti.
+    Albert: Ieri sono passato dalla piazza. Non c'è più nessuno. Neanche le panchine.
+    Nonno: I giovani sono andati via. In città.
+    Albert: Io no.
+    Nonno: Tu no.
+<<endif>>
+===
+
+title: Visit13
+position: 8692,1317
+---
+Albert: Ciao, nonno. Sono arrivato presto, visto?
+Nonno: Visto.
+Albert: Ho fatto la strada di corsa.
+Nonno: Non serviva correre.
+Albert: Lo so. Ma mi avevi detto di non fare tardi.
+===
+
+title: Visit15
+position: 1132,1317
+---
+Albert: Buongiorno, nonno! Eccomi, sono tornato.
+Nonno: Bentornato. La Capitale è ancora in piedi?
+Albert: Più o meno. E tu, cosa hai fatto in questi giorni?
+Nonno: Il solito.
+Albert: Cioè?
+Nonno: La mattina a pescare. Ogni tanto sono andato da Riccardo ad aggiustare l'attrezzatura. E la sera a casa.
+Albert: Tutti i giorni?
+Nonno: Tutti i giorni. Per questo si chiama il solito. (ride)
+===
+
+title: Visit16
+position: 3932,1317
+---
+Albert: Ciao, nonno.
+Nonno: Eccoti. Oggi andiamo piano, la schiena non va.
+Albert: Stai male? Vuoi che restiamo a terra?
+Nonno: No, no. Il mare fa bene. È l'età.
+Albert: …Va bene.
+===
+
+title: Visit24
+position: 4772,1317
+---
+Albert: Buongiorno, nonno! Lo sai cosa mi è successo ieri?
+Nonno: Dimmi.
+Albert: La signora del forno mi ha fermato per strada. Voleva che le accendessi il forno con la magia.
+Nonno: E tu?
+Albert: L'ho acceso. Poi è arrivato il pescivendolo. Poi quella della casa gialla. Ho fatto magie tutto il pomeriggio.
+Nonno: Colpa mia. Ho detto a tutti che sei apprendista. (ride)
+===
+
+title: VisitLettera
+position: 2812,1317
+---
+<<if $Affection > 0 or ($Affection == 0 and $lastChoiceGood)>>
+    Albert: Nonno! È arrivata la lettera!
+    Nonno: Calmo, calmo. E cosa dice?
+    Albert: Che mi prende. Il maestro mi prende!
+    Nonno: Lo sapevo io.
+    Albert: Non è vero, non lo sapevi.
+    Nonno: Lo speravo. È uguale. (ride)
+<<else>>
+    Albert: Ciao, nonno.
+    Nonno: Eccoti.
+    Albert: È arrivata la lettera.
+    Nonno: Ah.
+    Albert: Il maestro mi prende.
+    Nonno: Bene. Andiamo, che si fa tardi.
+<<endif>>
+===
+
+title: Day3
+position: 7292,1317
+---
+Nonno: Ieri c'era Albert. Oggi c'è il mare.
+===
+
+title: Day5
+position: 292,1317
+---
+Nonno: Caffè, berretto, lenza. Si va.
+===
+
+title: Day7
+position: 4212,1317
+---
+Nonno: Mare calmo. Oggi si lavora bene.
+===
+
+title: Day9
+position: 6452,1317
+---
+Nonno: Le ginocchia dicono che oggi è umido. Si va lo stesso.
+===
+
+title: Day10
+position: 1692,1317
+---
+Nonno: Domani torna Albert. Oggi mi porto avanti col pesce.
+===
+
+title: Day12
+position: 1972,1317
+---
+<<if $Affection > 0>>
+    Nonno: Albert sarà già nella Capitale. Buon per lui.
+<<else>>
+    Nonno: Domani torna. Ha detto presto.
+<<endif>>
+===
+
+title: Day13
+position: 8972,1317
+---
+<<if $Affection > 0>>
+    Nonno: Il mare è liscio come l'olio. Giornata buona.
+<<else>>
+    Nonno: Eccolo lì, l'isolotto. Sempre alla stessa distanza.
+<<endif>>
+===
+
+title: Day14
+position: 8132,1317
+---
+<<if $Affection > 0>>
+    Nonno: Eccolo lì, l'isolotto. Oggi sembra più vicino.
+<<else>>
+    Nonno: Un'altra giornata. Passerà anche questa.
+<<endif>>
+===
+
+title: Day15
+position: 5052,1317
+---
+<<if $Affection > 0>>
+    Nonno: Mi sono svegliato fischiettando. Alla mia età, pensa te.
+<<else>>
+    Nonno: La barca è leggera, da solo.
+<<endif>>
+===
+
+title: Day16
+position: 3652,1317
+---
+<<if $Affection > 0>>
+    Nonno: Il mare è liscio come l'olio. Giornata buona.
+<<else>>
+    Nonno: Eccolo lì, l'isolotto. Sempre alla stessa distanza.
+<<endif>>
+===
+
+title: Day17
+position: 6172,1317
+---
+<<if $Affection > 0>>
+    Nonno: Eccolo lì, l'isolotto. Oggi sembra più vicino.
+<<else>>
+    Nonno: Un'altra giornata. Passerà anche questa.
+<<endif>>
+===
+
+title: Day18
+position: 5332,1317
+---
+<<if $Affection > 0>>
+    Nonno: Mi sono svegliato fischiettando. Alla mia età, pensa te.
+<<else>>
+    Nonno: La barca è leggera, da solo.
+<<endif>>
+===
+
+title: Day19
+position: 4492,1317
+---
+<<if $Affection > 0>>
+    Nonno: Il mare è liscio come l'olio. Giornata buona.
+<<else>>
+    Nonno: Eccolo lì, l'isolotto. Sempre alla stessa distanza.
+<<endif>>
+===
+
+title: Day20
+position: 1412,1317
+---
+<<if $Affection > 0>>
+    Nonno: Eccolo lì, l'isolotto. Oggi sembra più vicino.
+<<else>>
+    Nonno: Un'altra giornata. Passerà anche questa.
+<<endif>>
+===
+
+title: Day21
+position: 572,1317
+---
+<<if $Affection > 0>>
+    Nonno: Mi sono svegliato fischiettando. Alla mia età, pensa te.
+<<else>>
+    Nonno: La barca è leggera, da solo.
+<<endif>>
+===
+
+title: Day22
+position: 2532,1317
+---
+<<if $Affection > 0>>
+    Nonno: Il mare è liscio come l'olio. Giornata buona.
+<<else>>
+    Nonno: Eccolo lì, l'isolotto. Sempre alla stessa distanza.
+<<endif>>
+===
+
+title: Day23
+position: 852,1317
+---
+<<if $Affection > 0>>
+    Nonno: Eccolo lì, l'isolotto. Oggi sembra più vicino.
+<<else>>
+    Nonno: Un'altra giornata. Passerà anche questa.
+<<endif>>
+===
+
+title: Day24
+position: 5892,1317
+---
+<<if $Affection > 0>>
+    Nonno: Mi sono svegliato fischiettando. Alla mia età, pensa te.
+<<else>>
+    Nonno: La barca è leggera, da solo.
+<<endif>>
+===
+
+title: Day25
+position: 2252,1317
+---
+<<if $Affection > 0>>
+    Nonno: Il mare è liscio come l'olio. Giornata buona.
+<<else>>
+    Nonno: Eccolo lì, l'isolotto. Sempre alla stessa distanza.
+<<endif>>
+===
+
+title: Day26
+position: 12,1317
+---
+<<if $Affection > 0>>
+    Nonno: Eccolo lì, l'isolotto. Oggi sembra più vicino.
+<<else>>
+    Nonno: Un'altra giornata. Passerà anche questa.
+<<endif>>
+===
+
+title: Day27
+position: 5612,1317
+---
+<<if $Affection > 0>>
+    Nonno: Mi sono svegliato fischiettando. Alla mia età, pensa te.
+<<else>>
+    Nonno: La barca è leggera, da solo.
+<<endif>>
+===
+
+title: Day28
+position: 6732,1317
+---
+<<if $Affection > 0>>
+    Nonno: Il mare è liscio come l'olio. Giornata buona.
+<<else>>
+    Nonno: Eccolo lì, l'isolotto. Sempre alla stessa distanza.
+<<endif>>
+===
+
+title: Day29
+position: 7572,1317
+---
+<<if $Affection > 0>>
+    Nonno: Eccolo lì, l'isolotto. Oggi sembra più vicino.
+<<else>>
+    Nonno: Un'altra giornata. Passerà anche questa.
+<<endif>>
+===
+
+
+title: Go2
+position: 1412,647
+---
+Nonno: Allora, come va nella Capitale?
+Albert: Si va avanti. Sto aspettando una risposta per l'apprendistato.
+Nonno: L'apprendistato?
+Albert: Sì. Un maestro deve dirmi se mi prende con sé.
+Albert: Ha detto che mi manderà la sua risposta a tempo debito.
+Albert: E nel frattempo aspetto. Non c'è molto da fare.
+Nonno: Capisco.
+
+<<set $posValue = 1>>
+<<set $negValue = -1>>
+<<if $Affection <= -5>>
+    <<set $posValue = 0>>
+<<elseif $Affection >= 5>>
+    <<set $negValue = 0>>
+<<endif>>
+
+-> Nonno: Dai, andrà tutto bene. Hai preso il lato migliore della famiglia, non preoccuparti.
+    <<set $Affection = $Affection + $posValue>>
+    <<set $lastChoiceGood = true>>
+    Albert: Il lato migliore? Il tuo, immagino. (ride)
+    Nonno: Ovvio. Adesso più pesca e meno parole.
+-> Nonno: Per oggi lasciala stare. Quando arriva, arriva. Intanto stai qui con tuo nonno, e riposati.
+    <<set $Affection = $Affection + $negValue>>
+    <<set $lastChoiceGood = false>>
+    Albert: Quando arriva, arriva… Va bene, nonno.
+    Nonno: Sì, sì. Adesso meno parole e più lenza.
+===
+
+title: Go4
+position: 2252,647
+---
+Nonno: Non te l'ho ancora chiesto, ma come ti trovi nella Capitale? Hai degli amici?
+Albert: Bene. Ho qualche amico ma tra lezione e lavoro non ho mai tempo.
+Albert: La sera torno in camera e non c'è nessuno. È strano, dopo essere cresciuto qui.
+Nonno: Eh, lo so com'è.
+
+<<set $posValue = 1>>
+<<set $negValue = -1>>
+<<if $Affection <= -5>>
+    <<set $posValue = 0>>
+<<elseif $Affection >= 5>>
+    <<set $negValue = 0>>
+<<endif>>
+
+-> Nonno: Dai, piano piano la situazione migliorerà, e troverai la tua strada.
+    <<set $Affection = $Affection + $posValue>>
+    <<set $lastChoiceGood = true>>
+    Albert: Speriamo. Uno del mio corso mi ha chiesto di studiare insieme, magari ci vado.
+    Nonno: Vai, vai. Da soli si fa fatica.
+-> Nonno: Se ti senti solo, qui c'è sempre posto. Torna quando vuoi.
+    <<set $Affection = $Affection + $negValue>>
+    <<set $lastChoiceGood = false>>
+    Albert: Grazie, nonno. Qui almeno mi sento a casa.
+    Nonno: Perché sei a casa.
+===
+
+title: Go6
+position: 1132,647
+---
+<<if $Affection > 0 or ($Affection == 0 and $lastChoiceGood)>>
+    Albert: Ammettilo, con il mio incantesimo peschi il doppio.
+    Nonno: Il pesce lo tiro su io.
+    Albert: Sì, ma con la mia magia ci metti di meno. (ride)
+<<else>>
+    Albert: Nonno… l'incantesimo funziona bene? Se vuoi lo rifaccio, magari l'ho fatto male.
+    Nonno: Funziona, funziona.
+    Albert: Meno male. Non volevo farti perdere la giornata.
+<<endif>>
+
+Albert: Ti ricordi la prima volta che mi hai portato qui? Ho preso un pesce e ti ho chiesto se fossi più bravo di te.
+Nonno: E io ti ho detto di no.
+Albert: E adesso?
+
+<<set $posValue = 1>>
+<<set $negValue = -1>>
+<<if $Affection <= -5>>
+    <<set $posValue = 0>>
+<<elseif $Affection >= 5>>
+    <<set $negValue = 0>>
+<<endif>>
+
+-> Nonno: Adesso sì. Senza di te non pescherei così.
+    <<set $Affection = $Affection + $posValue>>
+    <<set $lastChoiceGood = true>>
+    Albert: Davvero?
+    Nonno: Non montarti la testa. Ma sì. (ride)
+-> Nonno: Ancora no. La magia aiuta, ma il mare lo conosco io.
+    <<set $Affection = $Affection + $negValue>>
+    <<set $lastChoiceGood = false>>
+    Albert: Allora insegnamelo. Vengo più spesso.
+    Nonno: Eh, sì. C'è tanto da imparare.
+===
+
+title: Go8
+position: 852,647
+---
+<<if $Affection > 0 or ($Affection == 0 and $lastChoiceGood)>>
+    Albert: Nonno, ti devo raccontare una cosa. Nella Capitale c'è una ragazza.
+    Nonno: Ah.
+    Albert: Studia con me. Ogni tanto dopo lezione facciamo la strada insieme. Ma non le ho mai detto niente.
+<<else>>
+    Albert: Nonno… posso chiederti un consiglio?
+    Nonno: Dimmi.
+    Albert: Nella Capitale c'è una ragazza. Studia con me. Non so cosa fare. Tu cosa faresti?
+<<endif>>
+
+Nonno: E lei?
+Albert: Non lo so. A volte mi aspetta dopo lezione. A volte no.
+
+<<set $posValue = 1>>
+<<set $negValue = -1>>
+<<if $Affection <= -5>>
+    <<set $posValue = 0>>
+<<elseif $Affection >= 5>>
+    <<set $negValue = 0>>
+<<endif>>
+
+-> Nonno: Diglielo. Il peggio che può succedere è che ti dice di no.
+    <<set $Affection = $Affection + $posValue>>
+    <<set $lastChoiceGood = true>>
+    Albert: Detto così sembra facile.
+    Nonno: Non è facile. Ma il sabato in piazza, se non ballavi, restavi seduto.
+    Albert: …Quando torno, glielo dico.
+-> Nonno: Vai piano. In città la gente è diversa, non fidarti subito.
+    <<set $Affection = $Affection + $negValue>>
+    <<set $lastChoiceGood = false>>
+    Albert: Dici?
+    Nonno: Dico. Qui ci conosciamo tutti. Là no.
+    Albert: …Forse hai ragione. Meglio aspettare.
+===
+
+title: Go11
+position: 1692,647
+---
+<<set $posValue = 1>>
+<<set $negValue = -1>>
+<<if $Affection <= -5>>
+    <<set $posValue = 0>>
+<<elseif $Affection >= 5>>
+    <<set $negValue = 0>>
+<<endif>>
+
+<<if $Affection > 0 or ($Affection == 0 and $lastChoiceGood)>>
+    Albert: Nonno, ti devo dire una cosa. Per qualche giorno non riesco a venire.
+    Nonno: Ah.
+    Albert: Devo tornare nella Capitale, ho degli impegni. Quattro giorni, forse cinque.
+    -> Nonno: Vai tranquillo. Il mare non scappa, e nemmeno io.
+        <<set $Affection = $Affection + $posValue>>
+        <<set $lastChoiceGood = true>>
+        Albert: Sicuro?
+        Nonno: Sicuro. Vai a sbrigare le tue cose.
+        Albert: Quando torno ti racconto tutto. Anche le parti noiose.
+    -> Nonno: Va bene. Però se riesci, passa anche solo un momento. Anche senza pescare.
+        <<set $Affection = $Affection + $negValue>>
+        <<set $lastChoiceGood = false>>
+        Albert: Ci provo, nonno. Te lo prometto.
+        Nonno: Anche solo un momento.
+        Albert: …Va bene.
+<<else>>
+    Albert: Nonno… non arrabbiarti. Dovrei tornare nella Capitale per qualche giorno. Ho degli impegni.
+    Nonno: Quanti giorni?
+    Albert: Quattro, cinque. Ma posso rimandare. Non è niente di importante.
+    -> Nonno: Non rimandare per me. Se sono impegni, vai.
+        <<set $Affection = $Affection + $posValue>>
+        <<set $lastChoiceGood = true>>
+        Albert: Non è per te, nonno. È che lì…
+        Nonno: Lì cosa?
+        Albert: Niente. Hai ragione. Vado.
+    -> Nonno: Fai bene. Qui c'è bisogno di te.
+        <<set $Affection = $Affection + $negValue>>
+        <<set $lastChoiceGood = false>>
+        Albert: Di me?
+        Nonno: E di chi, sennò?
+        Albert: …Va bene. Allora resto.
+<<endif>>
+===
+
+title: Go13
+position: 12,647
+---
+Albert: Nonno… mi hanno scritto i miei amici della Capitale.
+Nonno: Ah.
+Albert: Sabato fanno una festa. Mi hanno invitato.
+Nonno: E tu?
+Albert: Non lo so. Dovrei stare via qualche giorno.
+
+<<set $posValue = 1>>
+<<set $negValue = -1>>
+<<if $Affection <= -5>>
+    <<set $posValue = 0>>
+<<elseif $Affection >= 5>>
+    <<set $negValue = 0>>
+<<endif>>
+
+-> Nonno: Vai. Il sabato non si resta a casa.
+    <<set $Affection = $Affection + $posValue>>
+    <<set $lastChoiceGood = true>>
+    Albert: Lo dici perché tu andavi a ballare.
+    Nonno: Appunto. Lo so io.
+    Albert: …Ci penso.
+-> Nonno: Vai, vai. Io mi arrangio.
+    <<set $Affection = $Affection + $negValue>>
+    <<set $lastChoiceGood = false>>
+    Albert: Ti arrangi come?
+    Nonno: Come ho sempre fatto.
+    Albert: …No, dai. Mi sento in colpa così…
+===
+
+title: Go15
+position: 292,647
+---
+Albert: Nonno, posso chiederti una cosa?
+Nonno: Se è sulla pesca, no. I segreti me li tengo.
+Albert: No. Da quando la nonna non c'è più… come stai?
+Nonno: …
+Nonno: In casa c'è un orologio. Prima non lo sentivo mai.
+Albert: E adesso?
+Nonno: Adesso sì.
+
+<<set $posValue = 1>>
+<<set $negValue = -1>>
+<<if $Affection <= -5>>
+    <<set $posValue = 0>>
+<<elseif $Affection >= 5>>
+    <<set $negValue = 0>>
+<<endif>>
+
+-> Nonno: Ma sto bene. Ho il mare, il buon Riccardo, e un nipote che ogni tanto passa.
+    <<set $Affection = $Affection + $posValue>>
+    <<set $lastChoiceGood = true>>
+    Albert: Ogni tanto?
+    Nonno: Quando si ricorda. (ride)
+    Albert: Mi ricordo sempre.
+-> Nonno: Da quando ci sei tu, meglio. Prima… lasciamo stare.
+    <<set $Affection = $Affection + $negValue>>
+    <<set $lastChoiceGood = false>>
+    Albert: Prima cosa?
+    Nonno: Niente. Pensa all'incantesimo.
+    Albert: …Va bene.
+===
+
+title: Go16
+position: 1972,647
+---
+Albert: Nonno… tra qualche giorno dovrebbe arrivare la lettera.
+Nonno: Ah. La lettera.
+Albert: Se il maestro mi prende, dovrò stare nella Capitale. Chissà per quanto.
+Nonno: Chissà.
+
+<<set $posValue = 1>>
+<<set $negValue = -1>>
+<<if $Affection <= -5>>
+    <<set $posValue = 0>>
+<<elseif $Affection >= 5>>
+    <<set $negValue = 0>>
+<<endif>>
+
+-> Nonno: Se ti prende, è la tua strada. Vai, e non pensarci due volte.
+    <<set $Affection = $Affection + $posValue>>
+    <<set $lastChoiceGood = true>>
+    Albert: E tu?
+    Nonno: Io ho il mare. E la schiena, purtroppo. (ride)
+    Albert: (ride) …Va bene.
+-> Nonno: Vai, vai. Alla mia età, chissà se quando torni mi trovi ancora.
+    <<set $Affection = $Affection + $negValue>>
+    <<set $lastChoiceGood = false>>
+    Albert: Nonno, non dirlo neanche per scherzo.
+    Nonno: Non scherzo. Dico com'è.
+    Albert: …
+===
+
+title: Go24
+position: 2532,647
+---
+Albert: Nonno, ma come facevano prima che arrivassi io?
+Nonno: Come sempre. Col fiammifero e la pazienza.
+Albert: E adesso la signora del forno mi ha chiesto se torno in estate. Per il forno, eh. Non per me.
+Nonno: Per il forno. Sì, certo. Come no, quella vecchia arpia.
+
+<<set $posValue = 1>>
+<<set $negValue = -1>>
+<<if $Affection <= -5>>
+    <<set $posValue = 0>>
+<<elseif $Affection >= 5>>
+    <<set $negValue = 0>>
+<<endif>>
+
+-> Nonno: Aiutali finché sei qui. Quando parti, torneranno al fiammifero.
+    <<set $Affection = $Affection + $posValue>>
+    <<set $lastChoiceGood = true>>
+    Albert: Mi sento un po' in colpa.
+    Nonno: Non sentirti in colpa. Il fiammifero non si offende. (ride)
+-> Nonno: Non farti fermare da tutti. I giorni che ti restano, passali qui.
+    <<set $Affection = $Affection + $negValue>>
+    <<set $lastChoiceGood = false>>
+    Albert: Va bene, nonno. Dico che ho da fare.
+    Nonno: Hai da fare. Con me.
+===
+
+title: GoLettera
+position: 572,647
+---
+<<if $Affection > 0 or ($Affection == 0 and $lastChoiceGood)>>
+    Nonno: E quando parti?
+    Albert: A fine mese.
+    Nonno: A fine mese.
+    Albert: Nonno… tu cosa ne pensi?
+<<else>>
+    Albert: Nonno, non dici niente?
+    Nonno: Cosa devo dire.
+    Albert: Non lo so. Qualcosa.
+    Nonno: Quando parti?
+    Albert: A fine mese.
+<<endif>>
+
+-> Nonno: Sono contento per te. Vai.
+    <<if $Affection > -5 and $Affection < 5>>
+        <<set $Affection = 5>>
+    <<endif>>
+    <<if $Affection > 0>>
+        Albert: Sei contento davvero?
+        Nonno: Ho la faccia di uno che scherza?
+        Albert: Sempre.
+        Nonno: Oggi no.
+        Albert: …Grazie, nonno.
+    <<else>>
+        Albert: Adesso?
+        Nonno: Adesso cosa?
+        Albert: Adesso mi dici di andare. Fino all'altro giorno c'era sempre bisogno di me.
+        Nonno: Albert…
+        Albert: Va bene, nonno. Vado.
+    <<endif>>
+-> Nonno: Vai, vai. Tanto io sono sempre qui. Da solo.
+    <<if $Affection > -5 and $Affection < 5>>
+        <<set $Affection = -5>>
+    <<endif>>
+    <<if $Affection > 0>>
+        Albert: Nonno, dai. Non fare così.
+        Nonno: Così come?
+        Albert: Così. Torno, lo sai. Torno sempre.
+        Nonno: …Lo so.
+    <<else>>
+        Albert: Nonno, perché ti comporti così? Sembra che tu voglia tenermi qui.
+        Nonno: Io non ti ho mai detto di restare.
+        Albert: No. Non l'hai mai detto.
+    <<endif>>
+===
+
+title: Back2
+position: 6052,237
+---
+Albert: Che pescata, oggi.
+Nonno: Merito della luna.
+Albert: Merito mio.
+Nonno: Sì, sì. Come dici tu. (ride)
+Albert: Io ho alcune cose da sbrigare.
+Albert: Ci vediamo tra due giorni.
+Nonno: Va bene.
+<<set $visitIndex = 4>>
+===
+
+title: Back4
+position: 6332,237
+---
+Albert: Oggi l'amo correva da solo.
+Nonno: L'amo correva. La lenza la tenevo io.
+Albert: Va bene, merito di tutti e due.
+Albert: Ci vediamo tra due giorni.
+<<if $Affection > 0 or ($Affection == 0 and $lastChoiceGood)>>
+    Nonno: Vai, vai. Poi mi racconti come va con quel tuo compagno di corso.
+<<else>>
+    Nonno: Due giorni… Va bene. Io sono qui.
+<<endif>>
+<<set $visitIndex = 6>>
+===
+
+title: Back6
+position: 7172,237
+---
+<<if $lastChoiceGood>>
+    Albert: Oggi me lo segno. Il giorno che il nonno l'ha ammesso.
+    Nonno: Scrivilo piccolo, però. (ride)
+<<else>>
+    Albert: Nonno, cosa mi insegni la prossima volta?
+    Nonno: A capire dove stanno i pesci. Quello la magia non lo fa.
+    Albert: Va bene. Imparo.
+<<endif>>
+
+<<if $Affection > 0 or ($Affection == 0 and $lastChoiceGood)>>
+    Albert: Nonno, mamma dice che da giovane eri uno tremendo.
+    Nonno: Tua madre dice tante cose.
+    Albert: Io ho alcune faccende da sbrigare, quindi starò lontano due giorni, ma la prossima volta mi racconti tutto.
+    Nonno: Va bene. Se te lo meriti. (ride)
+<<else>>
+    Albert: Ci vediamo tra due giorni… va bene?
+    Nonno: Due giorni… Va bene. Io sono qui.
+    Albert: Nonno, la prossima volta mi racconti com'eri tu alla mia età? Così non penso alle mie cose.
+    Nonno: Va bene. Te lo racconto.
+<<endif>>
+<<set $visitIndex = 8>>
+===
+
+title: Back8
+position: 8209,559
+---
+<<if $lastChoiceGood>>
+    Albert: Nonno, me lo insegni un passo? Di quelli del sabato. Così quando torno…
+    Nonno: Qui sul molo? Con queste ginocchia? (ride)
+    Albert: Un'altra volta, allora.
+    Nonno: Un'altra volta.
+<<else>>
+    Albert: Nonno… ma tu come capivi se di una persona ti potevi fidare?
+    Nonno: Ci mettevo anni.
+    Albert: Anni…
+    Nonno: Qui ci si conosce da sempre. È più facile.
+    Albert: Capisco.
+<<endif>>
+
+<<if $Affection > 0 or ($Affection == 0 and $lastChoiceGood)>>
+    Albert: Ci vediamo tra tre giorni, nonno. Allenale, quelle ginocchia!
+    Nonno: Va bene. E quando la rivedi, fammi sapere.
+<<else>>
+    Albert: Allora… ci vediamo tra tre giorni? Se ti va bene.
+    Nonno: Tre giorni… Va bene. Tanto io sono sempre qui.
+<<endif>>
+<<set $visitIndex = 11>>
+===
+
+title: Back11
+position: 6892,237
+---
+<<if $Affection > 0>>
+    <<if $lastChoiceGood>>
+        Albert: Grazie, nonno.
+        Nonno: Di niente. E salutami tua madre.
+    <<else>>
+        Albert: Se riesco, passo. Anche solo per salutarti.
+        Nonno: Lascio la porta aperta.
+    <<endif>>
+    Albert: Allora ci vediamo tra quattro giorni, nonno. Non annoiarti senza di me!
+    Nonno: Mi annoio, mi annoio. Ma pesco lo stesso. (ride)
+    <<set $visitIndex = 15>>
+<<else>>
+    <<if $lastChoiceGood>>
+        Albert: Due giorni e torno. Non di più.
+        Nonno: Anche tre, se servono.
+        Albert: Due.
+    <<else>>
+        Albert: Mando una lettera e dico che non vado. Tanto lì non se ne accorge nessuno.
+        Nonno: Qui sì.
+    <<endif>>
+    Albert: Ci vediamo tra due giorni, nonno.
+    Nonno: Due giorni. Non fare tardi, eh.
+    Albert: No, no. Arrivo presto.
+    <<set $visitIndex = 13>>
+<<endif>>
+===
+
+title: Back13
+position: 7452,237
+---
+<<if $lastChoiceGood>>
+    Albert: Se vado, per qualche giorno non ci vediamo. Va bene lo stesso?
+    Nonno: Va bene. Poi mi racconti.
+<<else>>
+    Albert: Tanto a quelle feste non mi diverto mai.
+    Nonno: Meglio così. Qui almeno non devi ballare.
+<<endif>>
+Albert: Allora… tra tre giorni?
+Nonno: Tre giorni… Va bene. Io me la cavo.
+<<if $Affection <= 0>>
+    <<set $visitIndex = 16>>
+<<else>>
+    <<set $visitIndex = 19>>
+<<endif>>
+===
+
+title: Back15
+position: 5212,237
+---
+<<if $lastChoiceGood>>
+    Albert: Una sera passo a casa e facciamo un paio di partite a carte.
+    Nonno: Vieni. Ma niente magie, eh. Non voglio imbrogli.
+    Albert: Va bene, tranquillo. Niente magia.
+    Nonno: Ottimo, però ti tengo d'occhio. (ride)
+<<else>>
+    Albert: Nonno… se vuoi, la sera passo io. Così l'orologio non lo senti.
+    Nonno: Ma no, ma no. Tu hai le tue cose.
+<<endif>>
+Albert: Ci vediamo tra quattro giorni, nonno.
+Nonno: Va bene. Non preoccuparti. (ride)
+<<set $visitIndex = 19>>
+===
+
+title: Back16
+position: 5492,237
+---
+<<if $lastChoiceGood>>
+    Albert: Però la schiena fattela vedere.
+    Nonno: Da chi? Il guaritore passa una volta al mese.
+    Albert: Allora la prossima volta.
+    Nonno: La prossima volta.
+<<else>>
+    Albert: Forse la lettera non arriva nemmeno.
+    Nonno: Forse.
+<<endif>>
+
+Albert: Oggi l'incantesimo andava piano. Non so perché.
+Nonno: Sarà la giornata.
+Albert: Sarà.
+Albert: Ci vediamo tra tre giorni, nonno.
+Nonno: Tre giorni. Io sono qui. Per ora.
+<<set $visitIndex = 19>>
+===
+
+title: Back24
+position: 4932,237
+---
+<<if $lastChoiceGood>>
+    Albert: Domani mi tocca il pozzo della casa gialla. Dicono che l'acqua sa di ruggine.
+    Nonno: Lo sa da trent'anni. Buona fortuna. (ride)
+<<else>>
+    Albert: Se mi fermano, dico che il nonno mi aspetta.
+    Nonno: Ed è vero.
+<<endif>>
+
+Albert: Allora ci vediamo prima di partire, nonno.
+Nonno: Prima di partire. Vieni la mattina presto.
+Albert: Perché?
+Nonno: Perché sì.
+<<set $visitIndex = 30>>
+===
+
+title: BackLettera
+position: 5772,237
+---
+<<if $Affection > 0>>
+    Albert: Prima di partire passo ancora.
+    Nonno: Va bene. Intanto lo dico in paese. Mio nipote, apprendista.
+    Albert: Nonno, il paese sono dieci persone.
+    Nonno: Undici, con me. (ride)
+    <<set $visitIndex = 24>>
+<<else>>
+    Albert: Ciao, nonno.
+    Nonno: Ci vediamo tra due giorni?
+    Albert: …
+    Albert: Ciao.
+    <<set $visitIndex = 0>>
+<<endif>>
+<<set $letterDone = true>>
+===
+
+title: Finale
+position: 8412,1317
+---
+<<if $Affection > 0 and $boatBuilt>>
+    <<jump FinaleAltaFinita1>>
+<<elseif $Affection > 0>>
+    <<jump FinaleAltaNonFinita1>>
+<<elseif $boatBuilt>>
+    <<jump FinaleBassaFinita>>
+<<else>>
+    <<jump FinaleBassaNonFinita1>>
+<<endif>>
+===
+
+title: FinaleAltaFinita1
+position: 8632,1542
+---
+<<if $dayIndex < 30>>
+    Albert: Buongiorno, nonno!
+    Nonno: Prima di pescare, vieni con me.
+<<else>>
+    Albert: Nonno! Parto stasera. Sono passato a salutarti.
+    Nonno: Prima di salutare, vieni con me.
+<<endif>>
+Albert: Dove?
+Nonno: Vieni e basta.
+===
+
+title: FinaleAltaFinita2
+position: 8632,1767
+---
+Albert: …
+Albert: Nonno. E questa?
+Nonno: Una barca.
+Albert: Lo vedo che è una barca. (ride) Ma quando l'hai fatta?
+Nonno: Mentre tu non guardavi.
+Albert: E perché una barca?
+Nonno: Non ti ricordi la promessa che ti ho fatto quando eri alto metà della canna da pesca?
+Albert: Ah, sì. L'isolotto… Te la ricordi ancora, quella promessa…
+Nonno: Io mi ricordo tutto. Sono le ginocchia che non funzionano. (ride)
+===
+
+title: FinaleAltaFinita3
+position: 8632,1992
+---
+Albert: Nonno… stiamo andando all'isolotto.
+Nonno: Eh, sì.
+Albert: Davvero?
+Nonno: Davvero, davvero.
+===
+
+title: FinaleAltaFinita4
+position: 8632,2217
+---
+Albert: È piccolo.
+Nonno: Da lontano sembrava più grande.
+Albert: Va bene così.
+Nonno: Se sei felice tu, lo sono anch'io.
+<<if $dayIndex < 30>>
+    Albert: Prima di partire, ci torniamo.
+    Nonno: Non preoccuparti, sarà per quando torni.
+<<else>>
+    Albert: Quando torno, ci torniamo.
+    Nonno: Sì, ti aspetto.
+<<endif>>
+===
+
+title: FinaleAltaNonFinita1
+position: 8352,1542
+---
+Albert: Nonno! Parto stasera. Sono passato a salutarti.
+Nonno: Eccoti. Allora, apprendista.
+Albert: Apprendista. Suona strano.
+Nonno: Suona bene.
+Nonno: Senti… volevo farti una sorpresa.
+Albert: Una sorpresa?
+Nonno: Dietro al faro. Una barca. Per l'isolotto.
+Albert: …L'isolotto. Davvero?
+Nonno: Davvero, davvero.
+Nonno: Solo che non l'ho finita in tempo.
+Albert: Non ti preoccupare, sono felice del pensiero.
+Nonno: Però sarà pronta per quando torni, su quello stanne certo.
+Albert: Grazie, nonno.
+===
+
+title: FinaleAltaNonFinita2
+position: 8352,1767
+---
+Nonno: Per quando torna.
+===
+
+title: FinaleBassaFinita
+position: 9192,1542
+---
+<<if $dayIndex < 30>>
+    Nonno: Tra qualche giorno parte.
+<<else>>
+    Nonno: Oggi parte.
+<<endif>>
+Nonno: E la barca è pronta.
+Nonno: …
+Nonno: Un giorno avremo una barca più forte, e ci andremo insieme.
+Nonno: Insieme.
+Nonno: Io non gli ho mai detto di restare.
+Nonno: …Non ce n'era bisogno.
+===
+
+title: FinaleBassaNonFinita1
+position: 8912,1542
+---
+Nonno: Oggi parte.
+Nonno: …
+Nonno: Bene. È il momento di prendere un po' di pesci.
+===
+
+title: FinaleBassaNonFinita2
+position: 8912,1767
+---
+Pesca, e aspetta che il giorno passi. #testo
+===
