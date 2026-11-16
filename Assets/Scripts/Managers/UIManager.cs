@@ -1,11 +1,13 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public enum Scene { Island, Boat, Fishing, Ending, Lighthouse, Hut }
+public enum Scene { Island, Boat, Fishing, Ending, Lighthouse, Hut, Menu }
 
 public class UIManager : MonoBehaviour
 {
@@ -14,9 +16,20 @@ public class UIManager : MonoBehaviour
 
     [Header("General")]
     [SerializeField] private Image blackScreen;
+    private EventSystem eventSystem;
 
     [Header("Island")]
+    [SerializeField] private TMP_Text moneyCount;
     [SerializeField] private GameObject shopMenu;
+    [SerializeField] private GameObject startingNodeShop;
+    [SerializeField] private GameObject upgradeInfo;
+    [SerializeField] private Image upgradeIcon;
+    [SerializeField] private TMP_Text upgradeName;
+    [SerializeField] private TMP_Text upgradeDescription;
+    [SerializeField] private TMP_Text upgradeCost;
+    [SerializeField] private GameObject upgradeUnlocked;
+    [SerializeField] private TMP_Text upgradeEffect;
+    public Action<bool> onShopInteraction;
 
     [Header("Fishing")]
     [SerializeField] private TMP_Text fishingPoints;
@@ -46,8 +59,68 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         hookScript = FindFirstObjectByType<Hook>();
-        staminaRectTransform = staminaSlider.GetComponent<RectTransform>();
+        staminaRectTransform = staminaSlider?.GetComponent<RectTransform>();
+        currentScene = GameManager.instance.GetCurrentScene();
+        eventSystem = FindFirstObjectByType<EventSystem>();
     }
+
+    #region Money
+
+    public void UpdateMoneyCount(int value)
+    {
+        moneyCount?.SetText(value + "€");
+    }
+
+    #endregion Money
+
+    #region Shop
+
+    public void OpenShop()
+    {
+        upgradeInfo.SetActive(false);
+        eventSystem.firstSelectedGameObject = startingNodeShop;
+        shopMenu.SetActive(true);
+        onShopInteraction.Invoke(true);
+    }
+
+    public void CloseShop()
+    {
+        shopMenu.SetActive(false);
+        onShopInteraction.Invoke(false);
+    }
+
+    public void UpdateUpgradeInfo(string name, string description, string effect, int cost, Sprite icon, bool unlocked)
+    {
+        upgradeName.text = name;
+        upgradeDescription.text = description;
+        upgradeEffect.text = effect;
+        upgradeIcon.sprite = icon;
+        if (unlocked)
+        {
+            upgradeUnlocked.SetActive(true);
+            upgradeCost.gameObject.SetActive(false);
+        }
+        else
+        {
+            if (cost > GameManager.instance.GetMoney())
+                upgradeCost.color = Color.red;
+            else
+                upgradeCost.color = Color.black;
+            upgradeUnlocked.SetActive(false);
+            upgradeCost.text = cost + "€";
+            upgradeCost.gameObject.SetActive(true);
+        }
+        upgradeInfo.SetActive(true);
+    }
+
+    public void HideUpgradeInfo()
+    {
+        upgradeInfo.SetActive(false);
+    }
+
+    #endregion Shop
+
+    #region Fishing
 
     public void UpdatePointsText(float value)
     {
@@ -158,9 +231,14 @@ public class UIManager : MonoBehaviour
         tmp.color = Color.red;
         pgt.localScale = new Vector3(2, 2, 1);
     }
+    
+    #endregion Fishing
 
-    private IEnumerator FadeIn(float duration)
+    #region Fade
+
+    public IEnumerator FadeOut(float duration, string sceneName)
     {
+        blackScreen.gameObject.SetActive(true);
         float elapsedTime = 0f;
         while (elapsedTime < duration)
         {
@@ -170,10 +248,13 @@ public class UIManager : MonoBehaviour
             yield return null;
         }
         blackScreen.color = new Color(0f, 0f, 0f, 1f);
+
+        SceneManager.LoadScene(sceneName);
     }
 
-    private IEnumerator FadeOut(float duration, string sceneName)
+    public IEnumerator FadeIn(float duration)
     {
+        blackScreen.gameObject.SetActive(true);
         float elapsedTime = 0f;
         while (elapsedTime < duration)
         {
@@ -183,7 +264,8 @@ public class UIManager : MonoBehaviour
             yield return null;
         }
         blackScreen.color = new Color(0f, 0f, 0f, 0f);
-
-        SceneManager.LoadScene(sceneName);
+        blackScreen.gameObject.SetActive(false);
     }
+
+    #endregion Fade
 }

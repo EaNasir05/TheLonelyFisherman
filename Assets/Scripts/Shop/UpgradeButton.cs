@@ -1,0 +1,107 @@
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+public class UpgradeButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler
+{
+    private EventSystem eventSystem;
+    [SerializeField] private string upgradeName;
+    [SerializeField] private UpgradesList upgradesList;
+    private Upgrade upgrade;
+    [SerializeField] private bool firstNode;
+    [SerializeField] private List<UpgradeButton> nextUpgrades;
+    [SerializeField] private Button button;
+    [SerializeField] private Image buttonImage;
+    [SerializeField] private Image connectionImage;
+    public bool unlocked;
+    public bool available;
+
+    private void Awake()
+    {
+        upgrade = upgradesList.GetUpgradeByName(upgradeName);
+    }
+
+    private void Start()
+    {
+        eventSystem = FindFirstObjectByType<EventSystem>();
+        if (firstNode)
+        {
+            UpdateButton(true);
+        }
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        UpdateUpgradeInfo();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (available)
+            eventSystem.SetSelectedGameObject(gameObject);
+    }
+
+    private void UpdateButton(bool available)
+    {
+        this.available = available;
+        button.interactable = available;
+        if (available)
+        {
+            connectionImage.color = Color.white;
+            if (upgrade.unlocked)
+            {
+                unlocked = true;
+                buttonImage.sprite = upgrade.unlockedIcon;
+                foreach (UpgradeButton button in nextUpgrades)
+                {
+                    button.UpdateButton(true);
+                }
+            }
+            else
+            {
+                unlocked = false;
+                buttonImage.sprite = upgrade.icon;
+                foreach (UpgradeButton button in nextUpgrades)
+                {
+                    button.UpdateButton(false);
+                }
+            }
+        }
+        else
+        {
+            buttonImage.sprite = upgrade.lockedIcon;
+            connectionImage.color = Color.gray;
+            foreach (UpgradeButton button in nextUpgrades)
+            {
+                button.UpdateButton(false);
+            }
+        }
+    }
+
+    public void UnlockUpgrade()
+    {
+        if (available && !unlocked)
+        {
+            int cost = upgrade.cost;
+            if (GameManager.instance.GetMoney() >= cost)
+            {
+                //sfx acquisto
+                GameManager.instance.AddMoney(-cost);
+                upgrade.unlocked = true;
+                UpdateButton(true);
+                UpdateUpgradeInfo();
+            }
+            else
+            {
+                Debug.Log("NOPE");
+                //sfx acquisto rifiutato
+            }
+        }
+    }
+
+    private void UpdateUpgradeInfo()
+    {
+        UIManager.instance.UpdateUpgradeInfo(upgrade.name, upgrade.description, upgrade.effect, upgrade.cost, upgrade.icon, upgrade.unlocked);
+    }
+}

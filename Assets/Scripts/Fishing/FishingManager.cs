@@ -9,6 +9,7 @@ public class FishingManager : MonoBehaviour
     public int points = 0;
     public int biomesUnlocked = 1;
     public float biomesHeight = 20f;
+    [SerializeField] private UpgradesList upgradesList;
     private int attemptsRemaining = 3;
 
     private void Awake()
@@ -18,7 +19,13 @@ public class FishingManager : MonoBehaviour
 
     public void Initialize()
     {
+        CheckUpgrades();
         FishesSpawner.instance.Initialize();
+    }
+
+    private void CheckUpgrades()
+    {
+        //controlla se gli upgrade son sbloccati
     }
 
     public void GainPoints(int value)

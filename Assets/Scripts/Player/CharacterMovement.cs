@@ -11,6 +11,8 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float acceleration = 10f;
     private float moveInput = 0f;
+    private bool talking = false;
+    private bool shopping = false;
     private Direction currentDirection = Direction.Left;
 
     private void Start()
@@ -20,17 +22,24 @@ public class CharacterMovement : MonoBehaviour
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         animator = gameObject.GetComponent<Animator>();
         inputHandler.onMoveInput += SetMoveInput;
+        DialoguesManager.instance.onDialogueActivation += SetTalking;
+        UIManager.instance.onShopInteraction += SetShopping;
     }
 
     private void OnDestroy()
     {
         inputHandler.onMoveInput -= SetMoveInput;
+        DialoguesManager.instance.onDialogueActivation -= SetTalking;
+        UIManager.instance.onShopInteraction -= SetShopping;
     }
 
     private void FixedUpdate()
     {
-        MoveCharacter();
-        UpdateSpriteAndAnimation();
+        if (!talking && !shopping)
+        {
+            MoveCharacter();
+            UpdateSpriteAndAnimation();
+        }
     }
 
     private void MoveCharacter()
@@ -64,5 +73,17 @@ public class CharacterMovement : MonoBehaviour
     public void SetMoveInput(float input)
     {
         moveInput = input;
+    }
+
+    public void SetTalking(bool value)
+    {
+        talking = value;
+        rb.linearVelocityX = 0;
+    }
+
+    public void SetShopping(bool value)
+    {
+        shopping = value;
+        rb.linearVelocityX = 0;
     }
 }

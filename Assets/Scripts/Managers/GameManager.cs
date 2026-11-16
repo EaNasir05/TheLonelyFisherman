@@ -9,9 +9,16 @@ public class GameManager : MonoBehaviour
     private Scene currentScene;
     private InMemoryVariableStorage yarnVariableStorage;
     public bool isPaused = false;
+    public bool tutorial = true;
+    private int day = 0;
+    private int money = 100;
     [SerializeField] private bool grandsonHere = false;
+    [SerializeField] private UpgradesList upgradesList;
 
     public bool IsGrandsonHere() => grandsonHere;
+    public Scene GetCurrentScene() => currentScene;
+    public int GetDay() => day;
+    public int GetMoney() => money;
 
     private void Awake()
     {
@@ -21,6 +28,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            upgradesList.ResetUpgrades();
         }
         else if (instance != this)
         {
@@ -43,9 +51,21 @@ public class GameManager : MonoBehaviour
 
         if (currentScene == Scene.Fishing)
         {
-            //Settaggio variabili FishingManager e Hook
             FishingManager.instance.Initialize();
         }
+
+        if (currentScene == Scene.Hut || currentScene == Scene.Island || currentScene == Scene.Lighthouse)
+        {
+            UIManager.instance.UpdateMoneyCount(money);
+        }
+
+        StartCoroutine(UIManager.instance.FadeIn(1f));
+    }
+
+    public void AddMoney(int increase)
+    {
+        money = Math.Clamp(money + increase, 0, 999999999);
+        UIManager.instance.UpdateMoneyCount(money);
     }
 
     private void UpdateCurrentScene()
@@ -67,6 +87,9 @@ public class GameManager : MonoBehaviour
             case "EveningOnBoat":
                 currentScene = Scene.Boat;
                 break;
+            case "MainMenu":
+                currentScene = Scene.Menu;
+                break;
             default:
                 currentScene = Scene.Ending;
                 break;
@@ -75,7 +98,7 @@ public class GameManager : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        StartCoroutine(UIManager.instance.FadeOut(1f, sceneName));
     }
 
     public void PrintYarnVariable(string variableName)

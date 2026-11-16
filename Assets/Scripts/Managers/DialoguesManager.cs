@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Yarn.Unity;
 
@@ -6,6 +7,7 @@ public class DialoguesManager : MonoBehaviour
     public static DialoguesManager instance;
     private DialogueRunner dialogueRunner;
     public bool isTalking = false;
+    public Action<bool> onDialogueActivation;
 
     private void Awake()
     {
@@ -30,19 +32,28 @@ public class DialoguesManager : MonoBehaviour
         else
         {
             dialogueRunner.AddCommandHandler<string>("ChangeScene", GameManager.instance.ChangeScene);
+            dialogueRunner.onDialogueComplete.AddListener(DialogueCompleted);
         }
     }
 
     public void StartDialogue(string nodeName)
     {
-        if (dialogueRunner != null)
+        if (!isTalking)
         {
-            isTalking = true;
-            dialogueRunner.StartDialogue(nodeName);
+            if (dialogueRunner != null)
+            {
+                isTalking = true;
+                onDialogueActivation.Invoke(true);
+                dialogueRunner.StartDialogue(nodeName);
+            }
+            else
+            {
+                Debug.LogError("DialogueRunner not found in the scene.");
+            }
         }
         else
         {
-            Debug.LogError("DialogueRunner not found in the scene.");
+            Debug.LogError("There's already a dialogue active");
         }
     }
 
@@ -56,5 +67,11 @@ public class DialoguesManager : MonoBehaviour
         {
             Debug.LogError("DialogueRunner not found in the scene.");
         }
+    }
+
+    public void DialogueCompleted()
+    {
+        onDialogueActivation.Invoke(false);
+        isTalking = false;
     }
 }
