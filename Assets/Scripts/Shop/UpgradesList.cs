@@ -33,7 +33,6 @@ public class Upgrade
     public string description;
     public string effect;
     public Sprite icon;
-    public Sprite unlockedIcon;
     public Sprite lockedIcon;
     public bool unlocked;
     public int cost;
