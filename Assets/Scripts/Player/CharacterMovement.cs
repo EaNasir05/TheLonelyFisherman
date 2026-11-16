@@ -23,12 +23,14 @@ public class CharacterMovement : MonoBehaviour
         animator = gameObject.GetComponent<Animator>();
         inputHandler.onMoveInput += SetMoveInput;
         DialoguesManager.instance.onDialogueActivation += SetTalking;
+        UIManager.instance.onShopInteraction += SetShopping;
     }
 
     private void OnDestroy()
     {
         inputHandler.onMoveInput -= SetMoveInput;
         DialoguesManager.instance.onDialogueActivation -= SetTalking;
+        UIManager.instance.onShopInteraction -= SetShopping;
     }
 
     private void FixedUpdate()
@@ -76,10 +78,12 @@ public class CharacterMovement : MonoBehaviour
     public void SetTalking(bool value)
     {
         talking = value;
+        rb.linearVelocityX = 0;
     }
 
     public void SetShopping(bool value)
     {
         shopping = value;
+        rb.linearVelocityX = 0;
     }
 }

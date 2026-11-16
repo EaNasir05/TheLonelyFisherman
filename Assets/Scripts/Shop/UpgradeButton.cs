@@ -1,11 +1,11 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UpgradeButton : MonoBehaviour, ISelectHandler
+public class UpgradeButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler
 {
+    private EventSystem eventSystem;
     [SerializeField] private string upgradeName;
     [SerializeField] private UpgradesList upgradesList;
     private Upgrade upgrade;
@@ -24,6 +24,7 @@ public class UpgradeButton : MonoBehaviour, ISelectHandler
 
     private void Start()
     {
+        eventSystem = FindFirstObjectByType<EventSystem>();
         if (firstNode)
         {
             UpdateButton(true);
@@ -33,6 +34,12 @@ public class UpgradeButton : MonoBehaviour, ISelectHandler
     public void OnSelect(BaseEventData eventData)
     {
         UpdateUpgradeInfo();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (available)
+            eventSystem.SetSelectedGameObject(gameObject);
     }
 
     private void UpdateButton(bool available)
@@ -87,6 +94,7 @@ public class UpgradeButton : MonoBehaviour, ISelectHandler
             }
             else
             {
+                Debug.Log("NOPE");
                 //sfx acquisto rifiutato
             }
         }

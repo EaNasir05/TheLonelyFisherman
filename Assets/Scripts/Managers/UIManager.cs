@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -28,6 +29,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text upgradeCost;
     [SerializeField] private GameObject upgradeUnlocked;
     [SerializeField] private TMP_Text upgradeEffect;
+    public Action<bool> onShopInteraction;
 
     [Header("Fishing")]
     [SerializeField] private TMP_Text fishingPoints;
@@ -78,11 +80,13 @@ public class UIManager : MonoBehaviour
         upgradeInfo.SetActive(false);
         eventSystem.firstSelectedGameObject = startingNodeShop;
         shopMenu.SetActive(true);
+        onShopInteraction.Invoke(true);
     }
 
     public void CloseShop()
     {
-        upgradeInfo.SetActive(false);
+        shopMenu.SetActive(false);
+        onShopInteraction.Invoke(false);
     }
 
     public void UpdateUpgradeInfo(string name, string description, string effect, int cost, Sprite icon, bool unlocked)
@@ -98,6 +102,10 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            if (cost > GameManager.instance.GetMoney())
+                upgradeCost.color = Color.red;
+            else
+                upgradeCost.color = Color.black;
             upgradeUnlocked.SetActive(false);
             upgradeCost.text = cost + "€";
             upgradeCost.gameObject.SetActive(true);
