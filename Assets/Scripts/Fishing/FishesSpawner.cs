@@ -9,6 +9,7 @@ public class FishesSpawner : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private int layersPerBiome = 4; //Quanti layer compongono un bioma
     [SerializeField] private List<int> fishesOnLayerPerBiome; //Per ogni bioma, quanti pesci sono presenti in un layer
+    [SerializeField] private List<int> fishesOnLayerPerBiomeWithGrandson; //Per ogni bioma, quanti pesci sono presenti in un layer se è presente il nipote
     [SerializeField] private int numberOfLayersToSpawnOnStart = 3; //Quanti layer di pesci attivare con Initialize
     [SerializeField] private float unitsVisibleToCamera = 11; //Unità comprese nel campo visivo verticale della camera
     [SerializeField] private Vector2 fishesPositionXRange;
@@ -34,7 +35,7 @@ public class FishesSpawner : MonoBehaviour
 
     public void Initialize()
     {
-        int biomes = FishingManager.instance.biomesUnlocked;
+        int biomes = FishingManager.instance.GetBiomesUnlocked();
         int layers = biomes * layersPerBiome + 1;
         layersSize = FishingManager.instance.biomesHeight / layersPerBiome;
         layersVisible = (int) Math.Ceiling((unitsVisibleToCamera - layersSize) / layersSize);
@@ -44,6 +45,11 @@ public class FishesSpawner : MonoBehaviour
         List<FishPercentages> fishesPercentagePerBiomes = fishesList.fishesRatesPerBiome;
         int y = -1;
         Dictionary<string, int> fishesInLayer = null;
+        List<int> fishesOnLayerPerBiome;
+        if (GameManager.instance.IsGrandsonHere())
+            fishesOnLayerPerBiome = fishesOnLayerPerBiomeWithGrandson;
+        else
+            fishesOnLayerPerBiome = this.fishesOnLayerPerBiome;
         for (int x = 0; x < layers; x++)
         {
             if ((x % layersPerBiome == 0 && y + 1 < biomes) || y == -1)

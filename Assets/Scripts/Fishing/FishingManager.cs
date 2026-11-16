@@ -6,11 +6,16 @@ public class FishingManager : MonoBehaviour
     public static FishingManager instance;
     public bool stop = false;
     public int points = 0;
-    public int biomesUnlocked = 1;
+    private int biomesUnlocked = 1;
     public float biomesHeight = 20f;
+    [SerializeField] private int maxAttemptsWithoutGrandson = 1;
+    [SerializeField] private int maxAttemptsWithGrandson = 2;
     [SerializeField] private UpgradesList upgradesList;
     private Hook hook;
+    private int maxAttempts = 3;
     private int attemptsRemaining = 3;
+
+    public int GetBiomesUnlocked() => biomesUnlocked;
 
     private void Awake()
     {
@@ -23,6 +28,12 @@ public class FishingManager : MonoBehaviour
     {
         hook = FindFirstObjectByType<Hook>();
         CheckUpgrades();
+        if (GameManager.instance.IsGrandsonHere())
+            maxAttempts = maxAttemptsWithGrandson;
+        else
+            maxAttempts = maxAttemptsWithoutGrandson;
+        attemptsRemaining = maxAttempts;
+        UIManager.instance.UpdateAttemptsSlider(maxAttempts, attemptsRemaining);
         FishesSpawner.instance.Initialize();
     }
 
@@ -207,6 +218,16 @@ public class FishingManager : MonoBehaviour
         if (attemptsRemaining > 0)
         {
             attemptsRemaining--;
+            UIManager.instance.UpdateAttemptsSlider(maxAttempts, attemptsRemaining);
+        }
+    }
+
+    public void CheckFishingAttempts()
+    {
+        if (attemptsRemaining == 0)
+        {
+            stop = true;
+            Debug.Log("Fine pesca");
         }
     }
 }

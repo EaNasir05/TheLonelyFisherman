@@ -32,6 +32,7 @@ public class DialoguesManager : MonoBehaviour
         else
         {
             dialogueRunner.AddCommandHandler<string>("ChangeScene", GameManager.instance.ChangeScene);
+            dialogueRunner.AddCommandHandler("FadeIn", GameManager.instance.FadeIn);
             dialogueRunner.onDialogueComplete.AddListener(DialogueCompleted);
         }
     }

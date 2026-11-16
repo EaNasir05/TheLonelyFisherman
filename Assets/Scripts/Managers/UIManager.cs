@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
 
     [Header("General")]
     [SerializeField] private Image blackScreen;
+    public Action onFadeIn;
     private EventSystem eventSystem;
 
     [Header("Island")]
@@ -31,6 +32,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Fishing")]
     [SerializeField] private TMP_Text fishingPoints;
+    [SerializeField] private Slider attemptsSlider;
     [SerializeField] private Slider staminaSlider;
     private RectTransform staminaRectTransform;
     [SerializeField] private Image staminaFillImage;
@@ -125,6 +127,17 @@ public class UIManager : MonoBehaviour
         fishingPoints.text = value.ToString();
     }
 
+    public void UpdateAttemptsSlider(int maxValue, int currentValue)
+    {
+        attemptsSlider.maxValue = maxValue;
+        attemptsSlider.value = currentValue;
+    }
+
+    public void HideAttemptsSlider()
+    {
+        attemptsSlider.gameObject.SetActive(false);
+    }
+
     public void ShowStaminaBar()
     {
         staminaSlider.gameObject.SetActive(true);
@@ -189,8 +202,8 @@ public class UIManager : MonoBehaviour
 
     public void RefreshStaminaBar()
     {
-        staminaSlider.maxValue = hookScript.maxStamina;
-        staminaSlider.value = hookScript.maxStamina;
+        staminaSlider.maxValue = hookScript.GetMaxStamina();
+        staminaSlider.value = hookScript.GetMaxStamina();
         staminaBackgroundImage.color = staminaBackgroundColor;
         staminaFillImage.color = staminaFillColor;
     }
@@ -263,6 +276,8 @@ public class UIManager : MonoBehaviour
         }
         blackScreen.color = new Color(0f, 0f, 0f, 0f);
         blackScreen.gameObject.SetActive(false);
+        
+        onFadeIn?.Invoke();
     }
 
     #endregion Fade

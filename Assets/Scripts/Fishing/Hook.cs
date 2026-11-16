@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Hook : MonoBehaviour
 {
+    #region Variables
+
     private InputHandler inputHandler;
     private Rigidbody2D rb;
     private Shooting shootingSystem;
@@ -14,9 +16,8 @@ public class Hook : MonoBehaviour
     [SerializeField] private Vector2 movementRange;
     [SerializeField] private float verticalSpeed = 5f;
     [SerializeField] private float verticalSpeedWithoutMagicOnReturn = 3f;
-    public float verticalSpeedUpMultiplier = 1.5f;
-    public float verticalSpeedDownMultiplier = 0.5f;
-    public float verticalSpeedUpMultiplierOnReturn = 1.5f;
+    [SerializeField] private float verticalSpeedUpMultiplier = 1.5f;
+    [SerializeField] private float verticalSpeedDownMultiplier = 0.5f;
     private Vector2 contactPoint;
     private float verticalRange;
 
@@ -29,13 +30,12 @@ public class Hook : MonoBehaviour
     private List<FishController> fishesCatched;
 
     [Header("Stamina")]
-    public float maxStamina = 100f;
+    [SerializeField] float maxStamina = 100f;
     private float currentStamina;
-    public float staminaConsumedPerSecond = 1f;
+    [SerializeField] private float staminaConsumedPerSecond = 1f;
     public float staminaLossMultiplier = 1f;
     public float staminaConsumedMultiplierOnSpeedUp = 1.5f;
     public float staminaConsumedMultiplierOnSpeedDown = 1f;
-    public float staminaLossOnCollisionMultiplier = 1f;
 
     [Header("Weight")]
     [SerializeField] private float maxWeight = 100f;
@@ -43,7 +43,6 @@ public class Hook : MonoBehaviour
     public float weightGainMultiplier = 1f;
     public float weightAccumulatedPerSecond = 0.1f;
     public float overweightPointsLossMultiplier = 1f;
-    public float weightGainOnCollisionMultiplier = 1f;
     public int fishesToLoseOnOverweight = 3;
 
     [Header("Character sprite settings")]
@@ -68,6 +67,9 @@ public class Hook : MonoBehaviour
     public float GetCurrentStamina() => currentStamina;
     public float GetCurrentWeight() => currentWeight;
     public float GetMaxWeight() => maxWeight;
+    public float GetMaxStamina() => maxStamina;
+
+    #endregion Variables
 
     private void Start()
     {
@@ -80,7 +82,7 @@ public class Hook : MonoBehaviour
         shootingSystem = FindFirstObjectByType<Shooting>();
         hookLeftStartPos = new Vector2(shootingSystem.GetHookStartingXPosLeft(), transform.position.y);
         hookRightStartPos = new Vector2(shootingSystem.GetHookStartingXPosRight(), transform.position.y);
-        verticalRange = FishingManager.instance.biomesHeight * FishingManager.instance.biomesUnlocked * -1;
+        verticalRange = FishingManager.instance.biomesHeight * FishingManager.instance.GetBiomesUnlocked() * -1;
         fishesCatched = new();
     }
 
@@ -101,6 +103,8 @@ public class Hook : MonoBehaviour
         inputHandler.onSpeedDownInput -= SpeedDown;
     }
 
+    #region Movement
+
     private void UpdateMoveInput(float value) => moveInput = value;
 
     private void SpeedUp(bool value)
@@ -110,7 +114,7 @@ public class Hook : MonoBehaviour
             if (grandsonHere)
             {
                 if (value)
-                    rb.linearVelocityY = verticalSpeed * verticalSpeedUpMultiplierOnReturn;
+                    rb.linearVelocityY = verticalSpeed * verticalSpeedUpMultiplier;
                 else
                     rb.linearVelocityY = verticalSpeed;
             }
@@ -192,39 +196,6 @@ public class Hook : MonoBehaviour
         }
     }
 
-    private void UpdateStaminaAndWeightOvertime()
-    {
-        if (!returning)
-        {
-            if (speedUp)
-                DecreaseStamina(staminaConsumedPerSecond * staminaLossMultiplier * staminaConsumedMultiplierOnSpeedUp * Time.deltaTime);
-            else if (speedDown)
-                DecreaseStamina(staminaConsumedPerSecond * staminaLossMultiplier * staminaConsumedMultiplierOnSpeedDown * Time.deltaTime);
-            else
-                DecreaseStamina(staminaConsumedPerSecond * staminaLossMultiplier * Time.deltaTime);
-        }
-        else if (!grandsonHere && !overweight && fishesCatched.Count > 0)
-        {
-            IncreaseWeight(weightAccumulatedPerSecond * weightGainMultiplier * Time.deltaTime);
-        }
-    }
-
-    public void DecreaseStamina(float decrease)
-    {
-        currentStamina = Mathf.Clamp(currentStamina - decrease, 0, maxStamina);
-        UIManager.instance.UpdateStaminaBar(currentStamina);
-        if (currentStamina == 0)
-            StartCoroutine(ReturnDelay());
-    }
-
-    public void IncreaseWeight(float increase)
-    {
-        currentWeight = Mathf.Clamp(currentWeight + increase, 0, maxWeight);
-        UIManager.instance.UpdateStaminaBar(currentWeight);
-        if (currentWeight == maxWeight && !overweight)
-            StartCoroutine(Overweight());
-    }
-
     private void CheckVerticalPosition()
     {
         if (!returning && !FishingManager.instance.stop)
@@ -304,7 +275,45 @@ public class Hook : MonoBehaviour
             yield return null;
         }
         transform.position = targetPos;
+        FishingManager.instance.CheckFishingAttempts();
         shootingSystem.Restart();
+    }
+
+    #endregion Movement
+
+    #region Resources
+
+    private void UpdateStaminaAndWeightOvertime()
+    {
+        if (!returning)
+        {
+            if (speedUp)
+                DecreaseStamina(staminaConsumedPerSecond * staminaLossMultiplier * staminaConsumedMultiplierOnSpeedUp * Time.deltaTime);
+            else if (speedDown)
+                DecreaseStamina(staminaConsumedPerSecond * staminaLossMultiplier * staminaConsumedMultiplierOnSpeedDown * Time.deltaTime);
+            else
+                DecreaseStamina(staminaConsumedPerSecond * staminaLossMultiplier * Time.deltaTime);
+        }
+        else if (!grandsonHere && !overweight && fishesCatched.Count > 0)
+        {
+            IncreaseWeight(weightAccumulatedPerSecond * weightGainMultiplier * Time.deltaTime);
+        }
+    }
+
+    public void DecreaseStamina(float decrease)
+    {
+        currentStamina = Mathf.Clamp(currentStamina - decrease, 0, maxStamina);
+        UIManager.instance.UpdateStaminaBar(currentStamina);
+        if (currentStamina == 0)
+            StartCoroutine(ReturnDelay());
+    }
+
+    public void IncreaseWeight(float increase)
+    {
+        currentWeight = Mathf.Clamp(currentWeight + increase, 0, maxWeight);
+        UIManager.instance.UpdateStaminaBar(currentWeight);
+        if (currentWeight == maxWeight && !overweight)
+            StartCoroutine(Overweight());
     }
 
     private IEnumerator Overweight()
@@ -361,4 +370,6 @@ public class Hook : MonoBehaviour
         }
         fishesCatched.Add(fish);
     }
+
+    #endregion Resources
 }

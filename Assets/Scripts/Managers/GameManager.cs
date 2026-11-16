@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Yarn.Unity;
@@ -8,11 +9,13 @@ public enum Scene { Village, Boat, Fishing, Ending, Interlude, Hut, Menu, Tutori
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    private Scene currentScene;
+    private Scene previousScene;
+    private Scene currentScene = Scene.Menu;
     private InMemoryVariableStorage yarnVariableStorage;
     public bool isPaused = false;
     public bool tutorial = true;
     private int day = 0;
+    private int boatLevel = 0;
     private int money = 0;
     [SerializeField] private bool grandsonHere = false;
     [SerializeField] private UpgradesList upgradesList;
@@ -40,8 +43,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        UpdateCurrentScene();
-
         if (yarnVariableStorage == null)
         {
             yarnVariableStorage = FindFirstObjectByType<InMemoryVariableStorage>();
@@ -51,18 +52,70 @@ public class GameManager : MonoBehaviour
                 DontDestroyOnLoad(yarnVariableStorage.gameObject);
         }
 
-        if (currentScene == Scene.Fishing)
-        {
-            FishingManager.instance.Initialize();
-        }
+        UpdateCurrentScene();
+        if (currentScene != Scene.Menu && currentScene != Scene.Tutorial)
+            FadeIn();
+    }
 
-        if (currentScene == Scene.Hut || currentScene == Scene.Village || currentScene == Scene.Boat)
+    private void UpdateCurrentScene()
+    {
+        string scene = SceneManager.GetActiveScene().name;
+        previousScene = currentScene;
+        switch (scene)
         {
-            UIManager.instance.UpdateMoneyCount(money);
+            case "EveningVillage":
+            case "MorningVillage":
+                currentScene = Scene.Village;
+                UIManager.instance.UpdateMoneyCount(money);
+                if (previousScene == Scene.Fishing)
+                    UIManager.instance.onFadeIn += StartEveningDialogue;
+                break;
+            case "Hut":
+                currentScene = Scene.Hut;
+                UIManager.instance.UpdateMoneyCount(money);
+                break;
+            case "Fishing":
+                currentScene = Scene.Fishing;
+                FishingManager.instance.Initialize();
+                break;
+            case "MorningBoat":
+            case "EveningBoat":
+                currentScene = Scene.Boat;
+                UIManager.instance.UpdateMoneyCount(money);
+                if (previousScene == Scene.Boat)
+                    UIManager.instance.onFadeIn += StartBoatDialogue;
+                break;
+            case "GoingToFish":
+                currentScene = Scene.Interlude;
+                UIManager.instance.onFadeIn += StartInterludeDialogue;
+                break;
+            case "MainMenu":
+                currentScene = Scene.Menu;
+                break;
+            case "Tutorial":
+                currentScene = Scene.Tutorial;
+                UIManager.instance.onFadeIn += StartTutorialDialogue;
+                StartCoroutine(StartPrologueDialogue());
+                break;
+            default:
+                currentScene = Scene.Ending;
+                //Fai partire il dialogo finale
+                break;
         }
+        Debug.Log("Setup scena " + currentScene);
+    }
 
+    public void ChangeScene(string sceneName)
+    {
+        StartCoroutine(UIManager.instance.FadeOut(1f, sceneName));
+    }
+
+    public void FadeIn()
+    {
         StartCoroutine(UIManager.instance.FadeIn(1f));
     }
+
+    #region Economy
 
     public void AddMoney(int increase)
     {
@@ -70,44 +123,43 @@ public class GameManager : MonoBehaviour
         UIManager.instance.UpdateMoneyCount(money);
     }
 
-    private void UpdateCurrentScene()
+    #endregion Economy
+
+    #region Dialogues
+
+    private void StarMorningDialogue()
     {
-        string scene = SceneManager.GetActiveScene().name;
-        switch (scene)
-        {
-            case "EveningVillage":
-            case "MorningVillage":
-                currentScene = Scene.Village;
-                break;
-            case "Hut":
-                currentScene = Scene.Hut;
-                break;
-            case "Fishing":
-                currentScene = Scene.Fishing;
-                break;
-            case "MorningBoat":
-            case "EveningBoat":
-                currentScene = Scene.Boat;
-                break;
-            case "GoingToFish":
-                currentScene = Scene.Interlude;
-                break;
-            case "MainMenu":
-                currentScene = Scene.Menu;
-                break;
-            case "Tutorial":
-                currentScene = Scene.Tutorial;
-                break;
-            default:
-                currentScene = Scene.Ending;
-                break;
-        }
+        
     }
 
-    public void ChangeScene(string sceneName)
+    private void StartEveningDialogue()
     {
-        StartCoroutine(UIManager.instance.FadeOut(1f, sceneName));
+        
     }
+
+    private void StartInterludeDialogue()
+    {
+        
+    }
+
+    private void StartTutorialDialogue()
+    {
+        
+    }
+
+    private IEnumerator StartPrologueDialogue()
+    {
+        return null;
+    }
+
+    private void StartBoatDialogue()
+    {
+        
+    }
+
+    #endregion Dialogues
+
+    #region Yarn Spinner
 
     public void PrintYarnVariable(string variableName)
     {
@@ -152,4 +204,6 @@ public class GameManager : MonoBehaviour
             yarnVariableStorage.SetValue(variableName, value);
         }
     }
+
+    #endregion Yarn Spinner
 }
