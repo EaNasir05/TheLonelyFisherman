@@ -124,6 +124,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
         Debug.Log("Setup scena " + currentScene);
+        PrintYarnVariable("$visitIndex");
     }
 
     public void ChangeScene(string sceneName)
@@ -134,6 +135,37 @@ public class GameManager : MonoBehaviour
     public void FadeIn()
     {
         StartCoroutine(UIManager.instance.FadeIn(1f));
+    }
+
+    public void NextDay()
+    {
+        day++;
+        UpdateGrandsonHere();
+        ChangeScene("MorningVillage");
+    }
+
+    public void GoFishing()
+    {
+        if (grandsonHere)
+            ChangeScene("GoingToFish");
+        else
+            ChangeScene("Fishing");
+    }
+
+    public void BuildBoat()
+    {
+        boatLevel++;
+        ChangeScene("EveningBoat");
+    }
+
+    private void UpdateGrandsonHere()
+    {
+        int nextVisitDay = -1;
+        yarnVariableStorage.TryGetValue("$visitIndex", out nextVisitDay);
+        if (nextVisitDay == day)
+            grandsonHere = true;
+        else
+            grandsonHere = false;
     }
 
     #region Economy

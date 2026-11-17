@@ -409,7 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b7bd7ebd204f2c41af5f5ab3e9ce50b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
-  dialogueNode: Test
+  dialogueNode: Fishing
   inputIcon: {fileID: 419879874}
   interactableRenderer: {fileID: 461662147}
   interactableColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -5308,7 +5308,7 @@ Tilemap:
       - {fileID: 1783169069, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
       - {fileID: 484148632, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
       - {fileID: 1686283720, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 4, y: -4, z: 0}
@@ -5517,7 +5517,7 @@ Tilemap:
       - {fileID: 1783169069, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
       - {fileID: 484148632, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
       - {fileID: 1686283720, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 15, y: -4, z: 0}
@@ -9910,7 +9910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b7bd7ebd204f2c41af5f5ab3e9ce50b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
-  dialogueNode: Test
+  dialogueNode: Boat
   inputIcon: {fileID: 1759984884}
   interactableRenderer: {fileID: 1818461981}
   interactableColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -10593,7 +10593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b7bd7ebd204f2c41af5f5ab3e9ce50b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
-  dialogueNode: Test
+  dialogueNode: Bed
   inputIcon: {fileID: 309851277}
   interactableRenderer: {fileID: 845730954}
   interactableColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

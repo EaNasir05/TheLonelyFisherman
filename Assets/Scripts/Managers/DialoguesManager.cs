@@ -33,6 +33,9 @@ public class DialoguesManager : MonoBehaviour
         {
             dialogueRunner.AddCommandHandler<string>("ChangeScene", GameManager.instance.ChangeScene);
             dialogueRunner.AddCommandHandler("FadeIn", GameManager.instance.FadeIn);
+            dialogueRunner.AddCommandHandler("NextDay", GameManager.instance.NextDay);
+            dialogueRunner.AddCommandHandler("GoFishing", GameManager.instance.GoFishing);
+            dialogueRunner.AddCommandHandler("BuildBoat", GameManager.instance.BuildBoat);
             dialogueRunner.onDialogueComplete.AddListener(DialogueCompleted);
         }
     }
