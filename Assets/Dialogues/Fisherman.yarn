@@ -25,7 +25,7 @@ position: 107,792
 
 // Giorni 1-12
 <<elseif $dayIndex == 1>>
-    <<jump Tutorial1>>
+    <<jump Day1>>
 <<elseif $dayIndex == 2>>
     <<jump Day2>>
 <<elseif $dayIndex == 3>>
@@ -239,7 +239,7 @@ position: 1112,12
 ---
 Riccardo: E ogni cosa che compri ne sblocca altre. Una tira l'altra.
 Riccardo: Se le monete non bastano, vai a pescare. (ride)
-(Esc) per uscire
+<<CloseShopUnlocked>>
 ===
 
 title: ShopWelcome
@@ -323,7 +323,6 @@ Pesca, e aspetta che il giorno passi. #testo
 <<FadeIn>>
 ===
 
-
 title: Tutorial1
 position: 9532,1317
 ---
@@ -398,8 +397,22 @@ Nonno: Hmm, la barca…
 Nonno: Il buon Albert torna finalmente in paese. Nella lettera dice che resta un mese.
 Nonno: Mi sembra giusto mantenerla, quella promessa.
 Nonno: Il legno buono costa. Ci vorrà parecchio pesce.
-Nonno: E la faccio dietro al faro, così non la vede finché non è pronta.
+Nonno: E Albert non dovrà saper nulla finché la barca non è pronta. Deve rimanere una sorpresa!
 Nonno: Bene. È il momento di prendere un po' di pesci.
+===
+
+title: Back0
+---
+Nonno: Di certo a quest'ora non posso mettermi a lavorare alla barca.
+Nonno: A quello ci penserò domani, intanto posso acquistare gli attrezzi necessari.
+Nonno: Chissà se al negozio di pesca vendono oggetti del genere...
+===
+
+title: Day1
+---
+Nonno: Oggi è decisamente una bella giornata.
+Nonno: Fin troppo bella per stare chiuso tutto il giorno nel cantiere navale.
+Nonno: A questo punto però non posso permettermi di posticipare la costruzione della barca.
 ===
 
 title: Day2

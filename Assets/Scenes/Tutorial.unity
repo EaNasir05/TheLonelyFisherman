@@ -1450,6 +1450,7 @@ GameObject:
   - component: {fileID: 756607251}
   - component: {fileID: 756607250}
   - component: {fileID: 756607249}
+  - component: {fileID: 756607252}
   m_Layer: 0
   m_Name: Fishing Manager
   m_TagString: Untagged
@@ -1525,6 +1526,18 @@ MonoBehaviour:
   maxAttemptsWithoutGrandson: 1
   maxAttemptsWithGrandson: 2
   upgradesList: {fileID: 11400000, guid: 0f85817bb1801744baee230bd2451712, type: 2}
+--- !u!114 &756607252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756607247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f15f6a92a6d840a47ae2f0d410c2af6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialFishing
 --- !u!1 &770551962
 GameObject:
   m_ObjectHideFlags: 0

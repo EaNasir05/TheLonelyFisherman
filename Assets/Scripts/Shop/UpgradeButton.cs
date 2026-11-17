@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -17,6 +18,7 @@ public class UpgradeButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler
     [SerializeField] private Image connectionImage;
     public bool unlocked;
     public bool available;
+    public Action onPurchase;
 
     private void Awake()
     {
@@ -96,6 +98,8 @@ public class UpgradeButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler
                 upgrade.unlocked = true;
                 UpdateButton(true);
                 UpdateUpgradeInfo();
+                if (firstNode)
+                    onPurchase.Invoke();
             }
             else
             {

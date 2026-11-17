@@ -3,7 +3,6 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -15,6 +14,8 @@ public class UIManager : MonoBehaviour
 
     [Header("General")]
     [SerializeField] private Image blackScreen;
+    [SerializeField] private GameObject happyMoodObject;
+    [SerializeField] private GameObject sadMoodObject;
     public Action onFadeIn;
     private EventSystem eventSystem;
 
@@ -29,6 +30,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text upgradeCost;
     [SerializeField] private GameObject upgradeUnlocked;
     [SerializeField] private TMP_Text upgradeEffect;
+    [SerializeField] private GameObject closeShopButton;
     public Action<bool> onShopInteraction;
 
     [Header("Fishing")]
@@ -60,6 +62,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Sprite[] boatSprites;
     [SerializeField] private SpriteRenderer boatRenderer;
 
+    public GameObject GetStartingNodeShop() => startingNodeShop;
+
     private void Awake()
     {
         instance = this;
@@ -71,6 +75,24 @@ public class UIManager : MonoBehaviour
         staminaRectTransform = staminaSlider?.GetComponent<RectTransform>();
         currentScene = GameManager.instance.GetCurrentScene();
         eventSystem = FindFirstObjectByType<EventSystem>();
+    }
+
+    public void SetHappyMood()
+    {
+        happyMoodObject.SetActive(true);
+        sadMoodObject.SetActive(false);
+    }
+
+    public void SetNeutralMood()
+    {
+        happyMoodObject.SetActive(true);
+        sadMoodObject.SetActive(false);
+    }
+
+    public void SetSadMood()
+    {
+        happyMoodObject.SetActive(false);
+        sadMoodObject.SetActive(true);
     }
 
     #region Money
@@ -96,6 +118,16 @@ public class UIManager : MonoBehaviour
     {
         shopMenu.SetActive(false);
         onShopInteraction.Invoke(false);
+    }
+
+    public void ShowCloseShopButton()
+    {
+        closeShopButton.SetActive(true);
+    }
+
+    public void HideCloseShopButton()
+    {
+        closeShopButton.SetActive(false);
     }
 
     public void UpdateUpgradeInfo(string name, string description, string effect, int cost, Sprite icon, bool unlocked)

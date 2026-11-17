@@ -1825,6 +1825,7 @@ GameObject:
   - component: {fileID: 881730808}
   - component: {fileID: 881730809}
   - component: {fileID: 881730810}
+  - component: {fileID: 881730811}
   m_Layer: 0
   m_Name: Fishing Manager
   m_TagString: Untagged
@@ -1900,6 +1901,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FishesPool
   fishesList: {fileID: 11400000, guid: 89781d83d7deebf48bebd1ecad104727, type: 2}
   fishesParent: {fileID: 2108757806}
+--- !u!114 &881730811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881730806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f15f6a92a6d840a47ae2f0d410c2af6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialFishing
 --- !u!1 &882527150
 GameObject:
   m_ObjectHideFlags: 0

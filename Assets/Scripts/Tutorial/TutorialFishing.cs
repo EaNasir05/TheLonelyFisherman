@@ -9,10 +9,17 @@ public class TutorialFishing : MonoBehaviour
         hook = FindFirstObjectByType<Hook>();
         if (GameManager.instance.GetDay() == 0)
         {
-            UIManager.instance.onFadeIn += Tutorial1;
-            hook.onEnterTheSea += Tutorial2;
-            hook.onStartReturning += Tutorial3;
-            hook.onExitTheSea += Tutorial4;
+            if (GameManager.instance.GetCurrentScene() != Scene.Fishing)
+            {
+                UIManager.instance.onFadeIn += Tutorial1;
+                hook.onEnterTheSea += Tutorial2;
+                hook.onStartReturning += Tutorial3;
+                hook.onExitTheSea += Tutorial4;
+            }
+            else
+            {
+                UIManager.instance.onFadeIn += Tutorial1;
+            }
         }
         else if (GameManager.instance.GetDay() == 2)
         {
