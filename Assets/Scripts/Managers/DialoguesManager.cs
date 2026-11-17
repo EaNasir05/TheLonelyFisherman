@@ -52,10 +52,6 @@ public class DialoguesManager : MonoBehaviour
                 Debug.LogError("DialogueRunner not found in the scene.");
             }
         }
-        else
-        {
-            Debug.LogError("There's already a dialogue active");
-        }
     }
 
     public void NextLine()

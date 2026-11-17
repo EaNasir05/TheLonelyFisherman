@@ -66,37 +66,58 @@ public class GameManager : MonoBehaviour
             case "EveningVillage":
             case "MorningVillage":
                 currentScene = Scene.Village;
+
                 UIManager.instance.UpdateMoneyCount(money);
+                if (previousScene == Scene.Village || previousScene == Scene.Menu)
+                    PlayerSpawner.instance.SpawnPlayerFromVillage();
+                else if (previousScene == Scene.Boat)
+                    PlayerSpawner.instance.SpawnPlayerFromBoat();
+                else if (previousScene == Scene.Fishing)
+                    PlayerSpawner.instance.SpawnPlayerFromFishing();
+                
                 if (previousScene == Scene.Fishing)
                     UIManager.instance.onFadeIn += StartEveningDialogue;
                 break;
+
             case "Hut":
                 currentScene = Scene.Hut;
                 UIManager.instance.UpdateMoneyCount(money);
                 break;
+
             case "Fishing":
                 currentScene = Scene.Fishing;
                 FishingManager.instance.Initialize();
                 break;
+
             case "MorningBoat":
             case "EveningBoat":
                 currentScene = Scene.Boat;
+
                 UIManager.instance.UpdateMoneyCount(money);
+                if (previousScene == Scene.Village || previousScene == Scene.Menu)
+                    PlayerSpawner.instance.SpawnPlayerFromVillage();
+                else if (previousScene == Scene.Boat)
+                    PlayerSpawner.instance.SpawnPlayerFromBoat();
+
                 if (previousScene == Scene.Boat)
                     UIManager.instance.onFadeIn += StartBoatDialogue;
                 break;
+
             case "GoingToFish":
                 currentScene = Scene.Interlude;
                 UIManager.instance.onFadeIn += StartInterludeDialogue;
                 break;
+
             case "MainMenu":
                 currentScene = Scene.Menu;
                 break;
+
             case "Tutorial":
                 currentScene = Scene.Tutorial;
                 UIManager.instance.onFadeIn += StartTutorialDialogue;
                 StartCoroutine(StartPrologueDialogue());
                 break;
+
             default:
                 currentScene = Scene.Ending;
                 //Fai partire il dialogo finale

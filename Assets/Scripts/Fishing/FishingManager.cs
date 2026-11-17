@@ -8,6 +8,7 @@ public class FishingManager : MonoBehaviour
     public int points = 0;
     private int biomesUnlocked = 1;
     public float biomesHeight = 20f;
+    [SerializeField] private float pointsFinalMultiplier = 1;
     [SerializeField] private int maxAttemptsWithoutGrandson = 1;
     [SerializeField] private int maxAttemptsWithGrandson = 2;
     [SerializeField] private UpgradesList upgradesList;
@@ -227,7 +228,9 @@ public class FishingManager : MonoBehaviour
         if (attemptsRemaining == 0)
         {
             stop = true;
-            Debug.Log("Fine pesca");
+            int money = (int)(points * pointsFinalMultiplier);
+            GameManager.instance.AddMoney(money);
+            UIManager.instance.ShowFishingResults(money);
         }
     }
 }

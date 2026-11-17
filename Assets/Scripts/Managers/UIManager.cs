@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour
     public Action onFadeIn;
     private EventSystem eventSystem;
 
-    [Header("Island")]
+    [Header("Village")]
     [SerializeField] private TMP_Text moneyCount;
     [SerializeField] private GameObject shopMenu;
     [SerializeField] private GameObject startingNodeShop;
@@ -33,6 +33,9 @@ public class UIManager : MonoBehaviour
     [Header("Fishing")]
     [SerializeField] private TMP_Text fishingPoints;
     [SerializeField] private Slider attemptsSlider;
+    [SerializeField] private GameObject resultsWindow;
+    [SerializeField] private TMP_Text resultsText;
+    [SerializeField] private GameObject exitSceneButton;
     [SerializeField] private Slider staminaSlider;
     private RectTransform staminaRectTransform;
     [SerializeField] private Image staminaFillImage;
@@ -50,6 +53,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Vector2 valueRangePointsGainText;
     [SerializeField] private float maxDistanceFromHookToText;
     private Hook hookScript;
+
+    [Header("Boat")]
+    [SerializeField] private Sprite[] boatSprites;
+    [SerializeField] private SpriteRenderer boatRenderer;
 
     private void Awake()
     {
@@ -136,6 +143,13 @@ public class UIManager : MonoBehaviour
     public void HideAttemptsSlider()
     {
         attemptsSlider.gameObject.SetActive(false);
+    }
+
+    public void ShowFishingResults(int money)
+    {
+        resultsText.text = "Hai guadagnato " + money + "€!";
+        eventSystem.SetSelectedGameObject(exitSceneButton);
+        resultsWindow.SetActive(true);
     }
 
     public void ShowStaminaBar()
