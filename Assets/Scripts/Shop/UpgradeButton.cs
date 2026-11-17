@@ -50,7 +50,8 @@ public class UpgradeButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler
         unlockedSymbol.SetActive(false);
         if (available)
         {
-            connectionImage.color = Color.white;
+            if (connectionImage != null)
+                connectionImage.color = Color.white;
             if (upgrade.unlocked)
             {
                 unlocked = true;
@@ -74,7 +75,8 @@ public class UpgradeButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler
         else
         {
             buttonImage.sprite = upgrade.lockedIcon;
-            connectionImage.color = Color.gray;
+            if (connectionImage != null)
+                connectionImage.color = Color.gray;
             foreach (UpgradeButton button in nextUpgrades)
             {
                 button.UpdateButton(false);

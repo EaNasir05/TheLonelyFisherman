@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 public class ShopButtonWithoutUpgrade : MonoBehaviour, ISelectHandler, IPointerEnterHandler
 {
     private EventSystem eventSystem;
+    private UpgradesList upgradesList;
 
     private void Start()
     {
@@ -18,5 +19,11 @@ public class ShopButtonWithoutUpgrade : MonoBehaviour, ISelectHandler, IPointerE
     public void OnPointerEnter(PointerEventData eventData)
     {
         eventSystem.SetSelectedGameObject(gameObject);
+    }
+
+    public void CloseShop()
+    {
+        if (upgradesList.GetUpgradeByName("Attrezzi da carpentiere").unlocked)
+            UIManager.instance.CloseShop();
     }
 }

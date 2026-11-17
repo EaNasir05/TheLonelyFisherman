@@ -193,3 +193,10 @@ MonoBehaviour:
     lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
     unlocked: 1
     cost: 2400
+  - name: Attrezzi da carpentiere
+    description: "Sblocca la possibilit\xE0 di costruire la barca per tuo nipote."
+    effect: 
+    icon: {fileID: 21300000, guid: 869d287e77fac3d488a844c5e85bb114, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
+    cost: 5

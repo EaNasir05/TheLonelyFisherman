@@ -14,9 +14,10 @@ public class GameManager : MonoBehaviour
     private InMemoryVariableStorage yarnVariableStorage;
     public bool isPaused = false;
     public bool tutorial = true;
-    private int day = 1;
+    private int day = 0;
     private int boatLevel = 0;
-    private int money = 0;
+    [SerializeField] private int[] boatCosts;
+    private int money = 10;
     [SerializeField] private bool grandsonHere = false;
     [SerializeField] private UpgradesList upgradesList;
 
@@ -49,7 +50,14 @@ public class GameManager : MonoBehaviour
             if (yarnVariableStorage == null)
                 Debug.LogError("InMemoryVariableStorage not found in the scene.");
             else
+            {
                 DontDestroyOnLoad(yarnVariableStorage.gameObject);
+                SetYarnVariable("$boatCost1", boatCosts[0]);
+                SetYarnVariable("$boatCost2", boatCosts[1]);
+                SetYarnVariable("$boatCost3", boatCosts[2]);
+                SetYarnVariable("$boatCost4", boatCosts[3]);
+                SetYarnVariable("$boatCost5", boatCosts[4]);
+            }
         }
 
         UpdateCurrentScene();
@@ -66,17 +74,22 @@ public class GameManager : MonoBehaviour
             case "EveningVillage":
             case "MorningVillage":
                 currentScene = Scene.Village;
-
                 UIManager.instance.UpdateMoneyCount(money);
-                if (previousScene == Scene.Village || previousScene == Scene.Menu)
+                if (previousScene == Scene.Village)
+                {
                     PlayerSpawner.instance.SpawnPlayerFromVillage();
+                    UIManager.instance.onFadeIn += StartMorningDialogue;
+                }
                 else if (previousScene == Scene.Boat)
+                {
                     PlayerSpawner.instance.SpawnPlayerFromBoat();
+                    UIManager.instance.onFadeIn += StartBoatDialogue;
+                }
                 else if (previousScene == Scene.Fishing)
+                {
                     PlayerSpawner.instance.SpawnPlayerFromFishing();
-                
-                if (previousScene == Scene.Fishing)
                     UIManager.instance.onFadeIn += StartEveningDialogue;
+                }
                 break;
 
             case "Hut":
@@ -91,16 +104,12 @@ public class GameManager : MonoBehaviour
 
             case "MorningBoat":
             case "EveningBoat":
+            case "Boat":
                 currentScene = Scene.Boat;
-
                 UIManager.instance.UpdateMoneyCount(money);
-                if (previousScene == Scene.Village || previousScene == Scene.Menu)
-                    PlayerSpawner.instance.SpawnPlayerFromVillage();
-                else if (previousScene == Scene.Boat)
-                    PlayerSpawner.instance.SpawnPlayerFromBoat();
-
-                if (previousScene == Scene.Boat)
-                    UIManager.instance.onFadeIn += StartBoatDialogue;
+                bool upgradable = money >= boatCosts[boatLevel];
+                SetYarnVariable("$boatUpgradable", upgradable);
+                SetYarnVariable("$boatCost", boatCosts[boatLevel]);
                 break;
 
             case "GoingToFish":
@@ -114,7 +123,6 @@ public class GameManager : MonoBehaviour
 
             case "Tutorial":
                 currentScene = Scene.Tutorial;
-                UIManager.instance.onFadeIn += StartTutorialDialogue;
                 StartCoroutine(StartPrologueDialogue());
                 break;
 
@@ -156,7 +164,8 @@ public class GameManager : MonoBehaviour
     public void BuildBoat()
     {
         boatLevel++;
-        ChangeScene("EveningBoat");
+        SetYarnVariable("$boatLevel", boatLevel);
+        ChangeScene("EveningVillage");
     }
 
     private void UpdateGrandsonHere()
@@ -181,34 +190,30 @@ public class GameManager : MonoBehaviour
 
     #region Dialogues
 
-    private void StarMorningDialogue()
+    private void StartMorningDialogue()
     {
-        
+        DialoguesManager.instance.StartDialogue("Morning");
     }
 
     private void StartEveningDialogue()
     {
-        
+        DialoguesManager.instance.StartDialogue("Back");
     }
 
     private void StartInterludeDialogue()
     {
-        
-    }
-
-    private void StartTutorialDialogue()
-    {
-        
+        DialoguesManager.instance.StartDialogue("Go");
     }
 
     private IEnumerator StartPrologueDialogue()
     {
-        return null;
+        yield return new WaitForSeconds(1f);
+        DialoguesManager.instance.StartDialogue("Prologo");
     }
 
     private void StartBoatDialogue()
     {
-        
+        DialoguesManager.instance.StartDialogue("BoatBuild");
     }
 
     #endregion Dialogues

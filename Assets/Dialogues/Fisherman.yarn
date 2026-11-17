@@ -10,6 +10,8 @@ position: 12,12
 <<declare $letterDone = false>> //Variabile che controlla se la scena di non ritorno è già avvenuta.
 <<declare $visitIndex = 2>>
 <<declare $confirm = false>> //Variabile per i nodi degli interagibili
+<<declare $boatCost = 0>>
+<<declare $boatUpgradable = false>>
 ===
 
 title: Morning
@@ -131,12 +133,20 @@ Vuoi andare a pescare?
 title: Boat
 position: 452,12
 ---
-Vuoi lavorare alla barca?
--> Sì
-    <<set $confirm = true>>
-    <<BuildBoat>>
--> No
-    <<set $confirm = false>>
+<<if $boatUpgradable == true>>
+    Vuoi spendere {$boatCost}€ per lavorare alla barca?
+    -> Sì
+        <<set $confirm = true>>
+        <<BuildBoat>>
+    -> No
+        <<set $confirm = false>>
+<<else>>
+    Vuoi spendere {$boatCost}€ per lavorare alla barca?
+    -> No (sei povero)
+        <<set $confirm = false>>
+    -> No (sei comunque povero)
+        <<set $confirm = false>>
+<<endif>>
 ===
 
 title: Bed
@@ -219,6 +229,7 @@ position: 892,12
 ---
 In alto a sinistra è rappresentato il numero di monete che possiedi.
 Riccardo: Scegli quello che ti serve. Se le monete bastano, è tuo.
+Nonno: Oggi mi limito a comprare degli attrezzi da carpentiere.
 Muovi il mouse per scegliere · (Mouse SX) per comprare
 ===
 
@@ -278,6 +289,8 @@ position: 5014,12
 ---
 <<if visited("GoLettera") and not $letterDone>>
     <<jump BackLettera>>
+<<elseif $dayIndex == 0>>
+    <<jump Back0>>
 <<elseif $dayIndex == 2>>
     <<jump Back2>>
 <<elseif $dayIndex == 4>>

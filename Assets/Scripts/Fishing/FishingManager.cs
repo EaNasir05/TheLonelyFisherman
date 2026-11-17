@@ -234,10 +234,6 @@ public class FishingManager : MonoBehaviour
                 GameManager.instance.AddMoney(money);
                 UIManager.instance.ShowFishingResults(money);
             }
-            else if (GameManager.instance.GetDay() == 1)
-            {
-                //Inizia dialogo
-            }
         }
     }
 }

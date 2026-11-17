@@ -756,7 +756,7 @@ GameObject:
   - component: {fileID: 3463749267554114521}
   - component: {fileID: 2271117426640122538}
   - component: {fileID: 9157412464170446326}
-  - component: {fileID: 479956206291556349}
+  - component: {fileID: 7163850922009814164}
   m_Layer: 0
   m_Name: FirstNode
   m_TagString: Untagged
@@ -777,6 +777,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2862971097097131390}
+  - {fileID: 1519821727276442245}
   m_Father: {fileID: 2224786719040789383}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -865,8 +866,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2271117426640122538}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &479956206291556349
+      m_Calls:
+      - m_Target: {fileID: 7163850922009814164}
+        m_TargetAssemblyTypeName: UpgradeButton, Assembly-CSharp
+        m_MethodName: UnlockUpgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7163850922009814164
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -875,9 +888,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 928935672015146807}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd632406d7187984ab2b2acf9a53b2fc, type: 3}
+  m_Script: {fileID: 11500000, guid: 1845d8b3940c3a34799a545f53190466, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShopButtonWithoutUpgrade
+  m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
+  upgradeName: Attrezzi da carpentiere
+  upgradesList: {fileID: 11400000, guid: 0f85817bb1801744baee230bd2451712, type: 2}
+  firstNode: 1
+  nextUpgrades:
+  - {fileID: 3495083887902683060}
+  - {fileID: 7530228610849400597}
+  - {fileID: 3185340455799859149}
+  - {fileID: 496929967818772153}
+  - {fileID: 1673524717811631402}
+  - {fileID: 2717981375629591179}
+  - {fileID: 7186214203624102711}
+  - {fileID: 9080392700573589463}
+  button: {fileID: 9157412464170446326}
+  buttonImage: {fileID: 6912719928765988864}
+  unlockedSymbol: {fileID: 6337279557249575051}
+  connectionImage: {fileID: 0}
+  unlocked: 0
+  available: 1
 --- !u!1 &1025673171889862521
 GameObject:
   m_ObjectHideFlags: 0
@@ -1177,7 +1208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   upgradeName: Mulinello magico 1
   upgradesList: {fileID: 11400000, guid: 0f85817bb1801744baee230bd2451712, type: 2}
-  firstNode: 1
+  firstNode: 0
   nextUpgrades:
   - {fileID: 6439937586338303246}
   button: {fileID: 8215404040392299687}
@@ -1335,7 +1366,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   upgradeName: "Manovrabilit\xE0 galleggiante 1"
   upgradesList: {fileID: 11400000, guid: 0f85817bb1801744baee230bd2451712, type: 2}
-  firstNode: 1
+  firstNode: 0
   nextUpgrades:
   - {fileID: 3235191352515031375}
   button: {fileID: 2752519762886574977}
@@ -3101,8 +3132,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+      - m_Target: {fileID: 5992786614150561647}
+        m_TargetAssemblyTypeName: ShopButtonWithoutUpgrade, Assembly-CSharp
         m_MethodName: CloseShop
         m_Mode: 1
         m_Arguments:
@@ -3806,7 +3837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   upgradeName: Piombino equilibrato 1
   upgradesList: {fileID: 11400000, guid: 0f85817bb1801744baee230bd2451712, type: 2}
-  firstNode: 1
+  firstNode: 0
   nextUpgrades:
   - {fileID: 4310169209454970212}
   button: {fileID: 5901246683259402717}
@@ -4409,7 +4440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   upgradeName: Potenza amo 1
   upgradesList: {fileID: 11400000, guid: 0f85817bb1801744baee230bd2451712, type: 2}
-  firstNode: 1
+  firstNode: 0
   nextUpgrades:
   - {fileID: 6132954721478374597}
   button: {fileID: 7690317156867086571}
@@ -4792,7 +4823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   upgradeName: Amo incantato 1
   upgradesList: {fileID: 11400000, guid: 0f85817bb1801744baee230bd2451712, type: 2}
-  firstNode: 1
+  firstNode: 0
   nextUpgrades:
   - {fileID: 2827663993933860898}
   - {fileID: 458278279325055043}
@@ -5545,7 +5576,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   upgradeName: Lunghezza lenza 1
   upgradesList: {fileID: 11400000, guid: 0f85817bb1801744baee230bd2451712, type: 2}
-  firstNode: 1
+  firstNode: 0
   nextUpgrades:
   - {fileID: 6495909756992137040}
   button: {fileID: 8013121421697370750}
@@ -5612,7 +5643,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.11558974, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7128,7 +7159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   upgradeName: Abbattimento pesci 1
   upgradesList: {fileID: 11400000, guid: 0f85817bb1801744baee230bd2451712, type: 2}
-  firstNode: 1
+  firstNode: 0
   nextUpgrades:
   - {fileID: 2449546140602471319}
   button: {fileID: 8857595485973798693}
@@ -7669,7 +7700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeButton
   upgradeName: Manico ergonomico 1
   upgradesList: {fileID: 11400000, guid: 0f85817bb1801744baee230bd2451712, type: 2}
-  firstNode: 1
+  firstNode: 0
   nextUpgrades:
   - {fileID: 6196839653907730670}
   button: {fileID: 3989221525334987425}
@@ -7910,6 +7941,81 @@ MonoBehaviour:
   connectionImage: {fileID: 1691314375160479717}
   unlocked: 0
   available: 0
+--- !u!1 &6337279557249575051
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1519821727276442245}
+  - component: {fileID: 4889778170218836822}
+  - component: {fileID: 2057469754574057289}
+  m_Layer: 0
+  m_Name: Unlocked
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1519821727276442245
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6337279557249575051}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8156224248724593810}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 70, y: 70}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4889778170218836822
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6337279557249575051}
+  m_CullTransparentMesh: 1
+--- !u!114 &2057469754574057289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6337279557249575051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 60227a338b132184bb60c10afed64d30, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &6341368721145842014
 GameObject:
   m_ObjectHideFlags: 0
