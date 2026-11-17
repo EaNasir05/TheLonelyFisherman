@@ -18,7 +18,7 @@ public class TutorialFishing : MonoBehaviour
             }
             else
             {
-                UIManager.instance.onFadeIn += Tutorial1;
+                UIManager.instance.onFadeIn += ExtraDialogue;
             }
         }
         else if (GameManager.instance.GetDay() == 2)
@@ -30,8 +30,15 @@ public class TutorialFishing : MonoBehaviour
         }
     }
 
+    private void ExtraDialogue()
+    {
+        GameManager.instance.tutorialState = 3;
+        DialoguesManager.instance.StartDialogue("PostTutorial");
+    }
+
     private void Tutorial1()
     {
+        GameManager.instance.tutorialState = 1;
         DialoguesManager.instance.StartDialogue("Tutorial1");
     }
 
@@ -47,11 +54,13 @@ public class TutorialFishing : MonoBehaviour
 
     private void Tutorial4()
     {
+        GameManager.instance.tutorialState = 2;
         DialoguesManager.instance.StartDialogue("Tutorial4");
     }
 
     private void Tutorial5()
     {
+        GameManager.instance.tutorialState = 4;
         DialoguesManager.instance.StartDialogue("TutorialMagic1");
     }
 
@@ -67,6 +76,7 @@ public class TutorialFishing : MonoBehaviour
 
     private void Tutorial8()
     {
+        GameManager.instance.tutorialState = 5;
         DialoguesManager.instance.StartDialogue("TutorialMagic4");
     }
 }

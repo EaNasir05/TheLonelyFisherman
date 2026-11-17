@@ -17,10 +17,21 @@ public class FishingManager : MonoBehaviour
     private int attemptsRemaining = 3;
 
     public int GetBiomesUnlocked() => biomesUnlocked;
+    public void SetStop(bool value) => stop = value;
 
     private void Awake()
     {
         instance = this;
+    }
+
+    private void Start()
+    {
+        DialoguesManager.instance.onDialogueActivation += SetStop;
+    }
+
+    private void OnDestroy()
+    {
+        DialoguesManager.instance.onDialogueActivation -= SetStop;
     }
 
     #region Initialize
@@ -227,7 +238,7 @@ public class FishingManager : MonoBehaviour
     {
         if (attemptsRemaining == 0)
         {
-            if (!GameManager.instance.tutorial)
+            if (GameManager.instance.tutorialState > 2)
             {
                 stop = true;
                 int money = (int)(points * pointsFinalMultiplier);

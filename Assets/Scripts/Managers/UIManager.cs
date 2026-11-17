@@ -10,7 +10,6 @@ using Random = UnityEngine.Random;
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
-    [SerializeField] private Scene currentScene;
 
     [Header("General")]
     [SerializeField] private Image blackScreen;
@@ -73,7 +72,6 @@ public class UIManager : MonoBehaviour
     {
         hookScript = FindFirstObjectByType<Hook>();
         staminaRectTransform = staminaSlider?.GetComponent<RectTransform>();
-        currentScene = GameManager.instance.GetCurrentScene();
         eventSystem = FindFirstObjectByType<EventSystem>();
     }
 

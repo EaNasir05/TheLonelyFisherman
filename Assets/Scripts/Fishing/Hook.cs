@@ -64,6 +64,7 @@ public class Hook : MonoBehaviour
     private bool returning = false;
     private bool grandsonHere;
     private bool overweight = false;
+    private bool dialogueAtReturnDone = false;
 
     public bool IsInTheSea() => inTheSea;
     public bool IsReturning() => returning;
@@ -223,8 +224,7 @@ public class Hook : MonoBehaviour
         UIManager.instance.RefreshStaminaBar();
         UIManager.instance.ShowStaminaBar();
         UIManager.instance.ShowHookPositionSlider();
-        if (GameManager.instance.tutorial)
-            onEnterTheSea.Invoke();
+        onEnterTheSea?.Invoke();
     }
 
     public void ExitTheSea()
@@ -241,8 +241,7 @@ public class Hook : MonoBehaviour
             fish.ResetFish();
         }
         fishesCatched.Clear();
-        if (GameManager.instance.tutorial)
-            onExitTheSea.Invoke();
+        onExitTheSea?.Invoke();
         StartCoroutine(RestartFishing());
     }
 
@@ -260,8 +259,11 @@ public class Hook : MonoBehaviour
         }
         currentWeight = 0f;
         UIManager.instance.RefreshWeightBar();
-        if (GameManager.instance.tutorial)
-            onStartReturning.Invoke();
+        if (!dialogueAtReturnDone)
+        {
+            dialogueAtReturnDone = true;
+            onStartReturning?.Invoke();
+        }
     }
 
     private IEnumerator ReturnDelay()

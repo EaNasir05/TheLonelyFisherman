@@ -98,8 +98,7 @@ public class UpgradeButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler
                 upgrade.unlocked = true;
                 UpdateButton(true);
                 UpdateUpgradeInfo();
-                if (firstNode)
-                    onPurchase.Invoke();
+                onPurchase?.Invoke();
             }
             else
             {

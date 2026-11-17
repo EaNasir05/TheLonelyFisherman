@@ -1,12 +1,15 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Yarn.Unity;
 
 public class DialoguesManager : MonoBehaviour
 {
     public static DialoguesManager instance;
-    private DialogueRunner dialogueRunner;
+    [SerializeField] private DialogueRunner dialogueRunner;
+    [SerializeField] private LinePresenter linePresenter;
     public bool isTalking = false;
+    private bool commandsReady = false;
     public Action<bool> onDialogueActivation;
 
     private void Awake()
@@ -24,12 +27,29 @@ public class DialoguesManager : MonoBehaviour
 
     private void Start()
     {
-        dialogueRunner = gameObject.GetComponent<DialogueRunner>();
+        //Initialize();
+    }
 
-        dialogueRunner = FindFirstObjectByType<DialogueRunner>();
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene arg0, LoadSceneMode arg1)
+    {
+        Initialize();
+    }
+
+    private void Initialize()
+    {
         if (dialogueRunner == null)
-            Debug.LogError("DialogueRunner not found in the scene.");
-        else
+            Debug.LogError("DialogueRunner not found.");
+        else if (!commandsReady)
         {
             dialogueRunner.AddCommandHandler<string>("ChangeScene", GameManager.instance.ChangeScene);
             dialogueRunner.AddCommandHandler("FadeIn", GameManager.instance.FadeIn);
@@ -38,6 +58,7 @@ public class DialoguesManager : MonoBehaviour
             dialogueRunner.AddCommandHandler("BuildBoat", GameManager.instance.BuildBoat);
             dialogueRunner.AddCommandHandler("CloseShopUnlocked", UIManager.instance.ShowCloseShopButton);
             dialogueRunner.onDialogueComplete.AddListener(DialogueCompleted);
+            commandsReady = true;
         }
     }
 
@@ -48,7 +69,12 @@ public class DialoguesManager : MonoBehaviour
             if (dialogueRunner != null)
             {
                 isTalking = true;
-                onDialogueActivation.Invoke(true);
+                if (GameManager.instance.tutorialState == 1 || GameManager.instance.tutorialState == 4)
+                {
+                    linePresenter.useFadeEffect = false;
+                    Time.timeScale = 0;
+                }
+                onDialogueActivation?.Invoke(true);
                 dialogueRunner.StartDialogue(nodeName);
             }
             else
@@ -74,5 +100,10 @@ public class DialoguesManager : MonoBehaviour
     {
         onDialogueActivation.Invoke(false);
         isTalking = false;
+        if (Time.timeScale == 0)
+        {
+            Time.timeScale = 1;
+            linePresenter.useFadeEffect = false;
+        }
     }
 }

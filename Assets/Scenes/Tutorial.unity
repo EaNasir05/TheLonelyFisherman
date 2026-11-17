@@ -3718,7 +3718,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 60147640229275356, guid: 5efc8207814ed0441a2c2d56c9df700c, type: 3}
       propertyPath: tutorial
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1475954368297262295, guid: 5efc8207814ed0441a2c2d56c9df700c, type: 3}
       propertyPath: m_Name
@@ -3971,6 +3971,10 @@ PrefabInstance:
     - target: {fileID: 1142527607811033305, guid: b0f963b256c03d342af2917b7f746f48, type: 3}
       propertyPath: valueRangePointsGainText.y
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067071080935194868, guid: b0f963b256c03d342af2917b7f746f48, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6955049282319932945, guid: b0f963b256c03d342af2917b7f746f48, type: 3}
       propertyPath: m_LocalPosition.x

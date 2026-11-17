@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     private Scene currentScene = Scene.Menu;
     private InMemoryVariableStorage yarnVariableStorage;
     public bool isPaused = false;
-    public bool tutorial = true;
+    public int tutorialState = 0;
     private int day = 0;
     private int boatLevel = 0;
     [SerializeField] private int[] boatCosts;
@@ -43,6 +43,26 @@ public class GameManager : MonoBehaviour
     }
 
     private void Start()
+    {
+        //Initialize();
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene arg0, LoadSceneMode arg1)
+    {
+        Initialize();
+    }
+
+    private void Initialize()
     {
         if (yarnVariableStorage == null)
         {
@@ -123,6 +143,7 @@ public class GameManager : MonoBehaviour
 
             case "Tutorial":
                 currentScene = Scene.Tutorial;
+                FishingManager.instance.Initialize();
                 StartCoroutine(StartPrologueDialogue());
                 break;
 

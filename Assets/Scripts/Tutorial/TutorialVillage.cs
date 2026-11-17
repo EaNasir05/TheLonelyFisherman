@@ -14,6 +14,7 @@ public class TutorialVillage : MonoBehaviour
             triggerToBlockVillage.enabled = false;
             colliderToSpawnVillage.SetActive(true);
             UIManager.instance.HideCloseShopButton();
+            UIManager.instance.GetStartingNodeShop().GetComponent<UpgradeButton>().onPurchase += Tutorial1;
         }
         else if (GameManager.instance.GetDay() == 1)
         {
@@ -26,5 +27,10 @@ public class TutorialVillage : MonoBehaviour
                 triggerToBlockBoat.enabled = false;
             }
         }
+    }
+
+    private void Tutorial1()
+    {
+        DialoguesManager.instance.StartDialogue("TutorialShop3");
     }
 }
