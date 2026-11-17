@@ -3,11 +3,10 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
-
-public enum Scene { Island, Boat, Fishing, Ending, Lighthouse, Hut, Menu }
 
 public class UIManager : MonoBehaviour
 {
@@ -16,9 +15,10 @@ public class UIManager : MonoBehaviour
 
     [Header("General")]
     [SerializeField] private Image blackScreen;
+    public Action onFadeIn;
     private EventSystem eventSystem;
 
-    [Header("Island")]
+    [Header("Village")]
     [SerializeField] private TMP_Text moneyCount;
     [SerializeField] private GameObject shopMenu;
     [SerializeField] private GameObject startingNodeShop;
@@ -33,6 +33,11 @@ public class UIManager : MonoBehaviour
 
     [Header("Fishing")]
     [SerializeField] private TMP_Text fishingPoints;
+    [SerializeField] private Slider attemptsSlider;
+    [SerializeField] private GameObject resultsWindow;
+    [SerializeField] private TMP_Text resultsText;
+    [SerializeField] private GameObject exitSceneButton;
+    [SerializeField] private Slider hookPositionSlider;
     [SerializeField] private Slider staminaSlider;
     private RectTransform staminaRectTransform;
     [SerializeField] private Image staminaFillImage;
@@ -50,6 +55,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Vector2 valueRangePointsGainText;
     [SerializeField] private float maxDistanceFromHookToText;
     private Hook hookScript;
+
+    [Header("Boat")]
+    [SerializeField] private Sprite[] boatSprites;
+    [SerializeField] private SpriteRenderer boatRenderer;
 
     private void Awake()
     {
@@ -127,6 +136,45 @@ public class UIManager : MonoBehaviour
         fishingPoints.text = value.ToString();
     }
 
+    public void UpdateAttemptsSlider(int maxValue, int currentValue)
+    {
+        attemptsSlider.maxValue = maxValue;
+        attemptsSlider.value = currentValue;
+    }
+
+    public void HideAttemptsSlider()
+    {
+        attemptsSlider.gameObject.SetActive(false);
+    }
+
+    public void ShowFishingResults(int money)
+    {
+        resultsText.text = "Hai guadagnato " + money + "€!";
+        eventSystem.SetSelectedGameObject(exitSceneButton);
+        resultsWindow.SetActive(true);
+    }
+
+    public void UpdateHookPositionSlider(float currentPos, float maxPos)
+    {
+        hookPositionSlider.maxValue = maxPos;
+        hookPositionSlider.value = currentPos;
+    }
+
+    public void UpdateHookPositionSlider(float currentPos)
+    {
+        hookPositionSlider.value = currentPos;
+    }
+
+    public void ShowHookPositionSlider()
+    {
+        hookPositionSlider.gameObject.SetActive(true);
+    }
+
+    public void HideHookPositionSlider()
+    {
+        hookPositionSlider.gameObject.SetActive(false);
+    }
+
     public void ShowStaminaBar()
     {
         staminaSlider.gameObject.SetActive(true);
@@ -191,8 +239,8 @@ public class UIManager : MonoBehaviour
 
     public void RefreshStaminaBar()
     {
-        staminaSlider.maxValue = hookScript.maxStamina;
-        staminaSlider.value = hookScript.maxStamina;
+        staminaSlider.maxValue = hookScript.GetMaxStamina();
+        staminaSlider.value = hookScript.GetMaxStamina();
         staminaBackgroundImage.color = staminaBackgroundColor;
         staminaFillImage.color = staminaFillColor;
     }
@@ -265,6 +313,8 @@ public class UIManager : MonoBehaviour
         }
         blackScreen.color = new Color(0f, 0f, 0f, 0f);
         blackScreen.gameObject.SetActive(false);
+        
+        onFadeIn?.Invoke();
     }
 
     #endregion Fade

@@ -13,6 +13,7 @@ public class UpgradeButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler
     [SerializeField] private List<UpgradeButton> nextUpgrades;
     [SerializeField] private Button button;
     [SerializeField] private Image buttonImage;
+    [SerializeField] private GameObject unlockedSymbol;
     [SerializeField] private Image connectionImage;
     public bool unlocked;
     public bool available;
@@ -46,13 +47,15 @@ public class UpgradeButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler
     {
         this.available = available;
         button.interactable = available;
+        unlockedSymbol.SetActive(false);
         if (available)
         {
             connectionImage.color = Color.white;
             if (upgrade.unlocked)
             {
                 unlocked = true;
-                buttonImage.sprite = upgrade.unlockedIcon;
+                unlockedSymbol.SetActive(true);
+                buttonImage.sprite = upgrade.icon;
                 foreach (UpgradeButton button in nextUpgrades)
                 {
                     button.UpdateButton(true);

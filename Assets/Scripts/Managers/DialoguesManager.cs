@@ -32,6 +32,10 @@ public class DialoguesManager : MonoBehaviour
         else
         {
             dialogueRunner.AddCommandHandler<string>("ChangeScene", GameManager.instance.ChangeScene);
+            dialogueRunner.AddCommandHandler("FadeIn", GameManager.instance.FadeIn);
+            dialogueRunner.AddCommandHandler("NextDay", GameManager.instance.NextDay);
+            dialogueRunner.AddCommandHandler("GoFishing", GameManager.instance.GoFishing);
+            dialogueRunner.AddCommandHandler("BuildBoat", GameManager.instance.BuildBoat);
             dialogueRunner.onDialogueComplete.AddListener(DialogueCompleted);
         }
     }
@@ -50,10 +54,6 @@ public class DialoguesManager : MonoBehaviour
             {
                 Debug.LogError("DialogueRunner not found in the scene.");
             }
-        }
-        else
-        {
-            Debug.LogError("There's already a dialogue active");
         }
     }
 

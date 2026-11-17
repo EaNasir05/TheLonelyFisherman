@@ -16,24 +16,180 @@ MonoBehaviour:
   - name: Lunghezza lenza 1
     description: "Aumenta la profondit\xE0 massima raggiungibile dall'amo."
     effect: 20m >> 40m
-    icon: {fileID: 21300000, guid: 869d287e77fac3d488a844c5e85bb114, type: 3}
-    unlockedIcon: {fileID: 21300000, guid: 05f97dd42ee32384694e2b8aaa360e4a, type: 3}
+    icon: {fileID: 21300000, guid: 0a7582950ddd21e41902efcae88b0042, type: 3}
     lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
-    unlocked: 0
-    cost: 100
+    unlocked: 1
+    cost: 120
   - name: Lunghezza lenza 2
     description: "Aumenta la profondit\xE0 massima raggiungibile dall'amo."
     effect: 40m >> 60m
-    icon: {fileID: 21300000, guid: 869d287e77fac3d488a844c5e85bb114, type: 3}
-    unlockedIcon: {fileID: 21300000, guid: 05f97dd42ee32384694e2b8aaa360e4a, type: 3}
+    icon: {fileID: 21300000, guid: 551be053b0080784f9b015180aea246f, type: 3}
     lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
-    unlocked: 0
-    cost: 500
+    unlocked: 1
+    cost: 600
   - name: Lunghezza lenza 3
     description: "Aumenta la profondit\xE0 massima raggiungibile dall'amo."
     effect: 60m >> 80m
-    icon: {fileID: 21300000, guid: 869d287e77fac3d488a844c5e85bb114, type: 3}
-    unlockedIcon: {fileID: 21300000, guid: 05f97dd42ee32384694e2b8aaa360e4a, type: 3}
+    icon: {fileID: 21300000, guid: e14603ef0b620e248aead48249978174, type: 3}
     lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
-    unlocked: 0
+    unlocked: 1
+    cost: 2400
+  - name: "Manovrabilit\xE0 galleggiante 1"
+    description: "Aumenta la velocit\xE0 del movimento orizzontale dell'amo."
+    effect: 100% >> 125%
+    icon: {fileID: 21300000, guid: 576ae8fa9ead2254cb178155c7c9f158, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
+    cost: 80
+  - name: "Manovrabilit\xE0 galleggiante 2"
+    description: "Aumenta la velocit\xE0 del movimento orizzontale dell'amo."
+    effect: 125% >> 150%
+    icon: {fileID: 21300000, guid: 3f0cb54aecb85e648a0e187ebd1532e4, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
+    cost: 400
+  - name: "Manovrabilit\xE0 galleggiante 3"
+    description: "Aumenta la velocit\xE0 del movimento orizzontale dell'amo."
+    effect: 150% >> 175%
+    icon: {fileID: 21300000, guid: a9d7ad0dbf6115c4ab013c9c64ead8dd, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
+    cost: 1600
+  - name: Potenza amo 1
+    description: Riduce la stamina persa con la cattura dei pesci.
+    effect: 0 >> 7
+    icon: {fileID: 21300000, guid: 94234f91ca22f374284a7d2f2c618c60, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
+    cost: 100
+  - name: Potenza amo 2
+    description: Riduce la stamina persa con la cattura dei pesci.
+    effect: 7 >> 15
+    icon: {fileID: 21300000, guid: 7d667ee85f3ba9143a0050c7cb312ed0, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
+    cost: 500
+  - name: Potenza amo 3
+    description: Riduce la stamina persa con la cattura dei pesci.
+    effect: 15 >> 22
+    icon: {fileID: 21300000, guid: 689f93ae83d4bcd4482485920e86d9bd, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
     cost: 2000
+  - name: Abbattimento pesci 1
+    description: 'Aumenta il valore dei pesci catturati con un colpo critico. '
+    effect: 100% >> 125%
+    icon: {fileID: 21300000, guid: 522dc871bc236684393456a6e81323b5, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
+    cost: 250
+  - name: Abbattimento pesci 2
+    description: 'Aumenta il valore dei pesci catturati con un colpo critico. '
+    effect: 125% >> 150%
+    icon: {fileID: 21300000, guid: 3a7fa6e9dd401754bb68fd3c006f930d, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
+    cost: 2000
+  - name: Piombino equilibrato 1
+    description: Riduce il numero di pesci persi in caso di sovraccarico.
+    effect: '6 >> 5 '
+    icon: {fileID: 21300000, guid: ca3e6e45679ed8b4586e3e177f305986, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
+    cost: 700
+  - name: Piombino equilibrato 2
+    description: Riduce il numero di pesci persi in caso di sovraccarico.
+    effect: 5 >> 4
+    icon: {fileID: 21300000, guid: 1879df4a2fc897d48b1540ff15f96d82, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
+    cost: 2500
+  - name: Piombino equilibrato 3
+    description: Riduce il numero di pesci persi in caso di sovraccarico.
+    effect: 4 >> 3
+    icon: {fileID: 21300000, guid: c093d1e36f982604a947f042da4ec3b8, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
+    cost: 4000
+  - name: Manico ergonomico 1
+    description: Riduce la stamina persa nel tempo.
+    effect: 100% >> 85%
+    icon: {fileID: 21300000, guid: f1cdf346d66a829478696200459d1dbf, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
+    cost: 80
+  - name: Manico ergonomico 2
+    description: Riduce la stamina persa nel tempo.
+    effect: 85% >> 70%
+    icon: {fileID: 21300000, guid: 674366e906f0e1a47809882080a01bed, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
+    cost: 400
+  - name: Manico ergonomico 3
+    description: Riduce la stamina persa nel tempo.
+    effect: 70% >> 55%
+    icon: {fileID: 21300000, guid: 73a45ed0e79521d438fad4ce3fdb37cf, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
+    cost: 1600
+  - name: Mulinello magico 1
+    description: Riduce la stamina persa con l'uso della magia durante la discesa
+      dell'amo.
+    effect: 100% >> 90%
+    icon: {fileID: 21300000, guid: a38791d53874d6347a516db6844217c2, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
+    cost: 90
+  - name: Mulinello magico 2
+    description: Riduce la stamina persa con l'uso della magia durante la discesa
+      dell'amo.
+    effect: 90% >> 80%
+    icon: {fileID: 21300000, guid: 20a2224412f967d42bdee929eb42383e, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
+    cost: 450
+  - name: Mulinello magico 3
+    description: Riduce la stamina persa con l'uso della magia durante la discesa
+      dell'amo.
+    effect: 80% >> 70%
+    icon: {fileID: 21300000, guid: 1fe992832f8e53e44b9ef9f11fbe321c, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
+    cost: 1800
+  - name: Amo incantato 1
+    description: "Con l'uso della magia, aumenta la probabilit\xE0 di critico dell'amo."
+    effect: 5% >> 10%
+    icon: {fileID: 21300000, guid: 8772ac050b47a9b4fbceecce0958c51c, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
+    cost: 110
+  - name: Amo incantato 2
+    description: "Con l'uso della magia, aumenta la probabilit\xE0 di critico dell'amo."
+    effect: 10% >> 15%
+    icon: {fileID: 21300000, guid: 5ee0c913b76bc54449ffbf073a1b80a8, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
+    cost: 550
+  - name: Amo incantato 3
+    description: "Con l'uso della magia, aumenta la probabilit\xE0 di critico dell'amo."
+    effect: 15% >> 20%
+    icon: {fileID: 21300000, guid: 9ad11035a715bd1409d6c0fab2cc3edc, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
+    cost: 2200
+  - name: Focus arcano 1
+    description: "Moltiplica la probabilit\xE0 di critico dell'amo incantato mentre
+      risale."
+    effect: 100% >> 200%
+    icon: {fileID: 21300000, guid: d4d0e14bceb77a94b93b38022f7d4c06, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
+    cost: 600
+  - name: Focus arcano 2
+    description: "Moltiplica la probabilit\xE0 di critico dell'amo incantato mentre
+      risale."
+    effect: 200% >> 300%
+    icon: {fileID: 21300000, guid: c9f916fcab7a11f43ba8c9d01bb1dd80, type: 3}
+    lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
+    unlocked: 1
+    cost: 2400
