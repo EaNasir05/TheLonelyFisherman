@@ -227,10 +227,17 @@ public class FishingManager : MonoBehaviour
     {
         if (attemptsRemaining == 0)
         {
-            stop = true;
-            int money = (int)(points * pointsFinalMultiplier);
-            GameManager.instance.AddMoney(money);
-            UIManager.instance.ShowFishingResults(money);
+            if (!GameManager.instance.tutorial)
+            {
+                stop = true;
+                int money = (int)(points * pointsFinalMultiplier);
+                GameManager.instance.AddMoney(money);
+                UIManager.instance.ShowFishingResults(money);
+            }
+            else if (GameManager.instance.GetDay() == 1)
+            {
+                //Inizia dialogo
+            }
         }
     }
 }

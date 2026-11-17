@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Hook : MonoBehaviour
 {
@@ -20,6 +22,9 @@ public class Hook : MonoBehaviour
     [SerializeField] private float verticalSpeedDownMultiplier = 0.5f;
     private Vector2 contactPoint;
     private float verticalRange;
+    public Action onEnterTheSea;
+    public Action onExitTheSea;
+    public Action onStartReturning;
 
     [Header("Catching")]
     public float power;
@@ -83,6 +88,7 @@ public class Hook : MonoBehaviour
         hookLeftStartPos = new Vector2(shootingSystem.GetHookStartingXPosLeft(), transform.position.y);
         hookRightStartPos = new Vector2(shootingSystem.GetHookStartingXPosRight(), transform.position.y);
         verticalRange = FishingManager.instance.biomesHeight * FishingManager.instance.GetBiomesUnlocked() * -1;
+        UIManager.instance.UpdateHookPositionSlider(0, -verticalRange);
         fishesCatched = new();
     }
 
@@ -198,9 +204,11 @@ public class Hook : MonoBehaviour
 
     private void CheckVerticalPosition()
     {
+        float posY = transform.position.y;
+        UIManager.instance.UpdateHookPositionSlider(-posY);
         if (!returning && !FishingManager.instance.stop)
         {
-            if (transform.position.y < verticalRange)
+            if (posY < verticalRange)
                 StartCoroutine(ReturnDelay());
         }
     }
@@ -214,6 +222,9 @@ public class Hook : MonoBehaviour
         currentStamina = maxStamina;
         UIManager.instance.RefreshStaminaBar();
         UIManager.instance.ShowStaminaBar();
+        UIManager.instance.ShowHookPositionSlider();
+        if (GameManager.instance.tutorial)
+            onEnterTheSea.Invoke();
     }
 
     public void ExitTheSea()
@@ -223,12 +234,15 @@ public class Hook : MonoBehaviour
         speedUp = false;
         rb.linearVelocity = Vector2.zero;
         UIManager.instance.HideStaminaBar();
+        UIManager.instance.HideHookPositionSlider();
         foreach (FishController fish in fishesCatched)
         {
             fish.transform.SetParent(null);
             fish.ResetFish();
         }
         fishesCatched.Clear();
+        if (GameManager.instance.tutorial)
+            onExitTheSea.Invoke();
         StartCoroutine(RestartFishing());
     }
 
@@ -246,6 +260,8 @@ public class Hook : MonoBehaviour
         }
         currentWeight = 0f;
         UIManager.instance.RefreshWeightBar();
+        if (GameManager.instance.tutorial)
+            onStartReturning.Invoke();
     }
 
     private IEnumerator ReturnDelay()

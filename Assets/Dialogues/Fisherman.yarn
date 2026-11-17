@@ -211,14 +211,15 @@ position: 3092,237
 ---
 Riccardo: Peppe! Benvenuto al negozio di Riccardo.
 Riccardo: Con le monete del pesce, qui ti sistemi la canna. Lenza più lunga, amo più robusto, cose così.
+<<Jump ShopTutorial2>>
 ===
 
 title: ShopTutorial2
 position: 892,12
 ---
-Riccardo: Qui in alto vedi quante monete hai.
+In alto a sinistra è rappresentato il numero di monete che possiedi.
 Riccardo: Scegli quello che ti serve. Se le monete bastano, è tuo.
-(Levetta sinistra) per scegliere · (A) per comprare
+Muovi il mouse per scegliere · (Mouse SX) per comprare
 ===
 
 
@@ -227,7 +228,7 @@ position: 1112,12
 ---
 Riccardo: E ogni cosa che compri ne sblocca altre. Una tira l'altra.
 Riccardo: Se le monete non bastano, vai a pescare. (ride)
-(B) per uscire
+(Esc) per uscire
 ===
 
 title: ShopWelcome
@@ -297,6 +298,7 @@ position: 5014,12
     <<jump Back24>>
 <<endif>>
 ===
+
 title: Prologo
 position: 1332,12
 ---
@@ -305,16 +307,16 @@ Eppure c'è un paese di mare dove quasi nessuno sa fare magie. #testo
 Lì vive Giuseppe, che tutti chiamano Peppe. #testo
 Da quando sua moglie non c'è più, passa le giornate in barca, poco fuori dal molo. #testo
 Pesca, e aspetta che il giorno passi. #testo
+<<FadeIn>>
 ===
 
 
 title: Tutorial1
 position: 9532,1317
 ---
-(A) per andare avanti
 Albert: Nonno, oggi lanciamo qui?
 Nonno: Qui o altrove, il mare è tutto uguale. Decidi tu.
-(← →) per scegliere la direzione · (RT) per gettare l'amo
+(← →) per scegliere la direzione · (Mouse SX) per gettare l'amo
 ===
 
 title: Tutorial2
@@ -322,7 +324,7 @@ position: 1552,12
 ---
 Albert: Vai, vai, vai!
 Nonno: Piano. Scende da solo, tu lo guidi.
-(← →) per spostare l'amo
+(← →) per spostare l'amo e prendere i pesci
 ===
 
 title: Tutorial3
@@ -330,7 +332,7 @@ position: 1772,12
 ---
 Albert: Ne ho presi! Nonno, ne ho presi!
 Nonno: Bravo. Adesso tirali su con tutta la forza che hai.
-(RT) per tirare su l'amo
+(Mouse SX) per tirare su l'amo
 ===
 
 title: Tutorial4
@@ -344,7 +346,7 @@ Albert: Però me lo prometti che un giorno ci andiamo?
 Nonno: Sì, te lo prometto. Un giorno avremo una barca più forte, e ci andremo insieme.
 Albert: Davvero?
 Nonno: Davvero, davvero.
-<<ChangeScene: namescene>>
+<<ChangeScene "Fishing">>
 ===
 
 title: TutorialMagic1
@@ -359,13 +361,19 @@ Albert: Bene, prova a pescare ora.
 title: TutorialMagic2
 position: 2432,12
 ---
-Tieni premuto (RB) per velocizzare · tieni premuto (LB) per rallentare
+Tieni premuto (Mouse SX) per velocizzare · tieni premuto (Mouse DX) per rallentare
 ===
 
 title: TutorialMagic3
 position: 2652,12
 ---
 Nonno: Grazie… Però la prossima volta avvisa.
+//Inserire dialogo per far risalire l'amo
+===
+
+title: TutorialMagic4
+---
+//Commento finale del nonno
 ===
 
 

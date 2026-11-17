@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -36,6 +37,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject resultsWindow;
     [SerializeField] private TMP_Text resultsText;
     [SerializeField] private GameObject exitSceneButton;
+    [SerializeField] private Slider hookPositionSlider;
     [SerializeField] private Slider staminaSlider;
     private RectTransform staminaRectTransform;
     [SerializeField] private Image staminaFillImage;
@@ -150,6 +152,27 @@ public class UIManager : MonoBehaviour
         resultsText.text = "Hai guadagnato " + money + "€!";
         eventSystem.SetSelectedGameObject(exitSceneButton);
         resultsWindow.SetActive(true);
+    }
+
+    public void UpdateHookPositionSlider(float currentPos, float maxPos)
+    {
+        hookPositionSlider.maxValue = maxPos;
+        hookPositionSlider.value = currentPos;
+    }
+
+    public void UpdateHookPositionSlider(float currentPos)
+    {
+        hookPositionSlider.value = currentPos;
+    }
+
+    public void ShowHookPositionSlider()
+    {
+        hookPositionSlider.gameObject.SetActive(true);
+    }
+
+    public void HideHookPositionSlider()
+    {
+        hookPositionSlider.gameObject.SetActive(false);
     }
 
     public void ShowStaminaBar()

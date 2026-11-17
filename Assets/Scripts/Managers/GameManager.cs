@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     private InMemoryVariableStorage yarnVariableStorage;
     public bool isPaused = false;
     public bool tutorial = true;
-    private int day = 0;
+    private int day = 1;
     private int boatLevel = 0;
     private int money = 0;
     [SerializeField] private bool grandsonHere = false;
@@ -140,6 +140,7 @@ public class GameManager : MonoBehaviour
     public void NextDay()
     {
         day++;
+        SetYarnVariable("$dayIndex", day);
         UpdateGrandsonHere();
         ChangeScene("MorningVillage");
     }
