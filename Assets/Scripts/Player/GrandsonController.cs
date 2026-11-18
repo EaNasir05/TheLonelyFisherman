@@ -6,6 +6,7 @@ public class GrandsonController : MonoBehaviour
 {
     private Transform target;
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
     [SerializeField] public float activationDistance = 8f;
     [SerializeField] public float targetDistance = 2f;
     [SerializeField] private float movementForce = 10f;
@@ -16,6 +17,7 @@ public class GrandsonController : MonoBehaviour
     {
         target = FindFirstObjectByType<CharacterMovement>().transform;
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void FixedUpdate()
@@ -37,13 +39,9 @@ public class GrandsonController : MonoBehaviour
             float dir = Mathf.Sign(dirX);
             rb.linearVelocityX = dir * movementForce;
             if (dir > 0)
-            {
-                //DESTRA
-            }
+                spriteRenderer.flipX = true;
             else
-            {
-                //SINISTRA
-            }
+                spriteRenderer.flipX = false;
         }
         if (currentDistance < targetDistance && !nextToPlayer)
         {
@@ -54,6 +52,7 @@ public class GrandsonController : MonoBehaviour
 
     private void ExitTheVillage()
     {
+        spriteRenderer.flipX = false;
         rb.linearVelocityX = -movementForce;
     }
 }

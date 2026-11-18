@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     private EventSystem eventSystem;
 
     [Header("Village")]
+    [SerializeField] private GrandsonController grandsonController;
     [SerializeField] private TMP_Text moneyCount;
     [SerializeField] private GameObject shopMenu;
     [SerializeField] private GameObject startingNodeShop;
@@ -75,6 +76,8 @@ public class UIManager : MonoBehaviour
         eventSystem = FindFirstObjectByType<EventSystem>();
     }
 
+    #region Grandson
+
     public void SetHappyMood()
     {
         happyMoodObject.SetActive(true);
@@ -92,6 +95,23 @@ public class UIManager : MonoBehaviour
         happyMoodObject.SetActive(false);
         sadMoodObject.SetActive(true);
     }
+
+    public void ShowGrandson()
+    {
+        grandsonController.gameObject.SetActive(true);
+    }
+
+    public void MakeGrandsonFollow()
+    {
+        grandsonController.state = GrandsonState.Following;
+    }
+
+    public void MakeGrandsonGoAway()
+    {
+        grandsonController.state = GrandsonState.Escaping;
+    }
+
+    #endregion Grandson
 
     #region Money
 

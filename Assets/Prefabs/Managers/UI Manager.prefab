@@ -1,5 +1,103 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &37674223815795643
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6582549798419281154}
+  - component: {fileID: 6770645478922251598}
+  m_Layer: 0
+  m_Name: SadMood
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6582549798419281154
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37674223815795643}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -12.550949, y: 0.49895602, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6955049282319932945}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6770645478922251598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37674223815795643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 79fb003c78aca234585758d47513385c, type: 2}
+--- !u!1 &1271693960374016933
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3470236943934151481}
+  - component: {fileID: 8578634122712040575}
+  m_Layer: 0
+  m_Name: HappyMood
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3470236943934151481
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271693960374016933}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -12.550949, y: 0.49895602, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6955049282319932945}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8578634122712040575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271693960374016933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 4e37e2af78e08fd4bb2a9db834ad2a8c, type: 2}
 --- !u!1 &1948686517025801782
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,6 +305,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3470236943934151481}
+  - {fileID: 6582549798419281154}
   - {fileID: 6841153270086025760}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -222,10 +322,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37009f64f56a5884bab8b022e2373f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
-  currentScene: 0
   blackScreen: {fileID: 7789636009651995692}
+  happyMoodObject: {fileID: 1271693960374016933}
+  sadMoodObject: {fileID: 37674223815795643}
+  grandsonController: {fileID: 0}
+  moneyCount: {fileID: 0}
   shopMenu: {fileID: 0}
+  startingNodeShop: {fileID: 0}
+  upgradeInfo: {fileID: 0}
+  upgradeIcon: {fileID: 0}
+  upgradeName: {fileID: 0}
+  upgradeDescription: {fileID: 0}
+  upgradeCost: {fileID: 0}
+  upgradeUnlocked: {fileID: 0}
+  upgradeEffect: {fileID: 0}
+  closeShopButton: {fileID: 0}
   fishingPoints: {fileID: 0}
+  attemptsSlider: {fileID: 0}
+  resultsWindow: {fileID: 0}
+  resultsText: {fileID: 0}
+  exitSceneButton: {fileID: 0}
+  hookPositionSlider: {fileID: 0}
   staminaSlider: {fileID: 0}
   staminaFillImage: {fileID: 0}
   staminaFillColor: {r: 0, g: 0, b: 0, a: 0}
@@ -240,3 +357,5 @@ MonoBehaviour:
   scaleRangePointsGainText: {x: 0, y: 0}
   valueRangePointsGainText: {x: 0, y: 0}
   maxDistanceFromHookToText: 0
+  boatSprites: []
+  boatRenderer: {fileID: 0}

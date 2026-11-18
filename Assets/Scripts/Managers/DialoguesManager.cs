@@ -56,6 +56,8 @@ public class DialoguesManager : MonoBehaviour
             dialogueRunner.AddCommandHandler("NextDay", GameManager.instance.NextDay);
             dialogueRunner.AddCommandHandler("GoFishing", GameManager.instance.GoFishing);
             dialogueRunner.AddCommandHandler("BuildBoat", GameManager.instance.BuildBoat);
+            dialogueRunner.AddCommandHandler("GrandsonFollowing", GameManager.instance.GrandsonFollowing);
+            dialogueRunner.AddCommandHandler("GrandsonReturning", GameManager.instance.GrandsonReturning);
             dialogueRunner.onDialogueComplete.AddListener(DialogueCompleted);
             commandsReady = true;
         }

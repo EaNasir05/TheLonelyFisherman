@@ -46,7 +46,7 @@ public class FishesSpawner : MonoBehaviour
         int y = -1;
         Dictionary<string, int> fishesInLayer = null;
         List<int> fishesOnLayerPerBiome;
-        if (GameManager.instance.IsGrandsonHere())
+        if (GameManager.instance.IsGrandsonHere() && GameManager.instance.GetAffection() >= -5)
             fishesOnLayerPerBiome = fishesOnLayerPerBiomeWithGrandson;
         else
             fishesOnLayerPerBiome = this.fishesOnLayerPerBiome;

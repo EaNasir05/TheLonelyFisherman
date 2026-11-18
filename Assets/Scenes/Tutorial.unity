@@ -4532,7 +4532,7 @@ Tilemap:
       - {fileID: -357874556, guid: f912dc3559406ce4987661e2312ca735, type: 3}
       - {fileID: -1716740865, guid: f912dc3559406ce4987661e2312ca735, type: 3}
       - {fileID: 737664686, guid: f912dc3559406ce4987661e2312ca735, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 24, y: -4, z: 0}
@@ -7567,7 +7567,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
 --- !u!1 &1646249120
 GameObject:
@@ -7932,7 +7932,7 @@ GameObject:
   - component: {fileID: 1737242667}
   - component: {fileID: 1737242666}
   m_Layer: 0
-  m_Name: SaturatorRicordo
+  m_Name: PastMood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7963,12 +7963,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1737242665}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.9697208, y: 0.110781446, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1922329728}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1750360858
 GameObject:
@@ -8997,6 +8997,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6955049282319932945, guid: b0f963b256c03d342af2917b7f746f48, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1737242667}
     - targetCorrespondingSourceObject: {fileID: 6841153270086025760, guid: b0f963b256c03d342af2917b7f746f48, type: 3}
       insertIndex: 0
       addedObject: {fileID: 926169160}
@@ -9442,4 +9445,3 @@ SceneRoots:
   - {fileID: 1567586314}
   - {fileID: 1780758108}
   - {fileID: 964341683}
-  - {fileID: 1737242667}

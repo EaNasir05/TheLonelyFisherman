@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public int tutorialState = 0;
     private int day = 0;
     private int boatLevel = 0;
+    private int affection = 0;
     private bool builtBoat = false;
     [SerializeField] private int[] boatCosts;
     private int money = 10;
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
     public int GetDay() => day;
     public int GetMoney() => money;
     public int GetBoatLevel() => boatLevel;
+    public int GetAffection() => affection;
 
     private void Awake()
     {
@@ -118,6 +120,8 @@ public class GameManager : MonoBehaviour
                     PlayerSpawner.instance.SpawnPlayerFromFishing();
                     UIManager.instance.onFadeIn += StartEveningDialogue;
                 }
+                if (grandsonHere)
+                    UIManager.instance.ShowGrandson();
                 break;
 
             case "Hut":
@@ -162,6 +166,7 @@ public class GameManager : MonoBehaviour
                 //Fai partire il dialogo finale
                 break;
         }
+        UpdateMoodAndAffection();
         Debug.Log("Setup scena " + currentScene);
     }
 
@@ -218,6 +223,41 @@ public class GameManager : MonoBehaviour
             grandsonHere = true;
         else
             grandsonHere = false;
+    }
+
+    private void UpdateMoodAndAffection()
+    {
+        if (currentScene != Scene.Menu && currentScene != Scene.Tutorial)
+        {
+            if (grandsonHere)
+            {
+                yarnVariableStorage.TryGetValue("$Affection", out affection);
+                if (affection < -5)
+                {
+                    UIManager.instance.SetNeutralMood();
+                }
+                else
+                {
+                    UIManager.instance.SetHappyMood();
+                }
+                //cambia musica
+            }
+            else
+            {
+                UIManager.instance.SetSadMood();
+                //cambia musica
+            }
+        }
+    }
+
+    public void GrandsonFollowing()
+    {
+        UIManager.instance.MakeGrandsonFollow();
+    }
+
+    public void GrandsonReturning()
+    {
+        UIManager.instance.MakeGrandsonGoAway();
     }
 
     #endregion Scene Transition

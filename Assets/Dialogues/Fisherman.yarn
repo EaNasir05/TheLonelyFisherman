@@ -442,6 +442,7 @@ Nonno: Ho ricevuto la tua lettera. Quindi ti fermi in paese per un po'.
 Albert: Sì, avevo bisogno di un po' di pace.
 Nonno: Senti, io stavo andando a pescare. Ti va di venire, come facevamo una volta?
 Albert: Volentieri.
+<<GrandsonFollowing>>
 ===
 
 title: Day4
@@ -456,6 +457,7 @@ Albert: All'accademia lo usiamo per spostare gli oggetti. Ho pensato che sull'am
 Nonno: Ah, ottimo. Capisco.
 Albert: Ma credo di poterlo migliorare, quindi più lo uso meglio è.
 Nonno: Allora andiamo ad allenarlo pescando altri pesci. (ride)
+<<GrandsonFollowing>>
 ===
 
 title: Day6
@@ -480,6 +482,7 @@ position: 7012,1317
     Albert: Sì… Qui è tutto più semplice.
     Nonno: Qui è casa.
 <<endif>>
+<<GrandsonFollowing>>
 ===
 
 title: Day8
@@ -502,6 +505,7 @@ position: 9252,1317
     Albert: Io non ho mai ballato. Mi vergogno troppo.
     Nonno: Eh. Si vergognano tutti, all'inizio.
 <<endif>>
+<<GrandsonFollowing>>
 ===
 
 title: Day11
@@ -522,6 +526,7 @@ position: 7852,1317
     Albert: Io no.
     Nonno: Tu no.
 <<endif>>
+<<GrandsonFollowing>>
 ===
 
 title: Visit13
@@ -532,6 +537,7 @@ Nonno: Visto.
 Albert: Ho fatto la strada di corsa.
 Nonno: Non serviva correre.
 Albert: Lo so. Ma mi avevi detto di non fare tardi.
+<<GrandsonFollowing>>
 ===
 
 title: Visit15
@@ -545,6 +551,7 @@ Albert: Cioè?
 Nonno: La mattina a pescare. Ogni tanto sono andato da Riccardo ad aggiustare l'attrezzatura. E la sera a casa.
 Albert: Tutti i giorni?
 Nonno: Tutti i giorni. Per questo si chiama il solito. (ride)
+<<GrandsonFollowing>>
 ===
 
 title: Visit16
@@ -555,6 +562,7 @@ Nonno: Eccoti. Oggi andiamo piano, la schiena non va.
 Albert: Stai male? Vuoi che restiamo a terra?
 Nonno: No, no. Il mare fa bene. È l'età.
 Albert: …Va bene.
+<<GrandsonFollowing>>
 ===
 
 title: Visit24
@@ -566,6 +574,7 @@ Albert: La signora del forno mi ha fermato per strada. Voleva che le accendessi 
 Nonno: E tu?
 Albert: L'ho acceso. Poi è arrivato il pescivendolo. Poi quella della casa gialla. Ho fatto magie tutto il pomeriggio.
 Nonno: Colpa mia. Ho detto a tutti che sei apprendista. (ride)
+<<GrandsonFollowing>>
 ===
 
 title: VisitLettera
@@ -586,6 +595,7 @@ position: 2812,1317
     Albert: Il maestro mi prende.
     Nonno: Bene. Andiamo, che si fa tardi.
 <<endif>>
+<<GrandsonFollowing>>
 ===
 
 title: Day3
@@ -1161,6 +1171,7 @@ Albert: Io ho alcune cose da sbrigare.
 Albert: Ci vediamo tra due giorni.
 Nonno: Va bene.
 <<set $visitIndex = 4>>
+<<GrandsonReturning>>
 ===
 
 title: Back4
@@ -1176,6 +1187,7 @@ Albert: Ci vediamo tra due giorni.
     Nonno: Due giorni… Va bene. Io sono qui.
 <<endif>>
 <<set $visitIndex = 6>>
+<<GrandsonReturning>>
 ===
 
 title: Back6
@@ -1202,6 +1214,7 @@ position: 7172,237
     Nonno: Va bene. Te lo racconto.
 <<endif>>
 <<set $visitIndex = 8>>
+<<GrandsonReturning>>
 ===
 
 title: Back8
@@ -1228,6 +1241,7 @@ position: 8209,559
     Nonno: Tre giorni… Va bene. Tanto io sono sempre qui.
 <<endif>>
 <<set $visitIndex = 11>>
+<<GrandsonReturning>>
 ===
 
 title: Back11
@@ -1258,6 +1272,7 @@ position: 6892,237
     Albert: No, no. Arrivo presto.
     <<set $visitIndex = 13>>
 <<endif>>
+<<GrandsonReturning>>
 ===
 
 title: Back13
@@ -1277,6 +1292,7 @@ Nonno: Tre giorni… Va bene. Io me la cavo.
 <<else>>
     <<set $visitIndex = 19>>
 <<endif>>
+<<GrandsonReturning>>
 ===
 
 title: Back15
@@ -1294,6 +1310,7 @@ position: 5212,237
 Albert: Ci vediamo tra quattro giorni, nonno.
 Nonno: Va bene. Non preoccuparti. (ride)
 <<set $visitIndex = 19>>
+<<GrandsonReturning>>
 ===
 
 title: Back16
@@ -1315,6 +1332,7 @@ Albert: Sarà.
 Albert: Ci vediamo tra tre giorni, nonno.
 Nonno: Tre giorni. Io sono qui. Per ora.
 <<set $visitIndex = 19>>
+<<GrandsonReturning>>
 ===
 
 title: Back24
@@ -1333,6 +1351,7 @@ Nonno: Prima di partire. Vieni la mattina presto.
 Albert: Perché?
 Nonno: Perché sì.
 <<set $visitIndex = 30>>
+<<GrandsonReturning>>
 ===
 
 title: BackLettera
@@ -1352,6 +1371,7 @@ position: 5772,237
     <<set $visitIndex = 0>>
 <<endif>>
 <<set $letterDone = true>>
+<<GrandsonReturning>>
 ===
 
 title: Finale
