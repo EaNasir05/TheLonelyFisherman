@@ -67,6 +67,7 @@ public class Hook : MonoBehaviour
     private bool dialogueAtStartDone = false;
     private bool dialogueAtReturnDone = false;
     private int risingLoopId = 0;
+    private bool returnScheduled = false;
 
     public bool IsInTheSea() => inTheSea;
     public bool IsReturning() => returning;
@@ -231,7 +232,7 @@ public class Hook : MonoBehaviour
         if (!returning && !FishingManager.instance.stop)
         {
             if (posY < verticalRange)
-                StartCoroutine(ReturnDelay());
+                ScheduleReturn();
         }
     }
 
@@ -257,6 +258,7 @@ public class Hook : MonoBehaviour
     {
         inTheSea = false;
         returning = false;
+        returnScheduled = false;
         speedUp = false;
         rb.linearVelocity = Vector2.zero;
         UIManager.instance.HideStaminaBar();
@@ -290,6 +292,19 @@ public class Hook : MonoBehaviour
             dialogueAtReturnDone = true;
             onStartReturning?.Invoke();
         }
+    }
+
+    /// <summary>
+    /// Avvia la risalita una sola volta. Prima ReturnDelay veniva avviata ad ogni frame
+    /// (finché l'amo era sul fondo o la stamina a 0), e ogni copia richiamava StartReturning
+    /// dopo 1 secondo: per circa un secondo il peso veniva azzerato di continuo.
+    /// </summary>
+    private void ScheduleReturn()
+    {
+        if (returning || returnScheduled)
+            return;
+        returnScheduled = true;
+        StartCoroutine(ReturnDelay());
     }
 
     private IEnumerator ReturnDelay()
@@ -349,7 +364,7 @@ public class Hook : MonoBehaviour
         currentStamina = Mathf.Clamp(currentStamina - decrease, 0, maxStamina);
         UIManager.instance.UpdateStaminaBar(currentStamina);
         if (currentStamina == 0)
-            StartCoroutine(ReturnDelay());
+            ScheduleReturn();
     }
 
     public void IncreaseWeight(float increase)
@@ -377,7 +392,7 @@ public class Hook : MonoBehaviour
         }
         FishingManager.instance.LosePoints((int)(pointsLoss * overweightPointsLossMultiplier));
         //UIManager.instance.ShowOverweightEffect();
-        //UIManager.instance.StartScreenshake(0.8f, 0.2f);
+        UIManager.instance.StartScreenshake(0.8f, 0.2f);
         //yield return new WaitForSeconds(1f);
         currentWeight = 0;
         UIManager.instance.UpdateStaminaBar(0);
@@ -420,16 +435,12 @@ public class Hook : MonoBehaviour
             }
             FishingManager.instance.GainPoints(value);
             float staminaLoss = Mathf.Clamp(strength - power, 0, maxStamina - currentStamina);
+            // Passano dai metodi appositi: così il valore resta nei limiti e,
+            // se la barra si riempie, scattano la risalita o l'overweight (anche col nipote).
             if (!returning)
-            {
-                currentStamina -= staminaLoss;
-                UIManager.instance.UpdateStaminaBar(currentStamina);
-            }
+                DecreaseStamina(staminaLoss);
             else if (!overweight)
-            {
-                currentWeight += staminaLoss;
-                UIManager.instance.UpdateStaminaBar(currentWeight);
-            }
+                IncreaseWeight(staminaLoss);
         }
         fishesCatched.Add(fish);
     }

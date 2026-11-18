@@ -11,27 +11,35 @@ public class FishesSpawner : MonoBehaviour
     [SerializeField] private List<int> fishesOnLayerPerBiome; //Per ogni bioma, quanti pesci sono presenti in un layer
     [SerializeField] private List<int> fishesOnLayerPerBiomeWithLowAffection;
     [SerializeField] private List<int> fishesOnLayerPerBiomeWithGrandson; //Per ogni bioma, quanti pesci sono presenti in un layer se è presente il nipote
-    [SerializeField] private int numberOfLayersToSpawnOnStart = 3; //Quanti layer di pesci attivare con Initialize
+    [Tooltip("Usato solo se la camera non è ortografica: unità visibili in verticale.")]
     [SerializeField] private float unitsVisibleToCamera = 11; //Unità comprese nel campo visivo verticale della camera
+    [Tooltip("Layer extra tenuti attivi sopra e sotto la parte visibile, così i pesci spariscono/compaiono sempre fuori dallo schermo.")]
+    [SerializeField, Min(0)] private int extraLayersMargin = 1;
     [SerializeField] private Vector2 fishesPositionXRange;
     private float layersSize = 5f; //Altezza di un layer
     private List<Dictionary<string, int>> fishesInLayers; //Quantità di pesci specifici per ogni layer
     private Dictionary<string, int> totalFishes; //Quantità totale di ogni tipo di pesce nel mare
-    private int currentLayer = 0; //Layer in cui si trova la camera
-    private int layersVisible = 3; //Quanti layer possono essere compresi nel campo visivo della camera sopra e sotto il currentLayer
+    private int currentLayer = int.MinValue; //Layer in cui si trova la camera
+    private int layersVisible = 3; //Quanti layer tenere attivi sopra e sotto il currentLayer
     private List<Dictionary<string, List<GameObject>>> fishesActivatedPerLayer; //Pesci attivi per ogni layer
+    private bool[] layerActive; //Quali layer hanno i pesci attivi in questo momento
 
     private void Awake()
     {
         instance = this;
     }
-    
+
     private void Update()
     {
-        if (cameraTransform.position.y > currentLayer * -layersSize)
-            DecreaseCurrentLayer();
-        else if (cameraTransform.position.y < (currentLayer + 1) * -layersSize)
-            IncreaseCurrentLayer();
+        if (fishesInLayers == null)
+            return;
+
+        int cameraLayer = GetLayerAt(cameraTransform.position.y);
+        if (cameraLayer != currentLayer)
+        {
+            currentLayer = cameraLayer;
+            RefreshActiveLayers();
+        }
     }
 
     public void Initialize()
@@ -39,10 +47,11 @@ public class FishesSpawner : MonoBehaviour
         int biomes = FishingManager.instance.GetBiomesUnlocked();
         int layers = biomes * layersPerBiome + 1;
         layersSize = FishingManager.instance.biomesHeight / layersPerBiome;
-        layersVisible = (int) Math.Ceiling((unitsVisibleToCamera - layersSize) / layersSize);
+        layersVisible = ComputeLayersToKeepActive();
         fishesInLayers = new(new Dictionary<string, int>[layers]);
         totalFishes = new();
         fishesActivatedPerLayer = new(new Dictionary<string, List<GameObject>>[layers]);
+        layerActive = new bool[layers];
         List<FishPercentages> fishesPercentagePerBiomes = fishesList.fishesRatesPerBiome;
         int y = -1;
         Dictionary<string, int> fishesInLayer = null;
@@ -79,28 +88,53 @@ public class FishesSpawner : MonoBehaviour
             }
         }
         FishesPool.instance.Initialize(totalFishes);
-        for (int i = 0; i < numberOfLayersToSpawnOnStart; i++)
+
+        // Attiva subito i layer giusti per la posizione attuale della camera.
+        currentLayer = GetLayerAt(cameraTransform.position.y);
+        RefreshActiveLayers();
+    }
+
+    /// <summary>
+    /// Quanti layer tenere attivi sopra e sotto quello della camera.
+    /// Calcolato dalla camera vera (metà altezza visibile), più un margine di sicurezza:
+    /// prima un valore troppo piccolo faceva sparire i pesci ancora visibili ai bordi dello schermo.
+    /// </summary>
+    private int ComputeLayersToKeepActive()
+    {
+        float halfHeight = unitsVisibleToCamera / 2f;
+        Camera cam = cameraTransform != null ? cameraTransform.GetComponent<Camera>() : null;
+        if (cam != null && cam.orthographic)
+            halfHeight = cam.orthographicSize;
+        return Mathf.CeilToInt(halfHeight / layersSize) + extraLayersMargin;
+    }
+
+    private int GetLayerAt(float worldY)
+    {
+        return Mathf.FloorToInt(-worldY / layersSize);
+    }
+
+    /// <summary>
+    /// Allinea i layer attivi alla finestra [currentLayer - layersVisible, currentLayer + layersVisible].
+    /// Ogni layer viene acceso o spento solo se serve: un layer non può essere attivato due volte
+    /// (perdendo traccia dei suoi pesci) né spento due volte, e funziona anche se la camera
+    /// salta di più layer in un colpo solo (es. quando torna in superficie).
+    /// </summary>
+    private void RefreshActiveLayers()
+    {
+        int min = currentLayer - layersVisible;
+        int max = currentLayer + layersVisible;
+
+        // Prima spegni (così i pesci tornano nel pool), poi accendi.
+        for (int layer = 0; layer < layerActive.Length; layer++)
         {
-            ActivateFishesOnLayer(i);
+            if (layerActive[layer] && (layer < min || layer > max))
+                DeactivateFishesOnLayer(layer);
         }
-    }
-
-    private void IncreaseCurrentLayer()
-    {
-        if (currentLayer - layersVisible >= 0)
-            DeactivateFishesOnLayer(currentLayer - layersVisible);
-        currentLayer++;
-        if (currentLayer + layersVisible < fishesInLayers.Count)
-            ActivateFishesOnLayer(currentLayer + layersVisible);
-    }
-
-    private void DecreaseCurrentLayer()
-    {
-        if (currentLayer + layersVisible < fishesInLayers.Count)
-            DeactivateFishesOnLayer(currentLayer + layersVisible);
-        currentLayer--;
-        if (currentLayer - layersVisible >= 0)
-            ActivateFishesOnLayer(currentLayer - layersVisible);
+        for (int layer = 0; layer < layerActive.Length; layer++)
+        {
+            if (!layerActive[layer] && layer >= min && layer <= max)
+                ActivateFishesOnLayer(layer);
+        }
     }
 
     private Vector2 GetRandomPositionInLayer(int layer)
@@ -110,6 +144,9 @@ public class FishesSpawner : MonoBehaviour
 
     private void ActivateFishesOnLayer(int layer)
     {
+        if (fishesActivatedPerLayer[layer] == null)
+            fishesActivatedPerLayer[layer] = new();
+
         foreach (var kvp in fishesInLayers[layer])
         {
             List<GameObject> fishes = new();
@@ -120,15 +157,17 @@ public class FishesSpawner : MonoBehaviour
                     maxY -= 1f;
                 fishes.Add(FishesPool.instance.ActivateFish(GetRandomPositionInLayer(layer), kvp.Key, new Vector2(fishesPositionXRange.x, fishesPositionXRange.y), new Vector2(-(layer + 1) * layersSize, maxY), layer));
             }
-            if (fishesActivatedPerLayer[layer] == null)
-                fishesActivatedPerLayer[layer] = new();
             fishesActivatedPerLayer[layer][kvp.Key] = fishes;
         }
+        layerActive[layer] = true;
     }
 
     public void RemoveFishFromFishesActivatedPerLayer(int layer, string type, GameObject fish)
     {
-        fishesActivatedPerLayer[layer][type].Remove(fish);
+        if (layer < 0 || layer >= fishesActivatedPerLayer.Count)
+            return;
+        if (fishesActivatedPerLayer[layer] != null && fishesActivatedPerLayer[layer].TryGetValue(type, out List<GameObject> fishes))
+            fishes.Remove(fish);
     }
 
     private void DeactivateFishesOnLayer(int layer)
@@ -145,5 +184,6 @@ public class FishesSpawner : MonoBehaviour
                 kvp.Value.Clear();
             }
         }
+        layerActive[layer] = false;
     }
 }

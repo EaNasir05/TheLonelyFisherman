@@ -398,6 +398,11 @@ public class UIManager : MonoBehaviour
 
     public void StartScreenshake(float duration, float intensity)
     {
+        if (screenshake == null)
+        {
+            Debug.LogWarning("[UIManager] Screenshake non assegnato nell'Inspector di questo UIManager.", this);
+            return;
+        }
         screenshake.TriggerShake(intensity, duration);
     }
     
