@@ -88,7 +88,7 @@ public class UpgradeButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler
 
     public void UnlockUpgrade()
     {
-        if (available && !unlocked)
+        if (available && !unlocked && !DialoguesManager.instance.isTalking)
         {
             int cost = upgrade.cost;
             if (GameManager.instance.GetMoney() >= cost)
