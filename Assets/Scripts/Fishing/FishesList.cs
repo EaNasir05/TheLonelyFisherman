@@ -7,6 +7,7 @@ public class FishesList : ScriptableObject
 {
     public List<Fish> list;
     public List<FishPercentages> fishesRatesPerBiome;
+    public List<FishPercentages> fishesRatesPerBiomeWithoutGrandson;
 
     public GameObject GetFishPrefabByType(string type)
     {

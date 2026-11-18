@@ -111,7 +111,7 @@ public class Hook : MonoBehaviour
     private void UpdateRisingSound()
     {
         bool rising = returning && inTheSea && rb != null && rb.linearVelocityY > 0.01f && !FishingManager.instance.stop;
-        if (rising && risingLoopId == 0)
+        if (rising && risingLoopId == 0 && grandsonHere)
         {
             risingLoopId = SFXManager.PlayLoop(SFX.AmoRising);
         }

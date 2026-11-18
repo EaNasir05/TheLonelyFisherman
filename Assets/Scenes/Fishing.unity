@@ -3690,7 +3690,7 @@ Tilemap:
       - {fileID: 1783169069, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
       - {fileID: 484148632, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
       - {fileID: 1686283720, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -32, y: -4, z: 0}
@@ -3747,7 +3747,7 @@ Tilemap:
       - {fileID: 1783169069, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
       - {fileID: 484148632, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
       - {fileID: 1686283720, guid: e73e671576b452446a17ee24a18ee81c, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -29, y: -4, z: 0}
@@ -4526,7 +4526,7 @@ Tilemap:
       - {fileID: -357874556, guid: f912dc3559406ce4987661e2312ca735, type: 3}
       - {fileID: -1716740865, guid: f912dc3559406ce4987661e2312ca735, type: 3}
       - {fileID: 737664686, guid: f912dc3559406ce4987661e2312ca735, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 12, y: -4, z: 0}
@@ -4811,7 +4811,7 @@ Tilemap:
       - {fileID: -357874556, guid: f912dc3559406ce4987661e2312ca735, type: 3}
       - {fileID: -1716740865, guid: f912dc3559406ce4987661e2312ca735, type: 3}
       - {fileID: 737664686, guid: f912dc3559406ce4987661e2312ca735, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:
@@ -5579,6 +5579,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 192f843e78de1f14f8b8d0876264fc5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Screenshake
+  shakeVertical: 1
+  fadeOut: 1
 --- !u!1 &678344356
 GameObject:
   m_ObjectHideFlags: 0
@@ -6443,11 +6445,11 @@ MonoBehaviour:
   fishesList: {fileID: 11400000, guid: 89781d83d7deebf48bebd1ecad104727, type: 2}
   cameraTransform: {fileID: 584015594}
   layersPerBiome: 4
-  fishesOnLayerPerBiome: 0500000008000000080000000a0000000a000000
+  fishesOnLayerPerBiome: 0300000005000000050000000700000007000000
   fishesOnLayerPerBiomeWithLowAffection: 0500000008000000080000000a0000000a000000
   fishesOnLayerPerBiomeWithGrandson: 0a00000010000000100000001400000014000000
-  numberOfLayersToSpawnOnStart: 3
   unitsVisibleToCamera: 11
+  extraLayersMargin: 1
   fishesPositionXRange: {x: -9.5, y: 9.5}
 --- !u!114 &881730810
 MonoBehaviour:

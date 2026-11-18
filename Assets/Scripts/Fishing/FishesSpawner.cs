@@ -52,7 +52,11 @@ public class FishesSpawner : MonoBehaviour
         totalFishes = new();
         fishesActivatedPerLayer = new(new Dictionary<string, List<GameObject>>[layers]);
         layerActive = new bool[layers];
-        List<FishPercentages> fishesPercentagePerBiomes = fishesList.fishesRatesPerBiome;
+        List<FishPercentages> fishesPercentagePerBiomes;
+        if (GameManager.instance.IsGrandsonHere() || GameManager.instance.GetCurrentScene() != Scene.Fishing)
+            fishesPercentagePerBiomes = fishesList.fishesRatesPerBiome;
+        else
+            fishesPercentagePerBiomes = fishesList.fishesRatesPerBiomeWithoutGrandson;
         int y = -1;
         Dictionary<string, int> fishesInLayer = null;
         List<int> fishesOnLayerPerBiome;

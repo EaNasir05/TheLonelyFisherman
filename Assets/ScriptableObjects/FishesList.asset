@@ -73,3 +73,39 @@ MonoBehaviour:
       percentage: 33
     - fishType: Pink
       percentage: 33
+  fishesRatesPerBiomeWithoutGrandson:
+  - fishes:
+    - fishType: Branzino
+      percentage: 1
+    - fishType: Sogliola
+      percentage: 70
+    - fishType: Merluzzo
+      percentage: 30
+  - fishes:
+    - fishType: Sardina
+      percentage: 80
+    - fishType: Tonno
+      percentage: 20
+    - fishType: Angelo
+      percentage: 1
+  - fishes:
+    - fishType: Sbocco
+      percentage: 60
+    - fishType: Cernia
+      percentage: 40
+    - fishType: Mandarino
+      percentage: 1
+  - fishes:
+    - fishType: Yellow
+      percentage: 33
+    - fishType: Red
+      percentage: 33
+    - fishType: Pink
+      percentage: 33
+  - fishes:
+    - fishType: Yellow
+      percentage: 33
+    - fishType: Red
+      percentage: 33
+    - fishType: Pink
+      percentage: 33
