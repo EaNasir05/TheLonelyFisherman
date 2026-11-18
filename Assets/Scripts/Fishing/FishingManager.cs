@@ -54,17 +54,17 @@ public class FishingManager : MonoBehaviour
         if (upgradesList.GetUpgradeByName("Lunghezza lenza 3").unlocked)
         {
             biomesUnlocked = 4;
-            hook.weightGainMultiplier = 0.7f;
+            hook.weightGainMultiplier = 0.55f;
         }
         else if (upgradesList.GetUpgradeByName("Lunghezza lenza 2").unlocked)
         {
             biomesUnlocked = 3;
-            hook.weightGainMultiplier = 0.8f;
+            hook.weightGainMultiplier = 0.7f;
         }
         else if (upgradesList.GetUpgradeByName("Lunghezza lenza 1").unlocked)
         {
             biomesUnlocked = 2;
-            hook.weightGainMultiplier = 0.9f;
+            hook.weightGainMultiplier = 0.85f;
         }
         else
         {

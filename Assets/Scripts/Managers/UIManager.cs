@@ -57,6 +57,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Vector2 scaleRangePointsGainText;
     [SerializeField] private Vector2 valueRangePointsGainText;
     [SerializeField] private float maxDistanceFromHookToText;
+    [SerializeField] private GameObject overWeightEffect;
+    [SerializeField] private GameObject normalHitPrefab;
+    [SerializeField] private GameObject normalCritHitPrefab;
+    [SerializeField] private GameObject magicHitPrefab;
+    [SerializeField] private GameObject magicCritHitPrefab;
+    [SerializeField] private Screenshake screenshake;
     private Hook hookScript;
 
     [Header("Boat")]
@@ -339,6 +345,49 @@ public class UIManager : MonoBehaviour
         tmp.text = "-" + value;
         tmp.color = Color.red;
         pgt.localScale = new Vector3(2, 2, 1);
+    }
+
+    public void ShowOverweightEffect()
+    {
+        overWeightEffect.SetActive(true);
+    }
+
+    public void HideOverweightEffect()
+    {
+        overWeightEffect.SetActive(false);
+    }
+
+    public void SpawnNormalHitEffect(Transform parent)
+    {
+        GameObject effect = Instantiate(normalHitPrefab);
+        effect.transform.SetParent(parent);
+        effect.transform.localPosition = Vector2.zero;
+    }
+
+    public void SpawnNormalCritHitEffect(Transform parent)
+    {
+        GameObject effect = Instantiate(normalCritHitPrefab);
+        effect.transform.SetParent(parent);
+        effect.transform.localPosition = Vector2.zero;
+    }
+
+    public void SpawnMagicHitEffect(Transform parent)
+    {
+        GameObject effect = Instantiate(magicHitPrefab);
+        effect.transform.SetParent(parent);
+        effect.transform.localPosition = Vector2.zero;
+    }
+
+    public void SpawnMagicCritHitEffect(Transform parent)
+    {
+        GameObject effect = Instantiate(magicCritHitPrefab);
+        effect.transform.SetParent(parent);
+        effect.transform.localPosition = Vector2.zero;
+    }
+
+    public void StartScreenshake(float duration, float intensity)
+    {
+        screenshake.TriggerShake(intensity, duration);
     }
     
     #endregion Fishing

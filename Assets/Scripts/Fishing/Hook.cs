@@ -354,9 +354,12 @@ public class Hook : MonoBehaviour
             }
         }
         FishingManager.instance.LosePoints((int)(pointsLoss * overweightPointsLossMultiplier));
-        //VFX sovraccarico
+        //UIManager.instance.ShowOverweightEffect();
+        //UIManager.instance.StartScreenshake(0.8f, 0.2f);
+        //yield return new WaitForSeconds(1f);
         currentWeight = 0;
         UIManager.instance.UpdateStaminaBar(0);
+        //UIManager.instance.HideOverweightEffect();
         overweight = false;
         yield return null;
     }
@@ -373,11 +376,19 @@ public class Hook : MonoBehaviour
         }
         if (Random.Range(1, 101) <= crit)
         {
-            //VFX critico
+            if (speedUp || speedDown)
+                UIManager.instance.SpawnMagicCritHitEffect(transform);
+            else
+                UIManager.instance.SpawnNormalCritHitEffect(transform);
+            UIManager.instance.StartScreenshake(0.2f, 0.1f);
             FishingManager.instance.GainPoints((int)(value * criticalCatchPointsMultiplier));
         }
         else
         {
+            if (speedUp || speedDown)
+                UIManager.instance.SpawnMagicHitEffect(transform);
+            else
+                UIManager.instance.SpawnNormalHitEffect(transform);
             FishingManager.instance.GainPoints(value);
             float staminaLoss = Mathf.Clamp(strength - power, 0, maxStamina - currentStamina);
             if (!returning)
