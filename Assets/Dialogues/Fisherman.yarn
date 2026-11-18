@@ -394,14 +394,9 @@ title: TutorialMagic3
 position: 2652,12
 ---
 Nonno: Grazie… Però la prossima volta avvisa.
-//Inserire dialogo per far risalire l'amo
+Albert: Aspetta a ringraziare, non hai visto tutto...
+Albert: Hamus recurre, filum revoca!
 ===
-
-title: TutorialMagic4
----
-//Commento finale del nonno
-===
-
 
 title: PostTutorial
 position: 2872,12
@@ -838,6 +833,7 @@ Nonno: Capisco.
     <<set $lastChoiceGood = false>>
     Albert: Quando arriva, arriva… Va bene, nonno.
     Nonno: Sì, sì. Adesso meno parole e più lenza.
+<<ChangeScene "Fishing">>
 ===
 
 title: Go4
@@ -866,6 +862,7 @@ Nonno: Eh, lo so com'è.
     <<set $lastChoiceGood = false>>
     Albert: Grazie, nonno. Qui almeno mi sento a casa.
     Nonno: Perché sei a casa.
+<<ChangeScene "Fishing">>
 ===
 
 title: Go6
@@ -903,6 +900,7 @@ Albert: E adesso?
     <<set $lastChoiceGood = false>>
     Albert: Allora insegnamelo. Vengo più spesso.
     Nonno: Eh, sì. C'è tanto da imparare.
+<<ChangeScene "Fishing">>
 ===
 
 title: Go8
@@ -941,6 +939,7 @@ Albert: Non lo so. A volte mi aspetta dopo lezione. A volte no.
     Albert: Dici?
     Nonno: Dico. Qui ci conosciamo tutti. Là no.
     Albert: …Forse hai ragione. Meglio aspettare.
+<<ChangeScene "Fishing">>
 ===
 
 title: Go11
@@ -987,6 +986,7 @@ position: 1692,647
         Nonno: E di chi, sennò?
         Albert: …Va bene. Allora resto.
 <<endif>>
+<<ChangeScene "Fishing">>
 ===
 
 title: Go13
@@ -1018,6 +1018,7 @@ Albert: Non lo so. Dovrei stare via qualche giorno.
     Albert: Ti arrangi come?
     Nonno: Come ho sempre fatto.
     Albert: …No, dai. Mi sento in colpa così…
+<<ChangeScene "Fishing">>
 ===
 
 title: Go15
@@ -1051,6 +1052,7 @@ Nonno: Adesso sì.
     Albert: Prima cosa?
     Nonno: Niente. Pensa all'incantesimo.
     Albert: …Va bene.
+<<ChangeScene "Fishing">>
 ===
 
 title: Go16
@@ -1081,6 +1083,7 @@ Nonno: Chissà.
     Albert: Nonno, non dirlo neanche per scherzo.
     Nonno: Non scherzo. Dico com'è.
     Albert: …
+<<ChangeScene "Fishing">>
 ===
 
 title: Go24
@@ -1109,6 +1112,7 @@ Nonno: Per il forno. Sì, certo. Come no, quella vecchia arpia.
     <<set $lastChoiceGood = false>>
     Albert: Va bene, nonno. Dico che ho da fare.
     Nonno: Hai da fare. Con me.
+<<ChangeScene "Fishing">>
 ===
 
 title: GoLettera
@@ -1158,6 +1162,7 @@ position: 572,647
         Nonno: Io non ti ho mai detto di restare.
         Albert: No. Non l'hai mai detto.
     <<endif>>
+<<ChangeScene "Fishing">>
 ===
 
 title: Back2

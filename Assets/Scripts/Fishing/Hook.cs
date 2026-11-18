@@ -64,6 +64,7 @@ public class Hook : MonoBehaviour
     private bool returning = false;
     private bool grandsonHere;
     private bool overweight = false;
+    private bool dialogueAtStartDone = false;
     private bool dialogueAtReturnDone = false;
 
     public bool IsInTheSea() => inTheSea;
@@ -224,7 +225,11 @@ public class Hook : MonoBehaviour
         UIManager.instance.RefreshStaminaBar();
         UIManager.instance.ShowStaminaBar();
         UIManager.instance.ShowHookPositionSlider();
-        onEnterTheSea?.Invoke();
+        if (!dialogueAtStartDone)
+        {
+            dialogueAtStartDone = true;
+            onEnterTheSea?.Invoke();
+        }
     }
 
     public void ExitTheSea()

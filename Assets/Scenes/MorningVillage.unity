@@ -2802,7 +2802,7 @@ Tilemap:
       - {fileID: -1893457906, guid: aeb7d716c670a314b9ba921df9579d80, type: 3}
       - {fileID: 1750403448, guid: aeb7d716c670a314b9ba921df9579d80, type: 3}
       - {fileID: -1001050091, guid: aeb7d716c670a314b9ba921df9579d80, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 25, y: -4, z: 0}
@@ -4896,7 +4896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632f66337139fc8408eabca8a100e1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrandsonController
-  activationDistance: 4
+  activationDistance: 3
   targetDistance: 2
   movementForce: 5
   state: 0

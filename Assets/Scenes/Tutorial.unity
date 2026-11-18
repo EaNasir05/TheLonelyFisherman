@@ -440,7 +440,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &374564508
 Transform:
   m_ObjectHideFlags: 0
@@ -585,7 +585,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -743,8 +743,8 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 1587138943
-  m_SortingLayer: 1
+  m_SortingLayerID: -67037067
+  m_SortingLayer: -2
   m_SortingOrder: 2
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
@@ -3810,7 +3810,7 @@ Tilemap:
       - {fileID: -357874556, guid: f912dc3559406ce4987661e2312ca735, type: 3}
       - {fileID: -1716740865, guid: f912dc3559406ce4987661e2312ca735, type: 3}
       - {fileID: 737664686, guid: f912dc3559406ce4987661e2312ca735, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -14, y: -4, z: 0}
@@ -4114,7 +4114,7 @@ Tilemap:
       - {fileID: -357874556, guid: f912dc3559406ce4987661e2312ca735, type: 3}
       - {fileID: -1716740865, guid: f912dc3559406ce4987661e2312ca735, type: 3}
       - {fileID: 737664686, guid: f912dc3559406ce4987661e2312ca735, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 2, y: -4, z: 0}
@@ -5479,8 +5479,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -67037067
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 637e67ff4f131b04dbae049547c942eb, type: 3}
@@ -6165,9 +6165,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 1587138943
-  m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingLayerID: -67037067
+  m_SortingLayer: -2
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2551154364882007612, guid: e8c61c39d1a55ba4b8b9cdf7033c9264, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -7325,8 +7325,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48870debd39692b4fb3a4bd7d4d16111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DrawSecondLine
-  lineStartWidth: 0.1
-  lineEndWidth: 0.1
+  lineStartWidth: 0.05
+  lineEndWidth: 0.05
 --- !u!120 &1623355437
 LineRenderer:
   serializedVersion: 3
@@ -8339,8 +8339,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -67037067
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: cd3505c488f2ce74f86904e9d5caad79, type: 3}
@@ -9323,8 +9323,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DrawLine
   startPoint: {fileID: 2113703217}
   hook: {fileID: 1623355434}
-  lineStartWidth: 0.1
-  lineEndWidth: 0.1
+  lineStartWidth: 0.05
+  lineEndWidth: 0.05
 --- !u!120 &2113703219
 LineRenderer:
   serializedVersion: 3

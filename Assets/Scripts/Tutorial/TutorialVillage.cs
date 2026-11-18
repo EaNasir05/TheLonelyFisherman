@@ -19,8 +19,6 @@ public class TutorialVillage : MonoBehaviour
         {
             if (GameManager.instance.GetCurrentScene() == Scene.Village)
             {
-                if (GameManager.instance.GetBoatLevel() != 0)
-                shopTrigger.enabled = false;
                 colliderFishing.SetActive(true);
             }
             else

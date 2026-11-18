@@ -131,6 +131,8 @@ public class GameManager : MonoBehaviour
 
             case "Fishing":
                 currentScene = Scene.Fishing;
+                if (grandsonHere)
+                    UIManager.instance.ShowGrandson();
                 FishingManager.instance.Initialize();
                 break;
 
@@ -178,8 +180,12 @@ public class GameManager : MonoBehaviour
     public void SkipIntro()
     {
         tutorialState = 3;
-        currentScene = Scene.Fishing;
-        ChangeScene("EveningVillage");
+        boatLevel = 1;
+        day = 2;
+        SetYarnVariable("$dayIndex", 2);
+        UpdateGrandsonHere();
+        currentScene = Scene.Village;
+        ChangeScene("MorningVillage");
     }
 
     public void FadeIn()
@@ -206,6 +212,7 @@ public class GameManager : MonoBehaviour
     public void BuildBoat()
     {
         builtBoat = true;
+        AddMoney(-boatCosts[boatLevel]);
         boatLevel++;
         SetYarnVariable("$boatLevel", boatLevel);
         if (boatLevel == 5)
@@ -217,8 +224,9 @@ public class GameManager : MonoBehaviour
 
     private void UpdateGrandsonHere()
     {
-        int nextVisitDay = -1;
+        float nextVisitDay = -1;
         yarnVariableStorage.TryGetValue("$visitIndex", out nextVisitDay);
+        Debug.Log(day + " = " + nextVisitDay);
         if (nextVisitDay == day)
             grandsonHere = true;
         else

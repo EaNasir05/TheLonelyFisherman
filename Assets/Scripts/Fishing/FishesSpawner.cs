@@ -9,6 +9,7 @@ public class FishesSpawner : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private int layersPerBiome = 4; //Quanti layer compongono un bioma
     [SerializeField] private List<int> fishesOnLayerPerBiome; //Per ogni bioma, quanti pesci sono presenti in un layer
+    [SerializeField] private List<int> fishesOnLayerPerBiomeWithLowAffection;
     [SerializeField] private List<int> fishesOnLayerPerBiomeWithGrandson; //Per ogni bioma, quanti pesci sono presenti in un layer se è presente il nipote
     [SerializeField] private int numberOfLayersToSpawnOnStart = 3; //Quanti layer di pesci attivare con Initialize
     [SerializeField] private float unitsVisibleToCamera = 11; //Unità comprese nel campo visivo verticale della camera
@@ -46,10 +47,17 @@ public class FishesSpawner : MonoBehaviour
         int y = -1;
         Dictionary<string, int> fishesInLayer = null;
         List<int> fishesOnLayerPerBiome;
-        if (GameManager.instance.IsGrandsonHere() && GameManager.instance.GetAffection() >= -5)
-            fishesOnLayerPerBiome = fishesOnLayerPerBiomeWithGrandson;
+        if (GameManager.instance.IsGrandsonHere())
+        {
+            if (GameManager.instance.GetAffection() >= -5)
+                fishesOnLayerPerBiome = fishesOnLayerPerBiomeWithGrandson;
+            else
+                fishesOnLayerPerBiome = fishesOnLayerPerBiomeWithLowAffection;
+        }
         else
+        {
             fishesOnLayerPerBiome = this.fishesOnLayerPerBiome;
+        }
         for (int x = 0; x < layers; x++)
         {
             if ((x % layersPerBiome == 0 && y + 1 < biomes) || y == -1)

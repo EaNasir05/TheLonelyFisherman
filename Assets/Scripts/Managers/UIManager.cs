@@ -34,6 +34,7 @@ public class UIManager : MonoBehaviour
     public Action<bool> onShopInteraction;
 
     [Header("Fishing")]
+    [SerializeField] private GameObject grandson;
     [SerializeField] private TMP_Text fishingPoints;
     [SerializeField] private Slider attemptsSlider;
     [SerializeField] private GameObject resultsWindow;
@@ -74,6 +75,7 @@ public class UIManager : MonoBehaviour
         hookScript = FindFirstObjectByType<Hook>();
         staminaRectTransform = staminaSlider?.GetComponent<RectTransform>();
         eventSystem = FindFirstObjectByType<EventSystem>();
+        DialoguesManager.instance.onDialogueActivation += HideUpgradeInfoOnTalking;
     }
 
     #region Grandson
@@ -98,7 +100,9 @@ public class UIManager : MonoBehaviour
 
     public void ShowGrandson()
     {
-        grandsonController.gameObject.SetActive(true);
+        grandsonController?.gameObject.SetActive(true);
+        if (grandson != null)
+            grandson.SetActive(true);
     }
 
     public void MakeGrandsonFollow()
@@ -172,9 +176,16 @@ public class UIManager : MonoBehaviour
         upgradeInfo.SetActive(true);
     }
 
+    private void HideUpgradeInfoOnTalking(bool value)
+    {
+        if (value)
+            HideUpgradeInfo();
+    }
+
     public void HideUpgradeInfo()
     {
-        upgradeInfo.SetActive(false);
+        if (upgradeInfo != null)
+            upgradeInfo.SetActive(false);
     }
 
     #endregion Shop

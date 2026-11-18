@@ -77,6 +77,5 @@ public class TutorialFishing : MonoBehaviour
     private void Tutorial8()
     {
         GameManager.instance.tutorialState = 5;
-        DialoguesManager.instance.StartDialogue("TutorialMagic4");
     }
 }

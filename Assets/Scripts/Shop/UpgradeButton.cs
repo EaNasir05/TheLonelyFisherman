@@ -36,12 +36,13 @@ public class UpgradeButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler
 
     public void OnSelect(BaseEventData eventData)
     {
-        UpdateUpgradeInfo();
+        if (!DialoguesManager.instance.isTalking)
+            UpdateUpgradeInfo();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (available)
+        if (available && !DialoguesManager.instance.isTalking)
             eventSystem.SetSelectedGameObject(gameObject);
     }
 

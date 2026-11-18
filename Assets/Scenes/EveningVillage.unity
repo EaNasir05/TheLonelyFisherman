@@ -768,7 +768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632f66337139fc8408eabca8a100e1aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrandsonController
-  activationDistance: 4
+  activationDistance: 3
   targetDistance: 2
   movementForce: 5
   state: 0
@@ -11117,7 +11117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0f4d6516ae3be1409d59ddf3fa46712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialVillage
-  shopTrigger: {fileID: 629961740}
+  shopTrigger: {fileID: 0}
   villageTrigger: {fileID: 0}
   colliderHut: {fileID: 1979462468}
   colliderFishing: {fileID: 1269454662}
