@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public int tutorialState = 0;
     private int day = 0;
     private int boatLevel = 0;
+    private bool builtBoat = false;
     [SerializeField] private int[] boatCosts;
     private int money = 10;
     [SerializeField] private bool grandsonHere = false;
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
     public Scene GetCurrentScene() => currentScene;
     public int GetDay() => day;
     public int GetMoney() => money;
+    public int GetBoatLevel() => boatLevel;
 
     private void Awake()
     {
@@ -103,7 +105,11 @@ public class GameManager : MonoBehaviour
                 else if (previousScene == Scene.Boat)
                 {
                     PlayerSpawner.instance.SpawnPlayerFromBoat();
-                    UIManager.instance.onFadeIn += StartBoatDialogue;
+                    if (builtBoat)
+                    {
+                        builtBoat = false;
+                        UIManager.instance.onFadeIn += StartBoatDialogue;
+                    }
                 }
                 else if (previousScene == Scene.Fishing)
                 {
@@ -153,12 +159,18 @@ public class GameManager : MonoBehaviour
                 break;
         }
         Debug.Log("Setup scena " + currentScene);
-        PrintYarnVariable("$visitIndex");
     }
 
     public void ChangeScene(string sceneName)
     {
         StartCoroutine(UIManager.instance.FadeOut(1f, sceneName));
+    }
+
+    public void SkipIntro()
+    {
+        tutorialState = 3;
+        currentScene = Scene.Fishing;
+        ChangeScene("EveningVillage");
     }
 
     public void FadeIn()
@@ -184,8 +196,13 @@ public class GameManager : MonoBehaviour
 
     public void BuildBoat()
     {
+        builtBoat = true;
         boatLevel++;
         SetYarnVariable("$boatLevel", boatLevel);
+        if (boatLevel == 5)
+        {
+            SetYarnVariable("$boatBuilt", true);
+        }
         ChangeScene("EveningVillage");
     }
 

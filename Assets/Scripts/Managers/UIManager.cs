@@ -109,13 +109,13 @@ public class UIManager : MonoBehaviour
         upgradeInfo.SetActive(false);
         eventSystem.firstSelectedGameObject = startingNodeShop;
         shopMenu.SetActive(true);
-        onShopInteraction.Invoke(true);
+        onShopInteraction?.Invoke(true);
     }
 
     public void CloseShop()
     {
         shopMenu.SetActive(false);
-        onShopInteraction.Invoke(false);
+        onShopInteraction?.Invoke(false);
     }
 
     public void ShowCloseShopButton()

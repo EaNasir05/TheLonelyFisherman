@@ -221,7 +221,7 @@ position: 3092,237
 ---
 Riccardo: Peppe! Benvenuto al negozio di Riccardo.
 Riccardo: Con le monete del pesce, qui ti sistemi la canna. Lenza più lunga, amo più robusto, cose così.
-<<Jump ShopTutorial2>>
+<<jump ShopTutorial2>>
 ===
 
 title: ShopTutorial2

@@ -98,7 +98,7 @@ public class DialoguesManager : MonoBehaviour
 
     public void DialogueCompleted()
     {
-        onDialogueActivation.Invoke(false);
+        onDialogueActivation?.Invoke(false);
         isTalking = false;
         if (Time.timeScale == 0)
         {

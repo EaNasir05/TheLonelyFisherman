@@ -2,17 +2,16 @@ using UnityEngine;
 
 public class TutorialVillage : MonoBehaviour
 {
-    [SerializeField] private Collider2D triggerToBlockBoat;
-    [SerializeField] private Collider2D triggerToBlockVillage;
-    [SerializeField] private GameObject colliderToSpawnVillage;
-    [SerializeField] private GameObject colliderToSpawnBoat;
+    [SerializeField] private Collider2D shopTrigger;
+    [SerializeField] private Collider2D villageTrigger;
+    [SerializeField] private GameObject colliderHut;
+    [SerializeField] private GameObject colliderFishing;
 
     private void Start()
     {
         if (GameManager.instance.GetDay() == 0 && GameManager.instance.GetCurrentScene() == Scene.Village)
         {
-            triggerToBlockVillage.enabled = false;
-            colliderToSpawnVillage.SetActive(true);
+            colliderHut.SetActive(true);
             UIManager.instance.HideCloseShopButton();
             UIManager.instance.GetStartingNodeShop().GetComponent<UpgradeButton>().onPurchase += Tutorial1;
         }
@@ -20,17 +19,19 @@ public class TutorialVillage : MonoBehaviour
         {
             if (GameManager.instance.GetCurrentScene() == Scene.Village)
             {
-                colliderToSpawnBoat.SetActive(true);
+                if (GameManager.instance.GetBoatLevel() != 0)
+                shopTrigger.enabled = false;
+                colliderFishing.SetActive(true);
             }
             else
             {
-                triggerToBlockBoat.enabled = false;
+                villageTrigger.enabled = false;
             }
         }
     }
 
     private void Tutorial1()
     {
-        DialoguesManager.instance.StartDialogue("TutorialShop3");
+        DialoguesManager.instance.StartDialogue("ShopTutorial3");
     }
 }
