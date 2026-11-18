@@ -21,6 +21,8 @@ public class UIManager : MonoBehaviour
     [Header("Village")]
     [SerializeField] private GrandsonController grandsonController;
     [SerializeField] private TMP_Text moneyCount;
+    [SerializeField] private TMP_Text dayCount;
+    [SerializeField] private Vector2 dayCountPos;
     [SerializeField] private GameObject shopMenu;
     [SerializeField] private GameObject startingNodeShop;
     [SerializeField] private GameObject upgradeInfo;
@@ -128,6 +130,12 @@ public class UIManager : MonoBehaviour
     public void MakeGrandsonGoAway()
     {
         grandsonController.state = GrandsonState.Escaping;
+    }
+
+    public void UpdateDayCount(int day)
+    {
+        dayCount.rectTransform.position = dayCountPos;
+        dayCount.text = day + " Luglio";
     }
 
     #endregion Grandson

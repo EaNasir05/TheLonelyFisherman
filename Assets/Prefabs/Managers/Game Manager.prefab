@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPaused: 0
   tutorialState: 0
-  boatCosts: 0500000096000000e8030000b80b0000401f0000
+  boatCosts: 0500000096000000e8030000d0070000a00f0000
   grandsonHere: 0
   upgradesList: {fileID: 11400000, guid: 0f85817bb1801744baee230bd2451712, type: 2}
 --- !u!114 &7896068036219356865

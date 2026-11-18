@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour
             case "MorningVillage":
                 currentScene = Scene.Village;
                 UIManager.instance.UpdateMoneyCount(money);
+                UIManager.instance.UpdateDayCount(day + 1);
                 if (previousScene == Scene.Village)
                 {
                     PlayerSpawner.instance.SpawnPlayerFromVillage();
@@ -146,6 +147,7 @@ public class GameManager : MonoBehaviour
             case "Boat":
                 currentScene = Scene.Boat;
                 UIManager.instance.UpdateMoneyCount(money);
+                UIManager.instance.UpdateDayCount(day + 1);
                 bool upgradable = money >= boatCosts[boatLevel];
                 SetYarnVariable("$boatUpgradable", upgradable);
                 SetYarnVariable("$boatCost", boatCosts[boatLevel]);
@@ -154,6 +156,7 @@ public class GameManager : MonoBehaviour
 
             case "GoingToFish":
                 currentScene = Scene.Interlude;
+                UIManager.instance.UpdateDayCount(day + 1);
                 UIManager.instance.onFadeIn += StartInterludeDialogue;
                 break;
 

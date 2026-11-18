@@ -8273,11 +8273,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 60147640229275356, guid: 5efc8207814ed0441a2c2d56c9df700c, type: 3}
       propertyPath: 'boatCosts.Array.data[3]'
-      value: 3000
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 60147640229275356, guid: 5efc8207814ed0441a2c2d56c9df700c, type: 3}
       propertyPath: 'boatCosts.Array.data[4]'
-      value: 8000
+      value: 4000
       objectReference: {fileID: 0}
     - target: {fileID: 1025412147329288980, guid: 5efc8207814ed0441a2c2d56c9df700c, type: 3}
       propertyPath: sceneMusic.Array.size

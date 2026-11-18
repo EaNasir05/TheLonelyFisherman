@@ -10,6 +10,7 @@ public class Hook : MonoBehaviour
 
     private InputHandler inputHandler;
     private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
     private Shooting shootingSystem;
 
     [Header("Movement")]
@@ -83,6 +84,7 @@ public class Hook : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         inputHandler = FindFirstObjectByType<InputHandler>();
         inputHandler.onMoveInput += UpdateMoveInput;
         inputHandler.onSpeedUpInput += SpeedUp;
@@ -143,9 +145,15 @@ public class Hook : MonoBehaviour
             if (grandsonHere)
             {
                 if (value)
+                {
                     rb.linearVelocityY = verticalSpeed * verticalSpeedUpMultiplier;
+                    spriteRenderer.color = Color.yellow;
+                }
                 else
+                {
                     rb.linearVelocityY = verticalSpeed;
+                    spriteRenderer.color = Color.white;
+                }
             }
             else
             {
@@ -163,12 +171,14 @@ public class Hook : MonoBehaviour
                 {
                     UIManager.instance.IncreaseStaminaBarScale();
                     speedUp = true;
+                    spriteRenderer.color = Color.yellow;
                     rb.linearVelocityY = -verticalSpeed * verticalSpeedUpMultiplier;
                 }
                 else if (speedUp)
                 {
                     UIManager.instance.ResetStaminaBarScale();
                     speedUp = false;
+                    spriteRenderer.color = Color.white;
                     rb.linearVelocityY = -verticalSpeed;
                 }
             }
@@ -184,9 +194,15 @@ public class Hook : MonoBehaviour
             if (returning)
             {
                 if (value)
+                {
                     rb.linearVelocityY = verticalSpeed * verticalSpeedDownMultiplier;
+                    spriteRenderer.color = Color.yellow;
+                }
                 else
+                {
                     rb.linearVelocityY = verticalSpeed;
+                    spriteRenderer.color = Color.white;
+                }
             }
             else if (inTheSea)
             {
@@ -194,12 +210,14 @@ public class Hook : MonoBehaviour
                 {
                     UIManager.instance.IncreaseStaminaBarScale();
                     speedDown = true;
+                    spriteRenderer.color = Color.yellow;
                     rb.linearVelocityY = -verticalSpeed * verticalSpeedDownMultiplier;
                 }
                 else if (speedDown)
                 {
                     UIManager.instance.ResetStaminaBarScale();
                     speedDown = false;
+                    spriteRenderer.color = Color.white;
                     rb.linearVelocityY = -verticalSpeed;
                 }
             }
@@ -264,6 +282,7 @@ public class Hook : MonoBehaviour
         speedUp = false;
         rb.linearVelocity = Vector2.zero;
         SFXManager.Play(SFX.ExitTheSea);
+        spriteRenderer.color = Color.white;
         UIManager.instance.HideStaminaBar();
         UIManager.instance.HideHookPositionSlider();
         foreach (FishController fish in fishesCatched)
@@ -281,6 +300,7 @@ public class Hook : MonoBehaviour
         returning = true;
         if (grandsonHere)
         {
+            spriteRenderer.color = Color.yellow;
             rb.linearVelocityY = verticalSpeed;
             speedUp = true;
         }
@@ -316,6 +336,7 @@ public class Hook : MonoBehaviour
         speedDown = false;
         speedUp = false;
         rb.linearVelocityY = 0;
+        spriteRenderer.color = Color.white;
         yield return new WaitForSeconds(1f);
         StartReturning();
     }
