@@ -96,21 +96,21 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: ca3e6e45679ed8b4586e3e177f305986, type: 3}
     lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
     unlocked: 0
-    cost: 700
+    cost: 500
   - name: Piombino equilibrato 2
     description: Riduce il numero di pesci persi in caso di sovraccarico.
     effect: 5 >> 4
     icon: {fileID: 21300000, guid: 1879df4a2fc897d48b1540ff15f96d82, type: 3}
     lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
     unlocked: 0
-    cost: 2500
+    cost: 2000
   - name: Piombino equilibrato 3
     description: Riduce il numero di pesci persi in caso di sovraccarico.
     effect: 4 >> 3
     icon: {fileID: 21300000, guid: c093d1e36f982604a947f042da4ec3b8, type: 3}
     lockedIcon: {fileID: 21300000, guid: e75fb3e086d372d4bb7b732896a8ce86, type: 3}
     unlocked: 0
-    cost: 4000
+    cost: 3000
   - name: Manico ergonomico 1
     description: Riduce la stamina persa nel tempo.
     effect: 100% >> 85%
