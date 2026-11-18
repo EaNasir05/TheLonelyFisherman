@@ -80,7 +80,7 @@ MonoBehaviour:
     - fishType: Sogliola
       percentage: 70
     - fishType: Merluzzo
-      percentage: 30
+      percentage: 40
   - fishes:
     - fishType: Sardina
       percentage: 80
