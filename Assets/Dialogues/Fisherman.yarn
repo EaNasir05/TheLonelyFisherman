@@ -130,9 +130,18 @@ Vuoi andare a pescare?
     <<set $confirm = false>>
 ===
 
-title: cantiere
+title: Cantiere
 ---
-<<ChangeScene "MorningBoat">>
+<<if $dayIndex == $visitIndex>>
+    Non è ancora il momento di rivelare la sorpresa.
+<<else>>
+    <<ChangeScene "MorningBoat">>
+<<endif>>
+===
+
+title: Villaggio
+---
+<<ChangeScene "MorningVillage">>
 ===
 
 title: Boat
