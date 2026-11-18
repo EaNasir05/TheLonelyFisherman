@@ -2757,8 +2757,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213c337f2ed4e9b4abe30da50e208a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterMovement
-  moveSpeed: 5
-  acceleration: 10
+  moveSpeed: 3.33
+  acceleration: 6
 --- !u!212 &860100372
 SpriteRenderer:
   serializedVersion: 2
@@ -2808,7 +2808,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: a34e0468b3033f948af803db48a52d85, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 637e67ff4f131b04dbae049547c942eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
