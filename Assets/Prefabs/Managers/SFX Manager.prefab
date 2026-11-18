@@ -1867,8 +1867,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SFXManager
   sounds:
   - sound: 0
-    clip: {fileID: 8300000, guid: f93fc3eaab9ed93468dd8b977ba62d16, type: 3}
-    volume: 0.6
+    clip: {fileID: 8300000, guid: dae572df94af30344b97d2b517e2f7d0, type: 3}
+    volume: 1
     randomPitch: 0
   - sound: 1
     clip: {fileID: 8300000, guid: 846c478a2f52aa04f8a8d9bfcb51300e, type: 3}
@@ -1888,7 +1888,7 @@ MonoBehaviour:
     randomPitch: 1
   - sound: 5
     clip: {fileID: 8300000, guid: 142051fb6ed35ce479b643b412b83b9b, type: 3}
-    volume: 1
+    volume: 0.7
     randomPitch: 1
   - sound: 6
     clip: {fileID: 8300000, guid: 9ea2cb80cd6e4c44790ea396ea0455e5, type: 3}
@@ -1911,12 +1911,20 @@ MonoBehaviour:
     volume: 1
     randomPitch: 0
   - sound: 11
-    clip: {fileID: 8300000, guid: 13e127624bb78f84986b2961f34e9956, type: 3}
+    clip: {fileID: 8300000, guid: e98bdff110b5d784b87b33c027667370, type: 3}
     volume: 1
     randomPitch: 0
   - sound: 12
     clip: {fileID: 8300000, guid: 42ea5ce3755285543bf68f1bb87b5134, type: 3}
     volume: 1
+    randomPitch: 0
+  - sound: 13
+    clip: {fileID: 8300000, guid: a7f4a8a2259c69d4dba6d4ad49a1d345, type: 3}
+    volume: 0.6
+    randomPitch: 0
+  - sound: 14
+    clip: {fileID: 8300000, guid: c9fc757e8eca3234ea987f7d8c87628d, type: 3}
+    volume: 0.6
     randomPitch: 0
   voices: 10
   randomPitchRange: {x: 0.85, y: 1.15}

@@ -136,6 +136,8 @@ public class Hook : MonoBehaviour
 
     private void SpeedUp(bool value)
     {
+        if (value && grandsonHere && (returning || inTheSea) && !FishingManager.instance.stop)
+            SFXManager.Play(SFX.MagicHit);
         if (returning)
         {
             if (grandsonHere)
@@ -261,6 +263,7 @@ public class Hook : MonoBehaviour
         returnScheduled = false;
         speedUp = false;
         rb.linearVelocity = Vector2.zero;
+        SFXManager.Play(SFX.ExitTheSea);
         UIManager.instance.HideStaminaBar();
         UIManager.instance.HideHookPositionSlider();
         foreach (FishController fish in fishesCatched)
@@ -426,7 +429,7 @@ public class Hook : MonoBehaviour
             if (speedUp || speedDown)
             {
                 UIManager.instance.SpawnMagicHitEffect(transform);
-                SFXManager.Play(SFX.MagicHit);
+                SFXManager.Play(SFX.NormalHit);
             }
             else
             {

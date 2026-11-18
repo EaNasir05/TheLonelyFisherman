@@ -23,6 +23,8 @@ public enum SFX
     Sovraccarico,
     // Aggiungi i nuovi suoni sempre in fondo: Unity salva la posizione, non il nome.
     ShopOpen,
+    ExitTheSea,
+    PurchaseFailed
 }
 
 [Serializable]

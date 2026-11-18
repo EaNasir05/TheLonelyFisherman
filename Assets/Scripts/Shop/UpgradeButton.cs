@@ -94,7 +94,7 @@ public class UpgradeButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler
             int cost = upgrade.cost;
             if (GameManager.instance.GetMoney() >= cost)
             {
-                //sfx acquisto
+                SFXManager.Play(SFX.Money);
                 GameManager.instance.AddMoney(-cost);
                 upgrade.unlocked = true;
                 UpdateButton(true);
@@ -103,8 +103,7 @@ public class UpgradeButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler
             }
             else
             {
-                Debug.Log("NOPE");
-                //sfx acquisto rifiutato
+                SFXManager.Play(SFX.PurchaseFailed);
             }
         }
     }
