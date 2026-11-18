@@ -134,7 +134,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateDayCount(int day)
     {
-        dayCount.rectTransform.position = dayCountPos;
+        dayCount.transform.parent.GetComponent<RectTransform>().localPosition = dayCountPos;
         dayCount.text = day + " Luglio";
     }
 
