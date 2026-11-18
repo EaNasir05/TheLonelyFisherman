@@ -5,7 +5,7 @@ position: 12,12
 <<declare $posValue = 0>>
 <<declare $negValue = 0>>
 <<declare $lastChoiceGood = true>> // ultima scelta: true = A, false = B
-<<declare $dayIndex = 1>> //Variabile che controlla il giorno corrente
+<<declare $dayIndex = 0>> //Variabile che controlla il giorno corrente
 <<declare $boatBuilt = false>> //Variabile che controlla se la è barca finita
 <<declare $letterDone = false>> //Variabile che controlla se la scena di non ritorno è già avvenuta.
 <<declare $visitIndex = 2>>
@@ -128,6 +128,11 @@ Vuoi andare a pescare?
     <<GoFishing>>
 -> No
     <<set $confirm = false>>
+===
+
+title: cantiere
+---
+<<ChangeScene "MorningBoat">>
 ===
 
 title: Boat
@@ -396,7 +401,10 @@ Nonno: Ah… devo essermi addormentato.
 Nonno: Hmm, la barca…
 Nonno: Il buon Albert torna finalmente in paese. Nella lettera dice che resta un mese.
 Nonno: Mi sembra giusto mantenerla, quella promessa.
-Nonno: Il legno buono costa. Ci vorrà parecchio pesce.
+Nonno: Se non ricordo male, è rimasta ancora una barca nel cantiere navale al molo...
+Nonno: Anche se per ricostruirla ci vorrà un bel po' di tempo.
+Nonno: Per non parlare dei costi di produzione!
+Nonno: Ci vorrà parecchio pesce e sudore...
 Nonno: E Albert non dovrà saper nulla finché la barca non è pronta. Deve rimanere una sorpresa!
 Nonno: Bene. È il momento di prendere un po' di pesci.
 ===
@@ -412,7 +420,7 @@ title: Day1
 ---
 Nonno: Oggi è decisamente una bella giornata.
 Nonno: Fin troppo bella per stare chiuso tutto il giorno nel cantiere navale.
-Nonno: A questo punto però non posso permettermi di posticipare la costruzione della barca.
+Nonno: Tuttavia non posso permettermi di posticipare la costruzione della barca.
 ===
 
 title: Day2

@@ -145,6 +145,7 @@ public class GameManager : MonoBehaviour
 
             case "MainMenu":
                 currentScene = Scene.Menu;
+                DialoguesManager.instance.StartDialogue("Start");
                 break;
 
             case "Tutorial":

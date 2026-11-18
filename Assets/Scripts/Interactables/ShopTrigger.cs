@@ -2,16 +2,21 @@ using UnityEngine;
 
 public class ShopTrigger : MonoBehaviour
 {
+    [SerializeField] private string nodeName = "Shop";
     [SerializeField] private GameObject inputIcon;
     [SerializeField] private SpriteRenderer interactableRenderer;
     [SerializeField] private Color interactableColor = Color.yellow;
     private InputHandler inputHandler;
     private bool playerHere = false;
+    private bool shopping = false;
+
+    public void SetShopping(bool value) => shopping = value;
 
     private void Start()
     {
         inputHandler = FindFirstObjectByType<InputHandler>();
         inputHandler.onInteractInput += OpenShop;
+        UIManager.instance.onShopInteraction += SetShopping;
     }
 
     private void OnDestroy()
@@ -45,7 +50,10 @@ public class ShopTrigger : MonoBehaviour
 
     public void OpenShop()
     {
-        if (playerHere)
+        if (playerHere && !shopping)
+        {
             UIManager.instance.OpenShop();
+            DialoguesManager.instance.StartDialogue(nodeName);
+        }
     }
 }

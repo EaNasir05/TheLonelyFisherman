@@ -56,10 +56,14 @@ public class DialoguesManager : MonoBehaviour
             dialogueRunner.AddCommandHandler("NextDay", GameManager.instance.NextDay);
             dialogueRunner.AddCommandHandler("GoFishing", GameManager.instance.GoFishing);
             dialogueRunner.AddCommandHandler("BuildBoat", GameManager.instance.BuildBoat);
-            dialogueRunner.AddCommandHandler("CloseShopUnlocked", UIManager.instance.ShowCloseShopButton);
             dialogueRunner.onDialogueComplete.AddListener(DialogueCompleted);
             commandsReady = true;
         }
+    }
+
+    public void AddStupidFuckingCommand()
+    {
+        dialogueRunner.AddCommandHandler("CloseShopUnlocked", UIManager.instance.ShowCloseShopButton);
     }
 
     public void StartDialogue(string nodeName)

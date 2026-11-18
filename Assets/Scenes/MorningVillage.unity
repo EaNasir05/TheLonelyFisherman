@@ -2533,7 +2533,7 @@ Tilemap:
       - {fileID: -1893457906, guid: aeb7d716c670a314b9ba921df9579d80, type: 3}
       - {fileID: 1750403448, guid: aeb7d716c670a314b9ba921df9579d80, type: 3}
       - {fileID: -1001050091, guid: aeb7d716c670a314b9ba921df9579d80, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 12, y: -4, z: 0}
@@ -3464,7 +3464,6 @@ GameObject:
   - component: {fileID: 704894686}
   - component: {fileID: 704894683}
   - component: {fileID: 704894685}
-  - component: {fileID: 704894684}
   m_Layer: 0
   m_Name: ShopTrigger
   m_TagString: Untagged
@@ -3518,22 +3517,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.9999993, y: 1}
   m_EdgeRadius: 0
---- !u!114 &704894684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 704894682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b7bd7ebd204f2c41af5f5ab3e9ce50b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
-  dialogueNode: Shop
-  inputIcon: {fileID: 0}
-  interactableRenderer: {fileID: 0}
-  interactableColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &704894685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3546,6 +3529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e26cc082ea03c0342bf5b477e77cb9fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopTrigger
+  nodeName: Shop
   inputIcon: {fileID: 674417399}
   interactableRenderer: {fileID: 740742498}
   interactableColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

@@ -32,6 +32,8 @@ public class TutorialVillage : MonoBehaviour
 
     private void Tutorial1()
     {
+        DialoguesManager.instance.AddStupidFuckingCommand();
         DialoguesManager.instance.StartDialogue("ShopTutorial3");
+        colliderHut.SetActive(false);
     }
 }
