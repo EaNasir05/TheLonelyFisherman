@@ -16,6 +16,14 @@ PrefabInstance:
       propertyPath: useFadeEffect
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2958262985454349548, guid: 52571f68872914e24837210513edea1d, type: 3}
+      propertyPath: eventHandlers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958262985454349548, guid: 52571f68872914e24837210513edea1d, type: 3}
+      propertyPath: 'eventHandlers.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8275201933981615125}
     - target: {fileID: 2958262986520364887, guid: 52571f68872914e24837210513edea1d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -74,11 +82,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7985477256237130417, guid: 52571f68872914e24837210513edea1d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -6.04474
       objectReference: {fileID: 0}
     - target: {fileID: 7985477256237130417, guid: 52571f68872914e24837210513edea1d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -36.7341
       objectReference: {fileID: 0}
     - target: {fileID: 7985477256237130417, guid: 52571f68872914e24837210513edea1d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -158,6 +166,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3416868783655305253, guid: 52571f68872914e24837210513edea1d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9165748701239332968}
+    - targetCorrespondingSourceObject: {fileID: 2958262985454349538, guid: 52571f68872914e24837210513edea1d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8275201933981615125}
     - targetCorrespondingSourceObject: {fileID: 3859336324316773512, guid: 52571f68872914e24837210513edea1d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8276891905310068106}
@@ -170,12 +181,74 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2958262985454349548, guid: 52571f68872914e24837210513edea1d, type: 3}
   m_PrefabInstance: {fileID: 804811413555161113}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2460829293972014331}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7dd50f871a60b4bbe88a71d308b2613f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2460829293972014331 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2958262985454349538, guid: 52571f68872914e24837210513edea1d, type: 3}
+  m_PrefabInstance: {fileID: 804811413555161113}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8275201933981615125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2460829293972014331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a580d5afe90d6e34a852329a65de9223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VoiceBlips
+  voices:
+  - characterName: Nonno
+    blips:
+    - {fileID: 8300000, guid: 9d32c7ae98cc0504f8dc1f460a015388, type: 3}
+    - {fileID: 8300000, guid: 5797599f2073b094d9ed8f2d379d6515, type: 3}
+    - {fileID: 8300000, guid: 084fa90d33040754ea6eaf7467c1ea35, type: 3}
+    volume: 0.3
+    pitch: 0.8
+    pitchVariation: 0.07
+    everyNLetters: 3
+  - characterName: Albert
+    blips:
+    - {fileID: 8300000, guid: 0225a688bc4ee2a42b147cc8d47ab94c, type: 3}
+    - {fileID: 8300000, guid: 3c570e5ded67dc1489293bc6e5f66835, type: 3}
+    - {fileID: 8300000, guid: 8078ae6110c414846acbcb69683ab6ef, type: 3}
+    volume: 0.3
+    pitch: 1.3
+    pitchVariation: 0.05
+    everyNLetters: 2
+  - characterName: Riccardo
+    blips:
+    - {fileID: 8300000, guid: 54267ababd07370488b7e5b1f994b797, type: 3}
+    - {fileID: 8300000, guid: fa0b68d07f2fac144b19911d4fec7566, type: 3}
+    - {fileID: 8300000, guid: 80e94862a9b61764fb4b6a4acce346bd, type: 3}
+    volume: 0.3
+    pitch: 1.05
+    pitchVariation: 0.03
+    everyNLetters: 2
+  narratorHasVoice: 0
+  narratorVoice:
+    characterName: Narratore
+    blips: []
+    volume: 0.5
+    pitch: 1
+    pitchVariation: 0.05
+    everyNLetters: 0
+  everyNLetters: 2
+  defaultVoice:
+    characterName: Default
+    blips: []
+    volume: 0.5
+    pitch: 1
+    pitchVariation: 0.05
+    everyNLetters: 0
+  outputGroup: {fileID: 0}
 --- !u!1 &2612206227761391676 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3416868783655305253, guid: 52571f68872914e24837210513edea1d, type: 3}

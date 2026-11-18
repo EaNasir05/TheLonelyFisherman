@@ -66,6 +66,7 @@ public class Hook : MonoBehaviour
     private bool overweight = false;
     private bool dialogueAtStartDone = false;
     private bool dialogueAtReturnDone = false;
+    private int risingLoopId = 0;
 
     public bool IsInTheSea() => inTheSea;
     public bool IsReturning() => returning;
@@ -102,10 +103,27 @@ public class Hook : MonoBehaviour
             UpdateStaminaAndWeightOvertime();
             CheckVerticalPosition();
         }
+        UpdateRisingSound();
+    }
+
+    // Suono "AmoRising" in loop finché l'amo sta effettivamente risalendo.
+    private void UpdateRisingSound()
+    {
+        bool rising = returning && inTheSea && rb != null && rb.linearVelocityY > 0.01f && !FishingManager.instance.stop;
+        if (rising && risingLoopId == 0)
+        {
+            risingLoopId = SFXManager.PlayLoop(SFX.AmoRising);
+        }
+        else if (!rising && risingLoopId != 0)
+        {
+            SFXManager.StopLoop(risingLoopId);
+            risingLoopId = 0;
+        }
     }
 
     private void OnDestroy()
     {
+        SFXManager.StopLoop(risingLoopId);
         inputHandler.onMoveInput -= UpdateMoveInput;
         inputHandler.onSpeedUpInput -= SpeedUp;
         inputHandler.onSpeedDownInput -= SpeedDown;
@@ -156,6 +174,8 @@ public class Hook : MonoBehaviour
 
     private void SpeedDown(bool value)
     {
+        if (value && grandsonHere && (returning || inTheSea) && !FishingManager.instance.stop)
+            SFXManager.Play(SFX.SlowedMagic);
         if (grandsonHere)
         {
             if (returning)
@@ -222,6 +242,7 @@ public class Hook : MonoBehaviour
         inTheSea = true;
         rb.linearVelocity = Vector2.down * verticalSpeed;
         currentStamina = maxStamina;
+        SFXManager.Play(SFX.HookLanding);
         UIManager.instance.RefreshStaminaBar();
         UIManager.instance.ShowStaminaBar();
         UIManager.instance.ShowHookPositionSlider();
@@ -342,6 +363,7 @@ public class Hook : MonoBehaviour
     private IEnumerator Overweight()
     {
         overweight = true;
+        SFXManager.Play(SFX.Sovraccarico);
         int pointsLoss = 0;
         for (int i = 1; i <= fishesToLoseOnOverweight; i++)
         {
@@ -380,15 +402,22 @@ public class Hook : MonoBehaviour
                 UIManager.instance.SpawnMagicCritHitEffect(transform);
             else
                 UIManager.instance.SpawnNormalCritHitEffect(transform);
+            SFXManager.Play(SFX.CriticalHit);
             UIManager.instance.StartScreenshake(0.2f, 0.1f);
             FishingManager.instance.GainPoints((int)(value * criticalCatchPointsMultiplier));
         }
         else
         {
             if (speedUp || speedDown)
+            {
                 UIManager.instance.SpawnMagicHitEffect(transform);
+                SFXManager.Play(SFX.MagicHit);
+            }
             else
+            {
                 UIManager.instance.SpawnNormalHitEffect(transform);
+                SFXManager.Play(SFX.NormalHit);
+            }
             FishingManager.instance.GainPoints(value);
             float staminaLoss = Mathf.Clamp(strength - power, 0, maxStamina - currentStamina);
             if (!returning)

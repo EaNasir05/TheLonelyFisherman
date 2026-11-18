@@ -14,6 +14,7 @@ public class CharacterMovement : MonoBehaviour
     private bool talking = false;
     private bool shopping = false;
     private Direction currentDirection = Direction.Left;
+    private int walkLoopId = 0;
 
     private void Start()
     {
@@ -28,9 +29,31 @@ public class CharacterMovement : MonoBehaviour
 
     private void OnDestroy()
     {
+        SFXManager.StopLoop(walkLoopId);
         inputHandler.onMoveInput -= SetMoveInput;
         DialoguesManager.instance.onDialogueActivation -= SetTalking;
         UIManager.instance.onShopInteraction -= SetShopping;
+    }
+
+    private void Update()
+    {
+        UpdateWalkSound();
+    }
+
+    // Suono "CamminataLoop" finché il giocatore cammina nelle scene del villaggio.
+    private void UpdateWalkSound()
+    {
+        bool walking = !talking && !shopping && Mathf.Abs(moveInput) > 0.01f
+            && GameManager.instance != null && GameManager.instance.GetCurrentScene() == Scene.Village;
+        if (walking && walkLoopId == 0)
+        {
+            walkLoopId = SFXManager.PlayLoop(SFX.CamminataLoop);
+        }
+        else if (!walking && walkLoopId != 0)
+        {
+            SFXManager.StopLoop(walkLoopId);
+            walkLoopId = 0;
+        }
     }
 
     private void FixedUpdate()

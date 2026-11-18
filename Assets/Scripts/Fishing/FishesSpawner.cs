@@ -141,6 +141,8 @@ public class FishesSpawner : MonoBehaviour
                 {
                     FishesPool.instance.DeactivateFish(kvp.Value[j], kvp.Key);
                 }
+                // Svuota la lista: quei pesci ora sono nel pool e potrebbero essere riusati in un altro layer.
+                kvp.Value.Clear();
             }
         }
     }

@@ -42,6 +42,9 @@ public class GameManager : MonoBehaviour
         }
         else if (instance != this)
         {
+            // Copia duplicata: disattivala subito, altrimenti riceve comunque sceneLoaded
+            // e riesegue l'inizializzazione della scena prima di essere distrutta.
+            enabled = false;
             Destroy(gameObject);
         }
     }
@@ -63,6 +66,8 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(UnityEngine.SceneManagement.Scene arg0, LoadSceneMode arg1)
     {
+        if (instance != this)
+            return;
         Initialize();
     }
 
@@ -159,8 +164,18 @@ public class GameManager : MonoBehaviour
 
             case "Tutorial":
                 currentScene = Scene.Tutorial;
-                FishingManager.instance.Initialize();
+                // Prima facciamo partire il prologo: se l'inizializzazione della pesca
+                // lancia un'eccezione, il prologo (e il FadeIn) partono comunque.
                 StartCoroutine(StartPrologueDialogue());
+                try
+                {
+                    FishingManager.instance.Initialize();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError("[GameManager] Errore in FishingManager.Initialize nella scena Tutorial:");
+                    Debug.LogException(e);
+                }
                 break;
 
             default:
@@ -211,6 +226,7 @@ public class GameManager : MonoBehaviour
 
     public void BuildBoat()
     {
+        SFXManager.Play(SFX.CostruzioneBarca);
         builtBoat = true;
         AddMoney(-boatCosts[boatLevel]);
         boatLevel++;
@@ -299,8 +315,40 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator StartPrologueDialogue()
     {
-        yield return new WaitForSeconds(1f);
-        DialoguesManager.instance.StartDialogue("Prologo");
+        // Realtime: se per qualsiasi motivo Time.timeScale fosse 0, WaitForSeconds non finirebbe mai.
+        yield return new WaitForSecondsRealtime(1f);
+
+        // Aspetta (max 3 s) che non ci siano altri dialoghi in corso, es. "Start" del menu.
+        float waited = 0f;
+        while (DialoguesManager.instance != null && DialoguesManager.instance.IsBusy && waited < 3f)
+        {
+            waited += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        if (DialoguesManager.instance == null)
+        {
+            Debug.LogError("[GameManager] DialoguesManager.instance è null: impossibile avviare il Prologo.");
+        }
+        else
+        {
+            DialoguesManager.instance.StartDialogue("Prologo");
+            // L'avvio può essere rimandato di un attimo: aspettiamo fino a 3 s che parta.
+            float waitedStart = 0f;
+            while (!DialoguesManager.instance.isTalking && waitedStart < 3f)
+            {
+                waitedStart += Time.unscaledDeltaTime;
+                yield return null;
+            }
+            if (DialoguesManager.instance.isTalking)
+                yield break;
+            Debug.LogError("[GameManager] Il dialogo 'Prologo' non è partito (vedi i messaggi sopra nel log).");
+        }
+
+        // Rete di sicurezza: se il Prologo non parte, almeno togliamo il nero
+        // così il gioco non resta bloccato.
+        Time.timeScale = 1;
+        FadeIn();
     }
 
     private void StartBoatDialogue()

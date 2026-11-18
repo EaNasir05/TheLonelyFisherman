@@ -81,7 +81,16 @@ public class UIManager : MonoBehaviour
         hookScript = FindFirstObjectByType<Hook>();
         staminaRectTransform = staminaSlider?.GetComponent<RectTransform>();
         eventSystem = FindFirstObjectByType<EventSystem>();
-        DialoguesManager.instance.onDialogueActivation += HideUpgradeInfoOnTalking;
+        if (DialoguesManager.instance != null)
+            DialoguesManager.instance.onDialogueActivation += HideUpgradeInfoOnTalking;
+    }
+
+    private void OnDestroy()
+    {
+        // Senza questo, lo UIManager di ogni scena precedente restava iscritto all'evento
+        // anche dopo essere stato distrutto.
+        if (DialoguesManager.instance != null)
+            DialoguesManager.instance.onDialogueActivation -= HideUpgradeInfoOnTalking;
     }
 
     #region Grandson
@@ -139,6 +148,7 @@ public class UIManager : MonoBehaviour
         upgradeInfo.SetActive(false);
         eventSystem.firstSelectedGameObject = startingNodeShop;
         shopMenu.SetActive(true);
+        SFXManager.Play(SFX.ShopOpen);
         onShopInteraction?.Invoke(true);
     }
 
@@ -217,6 +227,7 @@ public class UIManager : MonoBehaviour
     public void ShowFishingResults(int money)
     {
         resultsText.text = "Hai guadagnato " + money + "€!";
+        SFXManager.Play(SFX.Money);
         eventSystem.SetSelectedGameObject(exitSceneButton);
         resultsWindow.SetActive(true);
     }

@@ -129,7 +129,7 @@ public class Shooting : MonoBehaviour
         if (value && !isShot && !FishingManager.instance.stop)
         {
             FishingManager.instance.StartFishingAttempt();
-            //SoundEffectsManager.instance.PlaySFXClip(hookThrowAudio, 1);
+            SFXManager.Play(SFX.HookThrow);
             isShot = true;
             hookRB.gravityScale = 1f;
             hookRB.transform.position = transform.position;

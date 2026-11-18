@@ -1865,23 +1865,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 256ffc8dd0222f14eac1064e0eadd44f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SFXManager
-  sources:
-  - {fileID: 226498357777731208}
-  - {fileID: 5427933890504867255}
-  - {fileID: 5007436805823049078}
-  - {fileID: 7191782746122352897}
-  - {fileID: 5492517703275731325}
-  - {fileID: 3507278734402386775}
-  - {fileID: 7618850155543235936}
-  - {fileID: 8726171056641088053}
-  - {fileID: 8912334920327133479}
-  - {fileID: 172273279427699169}
-  - {fileID: 7993542617403793823}
-  - {fileID: 1331866720005762268}
-  - {fileID: 1886618191468345299}
-  - {fileID: 1032699915890757814}
-  - {fileID: 62437020326107385}
+  sounds:
+  - sound: 0
+    clip: {fileID: 8300000, guid: f93fc3eaab9ed93468dd8b977ba62d16, type: 3}
+    volume: 0.6
+    randomPitch: 0
+  - sound: 1
+    clip: {fileID: 8300000, guid: 846c478a2f52aa04f8a8d9bfcb51300e, type: 3}
+    volume: 1
+    randomPitch: 0
+  - sound: 2
+    clip: {fileID: 8300000, guid: 33ae1752ab4454c40a8eb74ae77dbc77, type: 3}
+    volume: 1
+    randomPitch: 0
+  - sound: 3
+    clip: {fileID: 8300000, guid: e5db99d1f4a976d4a99882822e3075f0, type: 3}
+    volume: 1
+    randomPitch: 0
+  - sound: 4
+    clip: {fileID: 8300000, guid: 9e57679d1fc7dfc468b895f013bba245, type: 3}
+    volume: 1
+    randomPitch: 1
+  - sound: 5
+    clip: {fileID: 8300000, guid: 142051fb6ed35ce479b643b412b83b9b, type: 3}
+    volume: 1
+    randomPitch: 1
+  - sound: 6
+    clip: {fileID: 8300000, guid: 9ea2cb80cd6e4c44790ea396ea0455e5, type: 3}
+    volume: 1
+    randomPitch: 0
+  - sound: 7
+    clip: {fileID: 8300000, guid: 320e103b6f7af4f45a9aa1e94a7af9b5, type: 3}
+    volume: 1
+    randomPitch: 0
+  - sound: 8
+    clip: {fileID: 8300000, guid: bc5a2bfe53df4b341961aa7d4b9ce5eb, type: 3}
+    volume: 1
+    randomPitch: 1
+  - sound: 9
+    clip: {fileID: 8300000, guid: d9093463138757040a97986a963d17a0, type: 3}
+    volume: 1
+    randomPitch: 0
+  - sound: 10
+    clip: {fileID: 8300000, guid: 15c0170ad5ac30c47814862bb47823d2, type: 3}
+    volume: 1
+    randomPitch: 0
+  - sound: 11
+    clip: {fileID: 8300000, guid: 13e127624bb78f84986b2961f34e9956, type: 3}
+    volume: 1
+    randomPitch: 0
+  - sound: 12
+    clip: {fileID: 8300000, guid: 42ea5ce3755285543bf68f1bb87b5134, type: 3}
+    volume: 1
+    randomPitch: 0
+  voices: 10
   randomPitchRange: {x: 0.85, y: 1.15}
+  outputGroup: {fileID: 0}
+  autoButtonClick: 1
 --- !u!1 &7656888968262077198
 GameObject:
   m_ObjectHideFlags: 0

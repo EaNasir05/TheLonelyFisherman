@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 60147640229275356}
   - component: {fileID: 7896068036219356865}
   - component: {fileID: 1741887650600582921}
+  - component: {fileID: 1025412147329288980}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -93,3 +94,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 686a186d419bfeb4c9b7ad2b5f2a0ee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputHandler
+--- !u!114 &1025412147329288980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475954368297262295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19dd41e5e1e920642814fc031358da46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MusicManager
+  sceneMusic:
+  - sceneName: MainMenu
+    alone: {fileID: 8300000, guid: eec722089228a2947a5bfe86a5991cb2, type: 3}
+    withGrandson: {fileID: 8300000, guid: eec722089228a2947a5bfe86a5991cb2, type: 3}
+  - sceneName: MorningVillage
+    alone: {fileID: 8300000, guid: cff8e25951918e44586de4cf7a735352, type: 3}
+    withGrandson: {fileID: 8300000, guid: a1e6f36026150d74c96a5e5fdc26abbb, type: 3}
+  - sceneName: EveningVillage
+    alone: {fileID: 8300000, guid: 2780e7782195b2b44bd307c747a0437d, type: 3}
+    withGrandson: {fileID: 8300000, guid: 9eeff72389da3264db294eddf60a6cb5, type: 3}
+  keepMusicInUnlistedScenes: 1
+  volume: 0.6
+  fadeDuration: 1.5
+  outputGroup: {fileID: 0}
