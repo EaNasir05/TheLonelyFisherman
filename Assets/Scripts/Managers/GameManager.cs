@@ -87,6 +87,8 @@ public class GameManager : MonoBehaviour
             FadeIn();
     }
 
+    #region Scene Transition
+
     private void UpdateCurrentScene()
     {
         string scene = SceneManager.GetActiveScene().name;
@@ -136,6 +138,7 @@ public class GameManager : MonoBehaviour
                 bool upgradable = money >= boatCosts[boatLevel];
                 SetYarnVariable("$boatUpgradable", upgradable);
                 SetYarnVariable("$boatCost", boatCosts[boatLevel]);
+                UIManager.instance.UpdateBoatSprite(boatLevel);
                 break;
 
             case "GoingToFish":
@@ -216,6 +219,8 @@ public class GameManager : MonoBehaviour
         else
             grandsonHere = false;
     }
+
+    #endregion Scene Transition
 
     #region Economy
 

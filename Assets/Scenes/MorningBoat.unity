@@ -603,19 +603,27 @@ PrefabInstance:
     - target: {fileID: 1142527607811033305, guid: b0f963b256c03d342af2917b7f746f48, type: 3}
       propertyPath: 'boatSprites.Array.data[0]'
       value: 
-      objectReference: {fileID: 21300000, guid: 44df74953216b0545a76eadc54717a18, type: 3}
+      objectReference: {fileID: 21300000, guid: c54b5e01a4aecf140a6dafdd0d250fc9, type: 3}
     - target: {fileID: 1142527607811033305, guid: b0f963b256c03d342af2917b7f746f48, type: 3}
       propertyPath: 'boatSprites.Array.data[1]'
       value: 
-      objectReference: {fileID: 21300000, guid: d6e2e5f7c7c909a47b21ed143e605b66, type: 3}
+      objectReference: {fileID: 21300000, guid: 82f76c2c7da02ba47be291d0dc4da286, type: 3}
+    - target: {fileID: 1142527607811033305, guid: b0f963b256c03d342af2917b7f746f48, type: 3}
+      propertyPath: 'boatSprites.Array.data[2]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 2a45da3b31c7b3747a57a11f88174933, type: 3}
     - target: {fileID: 1142527607811033305, guid: b0f963b256c03d342af2917b7f746f48, type: 3}
       propertyPath: 'boatSprites.Array.data[3]'
       value: 
-      objectReference: {fileID: 21300000, guid: 975ce919ed160aa428c8607d7b188533, type: 3}
+      objectReference: {fileID: 21300000, guid: 7a6fc58a8f4309347b92cfb483a0d54c, type: 3}
     - target: {fileID: 1142527607811033305, guid: b0f963b256c03d342af2917b7f746f48, type: 3}
       propertyPath: 'boatSprites.Array.data[4]'
       value: 
-      objectReference: {fileID: 21300000, guid: 3cfabe973f89f7b489cf9cebaeb4900d, type: 3}
+      objectReference: {fileID: 21300000, guid: 83eae098794e7bd40a1e9a47607d9e4e, type: 3}
+    - target: {fileID: 1142527607811033305, guid: b0f963b256c03d342af2917b7f746f48, type: 3}
+      propertyPath: 'boatSprites.Array.data[5]'
+      value: 
+      objectReference: {fileID: 21300000, guid: 83eae098794e7bd40a1e9a47607d9e4e, type: 3}
     - target: {fileID: 6955049282319932945, guid: b0f963b256c03d342af2917b7f746f48, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.20951
@@ -2520,7 +2528,7 @@ Tilemap:
       - {fileID: -357874556, guid: f912dc3559406ce4987661e2312ca735, type: 3}
       - {fileID: -1716740865, guid: f912dc3559406ce4987661e2312ca735, type: 3}
       - {fileID: 737664686, guid: f912dc3559406ce4987661e2312ca735, type: 3}
-      m_AnimationSpeed: 10.000001
+      m_AnimationSpeed: 10
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 5, y: -4, z: 0}

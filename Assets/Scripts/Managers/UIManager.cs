@@ -312,6 +312,15 @@ public class UIManager : MonoBehaviour
     
     #endregion Fishing
 
+    #region Boat
+
+    public void UpdateBoatSprite(int level)
+    {
+        boatRenderer.sprite = boatSprites[level];
+    }
+
+    #endregion Boat
+
     #region Fade
 
     public IEnumerator FadeOut(float duration, string sceneName)
